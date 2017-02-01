@@ -1,0 +1,21 @@
+.khb-titlelist-container{
+
+}
+
+.khb-titlelist-titlerow{
+    border:1px solid black;
+    padding:5px;
+    cursor:pointer;
+}
+
+.khb-titlelist-titlerow-active{
+    background-color:gray;
+}
+
+.khb-clipscontainer{
+    padding:5px;
+}
+
+div.khb-clipslist-container{
+    padding-top:5px;
+}

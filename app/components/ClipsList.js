@@ -11,7 +11,7 @@ export default class TitleList extends React.Component {
             clipItems.push(<ClipRow key={clip.date} clip={clip}/>);
         });
         return (
-            <div className="khb-clipslist-container">
+            <div >
                 {clipItems}
             </div>
         );

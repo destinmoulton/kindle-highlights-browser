@@ -1,7 +1,7 @@
 import React from 'react';
 import { remote } from 'electron';
 
-import Menu from './Menu';
+import Home from './Home';
 
 import HighlightBrowser from './HighlightBrowser.js';
 
@@ -11,7 +11,9 @@ export default class Layout extends React.Component{
    
     constructor(props){
         super(props);
+
         this.state = {
+            hasClippings: false,
             clippings:{}
         };
 
@@ -23,16 +25,21 @@ export default class Layout extends React.Component{
             const clipParser = new MyClippingsParser();
             const newClippings = clipParser.parseFile(fileName[0]);
             this.setState({
+                hasClippings: true,
                 clippings: newClippings
             });
         }); 
     }
 
     render(){
+        let contents = <Home openClippingsDialogHandler={this.openClippingsDialog.bind(this)} />;
+        if(this.state.hasClippings){
+            contents = <HighlightBrowser clippings={this.state.clippings}/>
+        }
+
         return (
             <div>
-                <Menu openClippingsDialogHandler={this.openClippingsDialog.bind(this)}></Menu>
-                <HighlightBrowser clippings={this.state.clippings}/>
+                {contents}                
             </div>
         );
     }

@@ -9,7 +9,7 @@ export default class Menu extends React.Component {
         return (
             <Navbar>
                 <Nav>
-                    <NavItem ><Button onClick={this.props.openClippingsDialogHandler.bind(this)}>Open "My Clippings.txt"...</Button></NavItem>
+                    <NavItem ></NavItem>
                 </Nav>
             </Navbar>
         );

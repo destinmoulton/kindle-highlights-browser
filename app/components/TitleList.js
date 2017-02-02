@@ -15,7 +15,7 @@ export default class TitleList extends React.Component {
                                      activeTitle={activeTitle}/>);
         });
         return (
-            <div className="khb-titlelist-container">
+            <div >
                 {listItems}
             </div>
         );

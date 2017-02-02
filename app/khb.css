@@ -1,18 +1,48 @@
-.khb-titlelist-container{
+body, html {
+  margin: 0;
+  overflow: hidden;
+  height:100%;
+}
 
+@media (min-width: 768px){
+  #khb-titlelist-container {
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    width: 25%;
+    overflow-y: scroll; 
+  }
+  
+  #khb-clipscontainer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    overflow-y: scroll;
+    width: 75%;
+  }
+}
+
+#khb-titlelist-container{
+    height:100%;
+    text-align:left;
+    padding:15px 0px 15px 0px;
 }
 
 .khb-titlelist-titlerow{
-    border:1px solid black;
-    padding:5px;
+    border-bottom:1px solid gray;
+    padding:5px 5px 5px 15px;
     cursor:pointer;
 }
 
 .khb-titlelist-titlerow-active{
-    background-color:gray;
+    background-color:#EFEFEF;
 }
 
-.khb-clipscontainer{
+#khb-clipscontainer{
+    height:100%;
+    text-align:left;
     padding:5px;
 }
 

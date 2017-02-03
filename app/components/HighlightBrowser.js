@@ -5,7 +5,7 @@ import { Col } from "react-bootstrap";
 
 import TitleList from "./TitleList";
 import ClipsList from "./ClipsList";
-import ClipsButtonBar from "./ClipsButtonBar";
+
 
 export default class HighlightBrowser extends React.Component{
     constructor(props){
@@ -31,7 +31,7 @@ export default class HighlightBrowser extends React.Component{
 
         let clipsContents = "";
         if(clips.length > 0){
-            clipsContents = <div><ClipsButtonBar /><ClipsList clips={clips}/></div>;
+            clipsContents = <ClipsList clips={clips}/>;
         }
         
         return (

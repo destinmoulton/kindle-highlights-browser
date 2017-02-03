@@ -49,7 +49,9 @@ export default class MyClippingsParser {
 
             const locdate = this.parseLocationAndDate(lines[1]);
             clipData['location'] = locdate['location'];
+            clipData['location_start'] = parseInt(locdate['location_start']);
             clipData['date'] = locdate['date'];
+            clipData['unix_timestamp'] = locdate['unix_timestamp'];
             clipData['text'] = lines.slice(2);
 
             if(clipData['location']['type']!=="bookmark"){
@@ -93,9 +95,12 @@ export default class MyClippingsParser {
                 'value':parts[0].replace(LOCATION_PAGE_PREFIX, "")
             }
         }
+
+        const location_start = location['value'].split('-')[0];
         const dateStr = parts[1].replace(TIME_PREFIX, "");
         const date = moment(dateStr, MOMENT_FORMAT);
-        return { location, date };
+        const unix_timestamp = date.unix();
+        return { location, location_start, date, unix_timestamp };
     }
 
     getFileContents(filename){

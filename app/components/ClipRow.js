@@ -5,9 +5,7 @@ export default class ClipRow extends React.Component {
         const {clip} = this.props;
         let loc = "";
 
-        if(clip.location.type==='page'){
-            loc = `Page: ${clip.location.value}`;
-        } else if(clip.location.type==='location') {
+        if(clip.location.type==='location') {
             loc = `Location: ${clip.location.value}`;
         }
 

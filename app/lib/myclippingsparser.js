@@ -7,6 +7,8 @@ const TITLEAUTHOR_SEPARATOR = " (";
 const LOCATION_LOC_PREFIX = "- Your Highlight on Location ";
 const LOCATION_PAGE_PREFIX = "- Your Highlight on page ";
 const LOCATION_BOOKMARK_PREFIX = "- Your Bookmark on Location ";
+const LOCATION_SHORT_PREFIX = "Location ";
+const LOCATION_NOTE_PREFIX = "- Your Note on Location ";
 const LOCTIME_SEPARATOR = " | ";
 const TIME_PREFIX = "Added on ";
 const AUTHOR_SUFFIX = ")";
@@ -89,16 +91,26 @@ export default class MyClippingsParser {
                 'type':'location',
                 'value':parts[0].replace(LOCATION_LOC_PREFIX, "")
             };
-        } else {
+        } else if(parts[0].startsWith(LOCATION_NOTE_PREFIX)){
             location = {
-                'type':'page',
-                'value':parts[0].replace(LOCATION_PAGE_PREFIX, "")
-            }
-        }
+                'type':'note',
+                'value':parts[0].replace(LOCATION_NOTE_PREFIX, "")
+            };
+        } else if(parts[0].startsWith(LOCATION_PAGE_PREFIX)){
+            // Ignore the Page (meaningless)
+            parts.shift();
 
+            location = {
+                'type':'location',
+                'value':parts[0].replace(LOCATION_SHORT_PREFIX, "")
+            }
+            
+        }
+        
         const location_start = location['value'].split('-')[0];
         const dateStr = parts[1].replace(TIME_PREFIX, "");
         const date = moment(dateStr, MOMENT_FORMAT);
+        
         const unix_timestamp = date.unix();
         return { location, location_start, date, unix_timestamp };
     }

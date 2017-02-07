@@ -17,6 +17,7 @@ export default class HighlightBrowser extends React.Component{
     }
 
     changeSelectedTitle(e){
+        document.getElementById('khb-clipscontainer').scrollTop = 0;
         this.setState({
             activeTitle:e.target.getAttribute('data-title')
         });

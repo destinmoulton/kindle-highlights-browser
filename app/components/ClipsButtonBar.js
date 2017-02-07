@@ -12,8 +12,8 @@ export default class ClipsButtonBar extends React.Component{
         return(
             <Panel>
                 <Col sm={6}>
-                    <Button>Save Highlights</Button>
-                    <Button>Copy Highlights</Button>
+                    <Button>Save Clips</Button>
+                    <Button>Copy Clips</Button>
                 </Col>
                 <Form horizontal>
                 <Col componentClass={ControlLabel} sm={2}>

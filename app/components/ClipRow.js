@@ -19,7 +19,7 @@ export default class ClipRow extends React.Component {
 
         return (
             <div>
-                <div>{icon} {loc} -- {clip.date.format("MMMM DD, YYYY h:mm:ss a")}</div>
+                <div>{icon}  {loc} -- {clip.date.format("MMMM DD, YYYY h:mm:ss a")}</div>
                 <div>{clip.text}</div>
                 <hr/>
             </div>

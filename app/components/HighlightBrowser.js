@@ -25,14 +25,15 @@ export default class HighlightBrowser extends React.Component{
 
     render(){
         const { clippings } = this.props;
+        const { activeTitle } = this.state;
         let clips = [];
-        if(clippings[this.state.activeTitle]!==undefined){
-            clips = clippings[this.state.activeTitle]['clips'];
+        if(clippings[activeTitle]!==undefined){
+            clips = clippings[activeTitle]['clips'];
         }
 
         let clipsContents = "";
         if(clips.length > 0){
-            clipsContents = <ClipsList clips={clips}/>;
+            clipsContents = <ClipsList clips={clips} activeTitle={activeTitle}/>;
         }
         
         return (
@@ -40,7 +41,7 @@ export default class HighlightBrowser extends React.Component{
                 <Col xs={6} md={4} id="khb-titlelist-container">
                     <TitleList clippings={clippings} 
                             changeSelectedTitle={this.changeSelectedTitle.bind(this)}
-                            activeTitle={this.state.activeTitle}/>
+                            activeTitle={activeTitle}/>
                 </Col>
                 <Col xs={12} md={8} id="khb-clipscontainer">
                     {clipsContents}
@@ -50,4 +51,3 @@ export default class HighlightBrowser extends React.Component{
 
     }
 }
-

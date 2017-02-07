@@ -24,7 +24,7 @@ export default class TitleList extends React.Component {
     }
 
     render(){
-        const { clips, sortParam } = this.props;
+        const { clips, sortParam, activeTitle } = this.props;
 
         this.clipSorter.sortClips(clips, this.state.sortBy);
 
@@ -35,6 +35,7 @@ export default class TitleList extends React.Component {
         return (
             <div >
                 <ClipsButtonBar sortChangeHandler={this.sortChangeHandler.bind(this)} sortBy={this.state.sortBy}/>
+                <h3>{activeTitle}</h3>
                 {clipItems}
             </div>
         );

@@ -2,7 +2,7 @@
 /**
  * Generate the string for a clip to export
  */
-export default function ExportClipsGenerator(clips, checkboxes, clipSeparator, EOL){
+export function GenerateClipsString(clips, checkboxes, clipSeparator, EOL){
     const includeLocation = checkboxes.location;
     const includeDate = checkboxes.date;
     let clipsString = "";
@@ -32,3 +32,8 @@ export default function ExportClipsGenerator(clips, checkboxes, clipSeparator, E
     });
     return clipsString;
 }
+
+export function CleanTitle(title){
+    return title.replace(/ /g, '_').replace(/\W/g, '');
+}
+

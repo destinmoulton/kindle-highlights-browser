@@ -1,10 +1,18 @@
+import fs from 'fs';
+import {EOL} from 'os';
+
 import React, {Component} from 'react';
 
-import { Checkbox, Col, ControlLabel, FormControl, FormGroup, Modal, Row } from 'react-bootstrap';
+import { Button, Checkbox, Col, ControlLabel, FormControl, FormGroup, Modal, Row } from 'react-bootstrap';
+
+import {remote} from 'electron';
 
 import ExportOptions from './ExportOptions';
 import ExportPreview from './ExportPreview';
 
+import {GenerateClipsString, CleanTitle} from '../../lib/exportutilities';
+
+const FILE_EXT = ".txt";
 class ClipsExportModal extends Component {
     constructor(props){
         super(props);
@@ -37,6 +45,22 @@ class ClipsExportModal extends Component {
             clipSeparator:e.target.value
         });
     }
+
+    handleSaveClipsToFile(){
+        const self = this;
+
+        const possibleTitle = CleanTitle(self.props.activeTitle);
+        remote.dialog.showSaveDialog({defaultPath:possibleTitle+FILE_EXT}, function(filename){
+            const strToWrite = GenerateClipsString(self.props.clips, self.state.checkboxes, self.state.clipSeparator, EOL);
+            fs.writeFile(filename, strToWrite, function(err){
+                if(err){
+                    return console.log("There was an error writing the file.");
+                }
+                console.log(filename, "written correctly");
+            });
+            
+        });
+    }
     
     render() {
         const { modalIsActive, closeModalHandler, clips } = this.props;
@@ -60,6 +84,7 @@ class ClipsExportModal extends Component {
                             <ExportPreview checkboxes={checkboxes}
                                 clipSeparator={clipSeparator}
                                 clips={clips} />
+                            <Button onClick={this.handleSaveClipsToFile.bind(this)}>Save to File</Button>
                         </Col>
                     </Row>
                 </Modal.Body>

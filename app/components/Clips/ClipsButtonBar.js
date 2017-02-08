@@ -26,12 +26,13 @@ export default class ClipsButtonBar extends React.Component{
     }
 
     render(){
-        const {sortBy, sortChangeHandler, clips} = this.props;
+        const {sortBy, sortChangeHandler, clips, activeTitle} = this.props;
         return(
             <div>
                 <ClipsExportModal closeModalHandler={this.closeModal.bind(this)} 
                                   modalIsActive={this.state.modalIsActive}
-                                  clips={clips}/>
+                                  clips={clips}
+                                  activeTitle={activeTitle}/>
                 <Panel>
                     <Col sm={6}>
                         <Button onClick={this.openModal.bind(this)}>Save or Copy Clips</Button>

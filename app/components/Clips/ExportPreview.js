@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 
 import {ControlLabel, FormControl, FormGroup} from 'react-bootstrap';
 
+import ExportClipsGenerator from '../../lib/exportclipsgenerator';
+
+const TEXTAREA_EOL = "\n";
 class ExportPreview extends Component {
     constructor(props){
         super(props);
@@ -9,35 +12,13 @@ class ExportPreview extends Component {
 
     render() {
         const {clips, includeLocation, includeDate, clipSeparator} = this.props;
-        
-        let preview = "";
-        clips.map(function(clip){
-            if(preview !== ""){
-                preview += "\n" + clipSeparator + "\n";
-            }
-
-            if(includeLocation){
-                preview += `Location: ${clip.location.value}`;
-            }
-
-            if(includeLocation && includeDate){
-                preview += " -- ";
-            }
-
-            if(includeDate){
-                preview += `${clip.date.format("MMMM DD, YYYY h:mm:ss a")}`;
-            }
-            
-            preview += "\n";
-
-            preview += clip.text;
-        });
+        const clipsPreview = ExportClipsGenerator(clips, includeLocation, includeDate, clipSeparator, TEXTAREA_EOL);
         return (
-            <FormGroup controlId="formControlsTextarea">
+            <FormGroup controlId="khb-exportpreview-textarea">
                 <ControlLabel>Preview Export</ControlLabel>
                 <FormControl componentClass="textarea" 
                              placeholder="textarea" 
-                             value={preview}
+                             value={clipsPreview}
                              readOnly/>
             </FormGroup>              
         );

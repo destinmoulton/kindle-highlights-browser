@@ -49,3 +49,7 @@ body, html {
 div.khb-clipslist-container{
     padding-top:5px;
 }
+
+#khb-exportpreview-textarea{
+    height:300px;
+}

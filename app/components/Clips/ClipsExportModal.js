@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 
-import { Checkbox, FormGroup, Modal } from 'react-bootstrap';
+import { Checkbox, Col, ControlLabel, FormControl, FormGroup, Modal } from 'react-bootstrap';
+
+import ExportPreview from './ExportPreview';
 
 class ClipsExportModal extends Component {
     constructor(props){
@@ -8,11 +10,12 @@ class ClipsExportModal extends Component {
 
         this.state = {
             includeLocation:true,
-            includeDate:true
+            includeDate:true,
+            clipSeparator:"--------------------------"
         };
     }
 
-    changeIncludeLocationHandler(e){
+    handleIncludeLocationChange(e){
         if(e.target.checked){
             this.setState({
                 includeLocation:true
@@ -24,7 +27,7 @@ class ClipsExportModal extends Component {
         }
     }
 
-    changeIncludeDateHandler(e){
+    handleIncludeDateChange(e){
         if(e.target.checked){
             this.setState({
                 includeDate:true
@@ -35,29 +38,49 @@ class ClipsExportModal extends Component {
             });
         }
     }
+
+    handleSeparatorChange(e){
+        this.setState({
+            clipSeparator:e.target.value
+        });
+    }
     
     render() {
-        const { modalIsActive, closeModalHandler } = this.props;
+        const { modalIsActive, closeModalHandler, clips } = this.props;
+        const { includeDate, includeLocation, clipSeparator } = this.state;
         return (
             <Modal show={modalIsActive} onHide={closeModalHandler}>
                 <Modal.Header closeButton>
                     <Modal.Title>Export Clips</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    
                     <FormGroup>
                         <Checkbox inline 
-                                  checked={this.state.includeLocation} 
-                                  onChange={this.changeIncludeLocationHandler.bind(this)}>
+                                  checked={includeLocation} 
+                                  onChange={this.handleIncludeLocationChange.bind(this)}>
                             Include Location
                         </Checkbox>
                     </FormGroup>
                     <FormGroup>
                         <Checkbox inline 
-                                  checked={this.state.includeDate}
-                                  onChange={this.changeIncludeDateHandler.bind(this)}>
+                                  checked={includeDate}
+                                  onChange={this.handleIncludeDateChange.bind(this)}>
                             Include Date
                         </Checkbox>
                     </FormGroup>
+                    <FormGroup>
+                        <ControlLabel>Clip Separator</ControlLabel>
+                        <FormControl
+                            type="text"
+                            value={clipSeparator}
+                            onChange={this.handleSeparatorChange.bind(this)}
+                        />
+                    </FormGroup>
+                    <ExportPreview includeLocation={includeLocation} 
+                                   includeDate={includeDate}
+                                   clipSeparator={clipSeparator}
+                                   clips={clips}/>
                 </Modal.Body>
             </Modal>
         );

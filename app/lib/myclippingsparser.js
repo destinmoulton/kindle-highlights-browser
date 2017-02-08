@@ -54,7 +54,8 @@ export default class MyClippingsParser {
             clipData['location_start'] = parseInt(locdate['location_start']);
             clipData['date'] = locdate['date'];
             clipData['unix_timestamp'] = locdate['unix_timestamp'];
-            clipData['text'] = lines.slice(2);
+            
+            clipData['text'] = lines[3];
 
             if(clipData['location']['type']!=="bookmark"){
                 clippings[titleAuthor['title']]['clips'].push(clipData);

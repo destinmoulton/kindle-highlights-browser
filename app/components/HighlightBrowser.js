@@ -2,9 +2,8 @@ import React from "react";
 
 import { Col } from "react-bootstrap";
 
-
 import TitleList from "./TitleList";
-import ClipsList from "./ClipsList";
+import ClipsList from "./Clips/ClipsList";
 
 
 export default class HighlightBrowser extends React.Component{

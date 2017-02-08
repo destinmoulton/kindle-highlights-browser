@@ -2,7 +2,7 @@ import React from "react";
 
 import ClipRow from "./ClipRow";
 
-import ClipSorter from "../lib/clipsorter";
+import ClipSorter from "../../lib/clipsorter";
 
 import ClipsButtonBar from "./ClipsButtonBar";
 
@@ -34,7 +34,9 @@ export default class TitleList extends React.Component {
         });
         return (
             <div >
-                <ClipsButtonBar sortChangeHandler={this.sortChangeHandler.bind(this)} sortBy={this.state.sortBy}/>
+                <ClipsButtonBar sortChangeHandler={this.sortChangeHandler.bind(this)} 
+                                sortBy={this.state.sortBy}
+                                clips={clips}/>
                 <h3>{activeTitle}</h3>
                 {clipItems}
             </div>

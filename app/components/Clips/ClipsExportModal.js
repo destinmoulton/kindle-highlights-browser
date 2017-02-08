@@ -9,35 +9,27 @@ class ClipsExportModal extends Component {
     constructor(props){
         super(props);
 
+        const checkboxes = {
+            location:true,
+            date:true
+        };
+
         this.state = {
-            includeLocation:true,
-            includeDate:true,
+            checkboxes,
             clipSeparator:"--------------------------"
         };
     }
 
-    handleIncludeLocationChange(e){
+    handleCheckboxChange(e){
+        let chks = this.state.checkboxes;
         if(e.target.checked){
-            this.setState({
-                includeLocation:true
-            });
+            chks[e.target.value] = true;
         } else {
-            this.setState({
-                includeLocation:false
-            });
+            chks[e.target.value] = false;
         }
-    }
-
-    handleIncludeDateChange(e){
-        if(e.target.checked){
-            this.setState({
-                includeDate:true
-            });
-        } else {
-            this.setState({
-                includeDate:false
-            });
-        }
+        this.setState({
+            checkboxes:chks
+        });
     }
 
     handleSeparatorChange(e){
@@ -48,7 +40,7 @@ class ClipsExportModal extends Component {
     
     render() {
         const { modalIsActive, closeModalHandler, clips } = this.props;
-        const { includeDate, includeLocation, clipSeparator } = this.state;
+        const { checkboxes, clipSeparator } = this.state;
         return (
             <Modal show={modalIsActive} 
                    onHide={closeModalHandler}
@@ -59,16 +51,13 @@ class ClipsExportModal extends Component {
                 <Modal.Body>
                     <Row>
                         <Col xs={4}>
-                            <ExportOptions includeDate={includeDate}
-                                           includeLocation={includeLocation}
+                            <ExportOptions checkboxes={checkboxes}
                                            clipSeparator={clipSeparator}
-                                           handleIncludeLocationChange={this.handleIncludeLocationChange.bind(this)}
-                                           handleIncludeDateChange={this.handleIncludeDateChange.bind(this)}
+                                           handleCheckboxChange={this.handleCheckboxChange.bind(this)}
                                            handleSeparatorChange={this.handleSeparatorChange.bind(this)}/>
                         </Col>
                         <Col xs={8}>
-                            <ExportPreview includeLocation={includeLocation}
-                                includeDate={includeDate}
+                            <ExportPreview checkboxes={checkboxes}
                                 clipSeparator={clipSeparator}
                                 clips={clips} />
                         </Col>

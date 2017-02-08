@@ -4,22 +4,24 @@ import { Checkbox, ControlLabel, FormControl, FormGroup } from 'react-bootstrap'
 
 class ExportOptions extends Component {
     render() {
-        const {includeLocation, includeDate, clipSeparator} = this.props;
-        const {handleIncludeLocationChange, handleIncludeDateChange, handleSeparatorChange} = this.props;
+        const {checkboxes, clipSeparator} = this.props;
+        const {handleCheckboxChange, handleSeparatorChange} = this.props;
         return (
             
             <div>
                 <FormGroup>
                     <Checkbox inline
-                        checked={includeLocation}
-                        onChange={handleIncludeLocationChange}>
+                        checked={checkboxes.location}
+                        onChange={handleCheckboxChange}
+                        value="location">
                         Include Location
                     </Checkbox>
                 </FormGroup>
                 <FormGroup>
                     <Checkbox inline
-                        checked={includeDate}
-                        onChange={handleIncludeDateChange}>
+                        checked={checkboxes.date}
+                        onChange={handleCheckboxChange}
+                        value="date">
                         Include Date
                     </Checkbox>
                 </FormGroup>

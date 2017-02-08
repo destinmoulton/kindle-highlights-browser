@@ -2,7 +2,9 @@
 /**
  * Generate the string for a clip to export
  */
-export default function ExportClipsGenerator(clips, includeLocation, includeDate, clipSeparator, EOL){
+export default function ExportClipsGenerator(clips, checkboxes, clipSeparator, EOL){
+    const includeLocation = checkboxes.location;
+    const includeDate = checkboxes.date;
     let clipsString = "";
     clips.map(function(clip){
         if(clipsString !== ""){

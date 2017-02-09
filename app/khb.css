@@ -50,6 +50,10 @@ div.khb-clipslist-container{
     padding-top:5px;
 }
 
+i.khb-clipslist-icon{
+    color:gray;
+}
+
 #khb-exportpreview-textarea{
     height:300px;
 }

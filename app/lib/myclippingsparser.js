@@ -4,7 +4,7 @@ import moment from "moment";
 
 const CLIPPING_SEPARATOR = "==========";
 const TITLEAUTHOR_SEPARATOR = " (";
-const LOCATION_LOC_PREFIX = "- Your Highlight on Location ";
+const LOCATION_HIGHLIGHT_PREFIX = "- Your Highlight on Location ";
 const LOCATION_PAGE_PREFIX = "- Your Highlight on page ";
 const LOCATION_BOOKMARK_PREFIX = "- Your Bookmark on Location ";
 const LOCATION_SHORT_PREFIX = "Location ";
@@ -87,10 +87,10 @@ export default class MyClippingsParser {
                 'type':'bookmark',
                 'value':parts[0].replace(LOCATION_BOOKMARK_PREFIX, "")
             }
-        } else if(parts[0].startsWith(LOCATION_LOC_PREFIX)){
+        } else if(parts[0].startsWith(LOCATION_HIGHLIGHT_PREFIX)){
             location = {
-                'type':'location',
-                'value':parts[0].replace(LOCATION_LOC_PREFIX, "")
+                'type':'highlight',
+                'value':parts[0].replace(LOCATION_HIGHLIGHT_PREFIX, "")
             };
         } else if(parts[0].startsWith(LOCATION_NOTE_PREFIX)){
             location = {
@@ -102,7 +102,7 @@ export default class MyClippingsParser {
             parts.shift();
 
             location = {
-                'type':'location',
+                'type':'highlight',
                 'value':parts[0].replace(LOCATION_SHORT_PREFIX, "")
             }
             

@@ -7,8 +7,16 @@ export function GenerateClipsString(clips, checkboxes, clipSeparator, EOL){
     const includeDate = checkboxes.date;
     let clipsString = "";
     clips.map(function(clip){
+        let quote = "";
         if(clipsString !== ""){
             clipsString += `${EOL}${clipSeparator}${EOL}`;
+        }
+
+        if(clip.location.type === 'highlight') {
+            clipsString += "Highlight at ";
+            quote=`"`;
+        } else if(clip.location.type === 'note'){
+            clipsString += "Note at ";
         }
 
         if(includeLocation){
@@ -27,12 +35,16 @@ export function GenerateClipsString(clips, checkboxes, clipSeparator, EOL){
             clipsString += `${EOL}`;
         }
 
-        clipsString += `"${clip.text}"`;
+        clipsString += `${quote}${clip.text}${quote}`;
 
     });
     return clipsString;
 }
 
+/**
+ * Strip the title of unnecessary characters,
+ * and replace spaces with underscores.
+ */
 export function CleanTitle(title){
     return title.replace(/ /g, '_').replace(/\W/g, '');
 }

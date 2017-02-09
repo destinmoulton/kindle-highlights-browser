@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 
 import { Button, Checkbox, Col, ControlLabel, FormControl, FormGroup, Modal, Row } from 'react-bootstrap';
 
-import {remote} from 'electron';
+import {clipboard,remote} from 'electron';
 
 import ExportOptions from './ExportOptions';
 import ExportPreview from './ExportPreview';
@@ -61,6 +61,16 @@ class ClipsExportModal extends Component {
             
         });
     }
+
+    handleCopyClips(){
+        const strToCopy = GenerateClipsString(this.props.clips, this.state.checkboxes, this.state.clipSeparator, EOL);
+
+        clipboard.writeText(strToCopy);
+    }
+
+    handleSelectAll(){
+        document.getElementById('khb-exportpreview-textarea').select();
+    }
     
     render() {
         const { modalIsActive, closeModalHandler, clips } = this.props;
@@ -84,7 +94,15 @@ class ClipsExportModal extends Component {
                             <ExportPreview checkboxes={checkboxes}
                                 clipSeparator={clipSeparator}
                                 clips={clips} />
-                            <Button onClick={this.handleSaveClipsToFile.bind(this)}>Save to File</Button>
+                            <Button onClick={this.handleSaveClipsToFile.bind(this)}>
+                                <i className="fa fa-floppy-o"></i> Save All to File
+                            </Button>
+                            <Button onClick={this.handleCopyClips.bind(this)}>
+                                <i className="fa fa-clipboard"></i> Copy All
+                            </Button>
+                            <Button onClick={this.handleSelectAll.bind(this)}>
+                                <i className="fa fa-hand-rock-o"></i> Select All
+                            </Button>
                         </Col>
                     </Row>
                 </Modal.Body>

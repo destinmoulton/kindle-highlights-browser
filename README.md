@@ -1,3 +1,6 @@
+### Kindle Highlight Browser
+
+Browse the contents of your Kindle's "My Clippings.txt" file. Easily Save and Copy your kindle highlights and notes.
 
 ### Compilation Notes
 

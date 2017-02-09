@@ -3,7 +3,15 @@ import {EOL} from 'os';
 
 import React, {Component} from 'react';
 
-import { Button, Checkbox, Col, ControlLabel, FormControl, FormGroup, Modal, Row } from 'react-bootstrap';
+import { Button, 
+         ButtonGroup,
+         Checkbox, 
+         Col, 
+         ControlLabel, 
+         FormControl, 
+         FormGroup, 
+         Modal, 
+         Row } from 'react-bootstrap';
 
 import {clipboard,remote} from 'electron';
 
@@ -94,14 +102,19 @@ class ClipsExportModal extends Component {
                             <ExportPreview checkboxes={checkboxes}
                                 clipSeparator={clipSeparator}
                                 clips={clips} />
-                            <Button onClick={this.handleSaveClipsToFile.bind(this)}>
-                                <i className="fa fa-floppy-o"></i> Save All to File
-                            </Button>
-                            <Button onClick={this.handleCopyClips.bind(this)}>
-                                <i className="fa fa-clipboard"></i> Copy All
-                            </Button>
-                            <Button onClick={this.handleSelectAll.bind(this)}>
-                                <i className="fa fa-hand-rock-o"></i> Select All
+                            <ButtonGroup>
+                                <Button onClick={this.handleSaveClipsToFile.bind(this)}>
+                                    <i className="fa fa-floppy-o"></i> Save All to File
+                                </Button>
+                                <Button onClick={this.handleCopyClips.bind(this)}>
+                                    <i className="fa fa-clipboard"></i> Copy All
+                                </Button>
+                                <Button onClick={this.handleSelectAll.bind(this)}>
+                                    <i className="fa fa-hand-rock-o"></i> Select All
+                                </Button>
+                            </ButtonGroup>
+                            <Button onClick={closeModalHandler} className="pull-right">
+                                Close
                             </Button>
                         </Col>
                     </Row>

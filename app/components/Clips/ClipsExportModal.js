@@ -11,6 +11,7 @@ import ExportOptions from './ExportOptions';
 import ExportPreview from './ExportPreview';
 
 import {GenerateClipsString, CleanTitle} from '../../lib/exportutilities';
+import {ErrorDialog} from '../../lib/dialogboxes';
 
 const FILE_EXT = ".txt";
 class ClipsExportModal extends Component {
@@ -54,9 +55,8 @@ class ClipsExportModal extends Component {
             const strToWrite = GenerateClipsString(self.props.clips, self.state.checkboxes, self.state.clipSeparator, EOL);
             fs.writeFile(filename, strToWrite, function(err){
                 if(err){
-                    return console.log("There was an error writing the file.");
+                    return ErrorDialog("There was a problem saving the file.\n"+err);
                 }
-                console.log(filename, "written correctly");
             });
             
         });

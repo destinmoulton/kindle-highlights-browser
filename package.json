@@ -1,11 +1,12 @@
 {
   "name": "kindlehighlights",
-  "version": "0.0.1",
-  "description": "A Kindle highlights viewer built using Electron.",
-  "main": "index.js",
+  "version": "0.0.4",
+  "description": "A Kindle highlights viewer built using Node, Electron, and React.",
+  "main": "app/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "rundev": "electron ."
+    "rundev": "electron .",
+    "compile-windows": "electron-packager-compile . --overwrite --out=dist/win32 --platform=win32 --arch=x64 --electron-version=1.4.15 --ignore=typings"
   },
   "keywords": [
     "electron",
@@ -25,6 +26,7 @@
   },
   "dependencies": {
     "electron-compile": "^5.1.3",
+    "electron-packager": "^8.5.1",
     "electron-prebuilt-compile": "^1.4.15",
     "moment": "^2.17.1"
   }

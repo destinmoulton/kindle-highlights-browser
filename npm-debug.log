@@ -1,0 +1,51 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'compile-windows' ]
+2 info using npm@4.1.2
+3 info using node@v7.4.0
+4 verbose run-script [ 'precompile-windows',
+4 verbose run-script   'compile-windows',
+4 verbose run-script   'postcompile-windows' ]
+5 info lifecycle kindlehighlights@0.0.4~precompile-windows: kindlehighlights@0.0.4
+6 silly lifecycle kindlehighlights@0.0.4~precompile-windows: no script for precompile-windows, continuing
+7 info lifecycle kindlehighlights@0.0.4~compile-windows: kindlehighlights@0.0.4
+8 verbose lifecycle kindlehighlights@0.0.4~compile-windows: unsafe-perm in lifecycle true
+9 verbose lifecycle kindlehighlights@0.0.4~compile-windows: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/home/destin/projects/kindle-highlights-browser/node_modules/.bin:/home/destin/bin:/usr/local/bin:/usr/bin:/bin:/usr/bin/X11:/usr/X11R6/bin:/usr/games:/home/destin/scripts/:/home/destin/.composer/vendor/bin
+10 verbose lifecycle kindlehighlights@0.0.4~compile-windows: CWD: /home/destin/projects/kindle-highlights-browser
+11 silly lifecycle kindlehighlights@0.0.4~compile-windows: Args: [ '-c',
+11 silly lifecycle   'electron-packager . --overwrite --out=dist/win32 --platform=win32 --arch=x64 --ignore=typings --ignore=.vscode --ignore=dist' ]
+12 silly lifecycle kindlehighlights@0.0.4~compile-windows: Returned: code: 1  signal: null
+13 info lifecycle kindlehighlights@0.0.4~compile-windows: Failed to exec compile-windows script
+14 verbose stack Error: kindlehighlights@0.0.4 compile-windows: `electron-packager . --overwrite --out=dist/win32 --platform=win32 --arch=x64 --ignore=typings --ignore=.vscode --ignore=dist`
+14 verbose stack Exit status 1
+14 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:279:16)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at EventEmitter.emit (events.js:191:7)
+14 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:40:14)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at ChildProcess.emit (events.js:191:7)
+14 verbose stack     at maybeClose (internal/child_process.js:885:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+15 verbose pkgid kindlehighlights@0.0.4
+16 verbose cwd /home/destin/projects/kindle-highlights-browser
+17 error Linux 4.4.0-59-generic
+18 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "compile-windows"
+19 error node v7.4.0
+20 error npm  v4.1.2
+21 error code ELIFECYCLE
+22 error kindlehighlights@0.0.4 compile-windows: `electron-packager . --overwrite --out=dist/win32 --platform=win32 --arch=x64 --ignore=typings --ignore=.vscode --ignore=dist`
+22 error Exit status 1
+23 error Failed at the kindlehighlights@0.0.4 compile-windows script 'electron-packager . --overwrite --out=dist/win32 --platform=win32 --arch=x64 --ignore=typings --ignore=.vscode --ignore=dist'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the kindlehighlights package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     electron-packager . --overwrite --out=dist/win32 --platform=win32 --arch=x64 --ignore=typings --ignore=.vscode --ignore=dist
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs kindlehighlights
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls kindlehighlights
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]

@@ -3,9 +3,9 @@ import { app, BrowserWindow } from "electron";
 const path = require('path')
 const url = require('url')
 
-import BuildMainMenu from "./electron_menus/mainmenu.js";
+import BuildMainMenu from "./react-src/electron_menus/mainmenu.js";
 
-const PATH_INDEX = "./index.html";
+const PATH_INDEX = "./www/index.html";
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.

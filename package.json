@@ -2,10 +2,11 @@
   "name": "kindlehighlights",
   "version": "0.0.4",
   "description": "A Kindle highlights viewer built using Node, Electron, and React.",
-  "main": "app/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "rundev": "electron .",
+    "compile": "webpack --config webpack.config.js -d --watch",
+    "app": "electron .",
     "compile-windows": "electron-packager . --overwrite --out=dist/win32 --platform=win32 --arch=x64 --electron-version=1.4.15 --ignore=typings --ignore=.vscode --ignore=dist"
   },
   "keywords": [
@@ -17,12 +18,13 @@
   "author": "Destin Moulton",
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.22.0",
-    "babelify": "^7.3.0",
-    "browserify": "^14.0.0",
-    "electron": "^1.4.15",
-    "watchify": "^3.9.0"
+    "electron-prebuilt": "^1.4.13",
+    "webpack": "^2.2.1"
   },
   "dependencies": {
     "react": "^15.4.2",

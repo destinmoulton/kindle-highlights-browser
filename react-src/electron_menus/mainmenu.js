@@ -1,6 +1,6 @@
-import { Menu } from "electron";
+const { Menu } = require("electron");
 
-export default function BuildMainMenu (app, win){
+function BuildMainMenu (app, win){
     var menuTemplate = [{
         label: "File",
         submenu: [
@@ -44,3 +44,5 @@ export default function BuildMainMenu (app, win){
     }];
     Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 }
+
+module.exports = BuildMainMenu;

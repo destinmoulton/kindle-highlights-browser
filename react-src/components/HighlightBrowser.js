@@ -4,7 +4,7 @@ import { Col } from "react-bootstrap";
 
 import TitleList from "./TitleList";
 import ClipsList from "./Clips/ClipsList";
-
+import EmptyClipList from "./Clips/EmptyClipList";
 
 export default class HighlightBrowser extends React.Component{
     constructor(props){
@@ -30,7 +30,7 @@ export default class HighlightBrowser extends React.Component{
             clips = clippings[activeTitle]['clips'];
         }
 
-        let clipsContents = "";
+        let clipsContents = <EmptyClipList/>;
         if(clips.length > 0){
             clipsContents = <ClipsList clips={clips} activeTitle={activeTitle}/>;
         }

@@ -27,12 +27,14 @@ body, html {
 #khb-titlelist-container{
     height:100%;
     text-align:left;
-    padding:15px 0px 15px 0px;
+    padding:0px 0px 0px 0px;
 }
 
 .khb-titlelist-titlerow{
-    border-bottom:1px solid gray;
-    padding:5px 5px 5px 15px;
+    font-size:.9em;
+    font-weight:bold;
+    border-bottom:2px solid gray;
+    padding:5px 5px 5px 5px;
     cursor:pointer;
 }
 

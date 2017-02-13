@@ -6,7 +6,7 @@ class EmptyClipList extends Component {
     render() {
         return (
             <Panel>
-                <h4><i className="fa fa-arrow-left"></i>&nbsp;Click on an ebook to get started browsing!</h4>
+                <h4><i className="fa fa-arrow-left"></i>&nbsp;Click on an ebook to start browsing!</h4>
             </Panel>
         );
     }

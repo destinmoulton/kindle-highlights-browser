@@ -37,12 +37,12 @@ export default class HighlightBrowser extends React.Component{
         
         return (
             <div>
-                <Col xs={6} md={4} id="khb-titlelist-container">
+                <Col xs={4} id="khb-titlelist-container">
                     <TitleList clippings={clippings} 
                             changeSelectedTitle={this.changeSelectedTitle.bind(this)}
                             activeTitle={activeTitle}/>
                 </Col>
-                <Col xs={12} md={8} id="khb-clipscontainer">
+                <Col xs={8} id="khb-clipscontainer">
                     {clipsContents}
                 </Col>
             </div>

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "webpack --config webpack.config.js -d --watch",
+    "compile-react": "webpack --config webpack.config.js -d --watch",
     "app": "electron .",
     "compile-windows": "electron-packager . --overwrite --out=dist/win32 --platform=win32 --arch=x64 --electron-version=1.4.15 --ignore=typings --ignore=.vscode --ignore=dist --ignore=node_modules"
   },

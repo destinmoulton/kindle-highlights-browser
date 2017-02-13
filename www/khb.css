@@ -4,6 +4,14 @@ body, html {
   height:100%;
 }
 
+h3{
+    margin:5px 0 5px 0;
+}
+
+.well{
+    padding:10px;
+}
+
 @media (min-width: 768px){
   #khb-titlelist-container {
     position: absolute;

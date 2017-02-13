@@ -39,11 +39,17 @@ export default class MyClippingsParser {
             let clipData = {};
 
             const titleAuthor = this.parseTitleAndAuthor(lines[0]);
+
+            let author = "";
+            if(titleAuthor['authorFirstName']!=""){
+                author = titleAuthor['authorFirstName'] + " ";
+            }
+
+            author += titleAuthor['authorLastName'];
             if(!clippings.hasOwnProperty(titleAuthor['title'])){
                 clippings[titleAuthor['title']] = {
                     title:titleAuthor['title'],
-                    authorFirstName:titleAuthor['authorFirstName'],
-                    authorLastName:titleAuthor['authorLastName'],
+                    author:author,
                     clips:[]
                 };
 
@@ -72,7 +78,7 @@ export default class MyClippingsParser {
 
         const authorParts = parts[1].replace(AUTHOR_SUFFIX,"").split(AUTHOR_SEPARATOR);
         const authorLastName = authorParts[0];
-        const authorFirstName = authorParts[1];
+        const authorFirstName = authorParts[1] || "";
 
         return { title, authorFirstName, authorLastName };
     }

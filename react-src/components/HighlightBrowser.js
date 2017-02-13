@@ -11,20 +11,22 @@ export default class HighlightBrowser extends React.Component{
         super(props);
 
         this.state={
-            activeTitle:""
+            activeTitle:"",
+            activeAuthor:""
         }
     }
 
     changeSelectedTitle(e){
         document.getElementById('khb-clipscontainer').scrollTop = 0;
         this.setState({
-            activeTitle:e.target.getAttribute('data-title')
+            activeTitle:e.target.getAttribute('data-title'),
+            activeAuthor:e.target.getAttribute('data-author')
         });
     }
 
     render(){
         const { clippings } = this.props;
-        const { activeTitle } = this.state;
+        const { activeTitle, activeAuthor } = this.state;
         let clips = [];
         if(clippings[activeTitle]!==undefined){
             clips = clippings[activeTitle]['clips'];
@@ -32,7 +34,7 @@ export default class HighlightBrowser extends React.Component{
 
         let clipsContents = <EmptyClipList/>;
         if(clips.length > 0){
-            clipsContents = <ClipsList clips={clips} activeTitle={activeTitle}/>;
+            clipsContents = <ClipsList clips={clips} activeTitle={activeTitle} activeAuthor={activeAuthor}/>;
         }
         
         return (

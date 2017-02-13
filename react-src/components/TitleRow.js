@@ -11,7 +11,8 @@ export default class TitleRow extends React.Component {
         return (
             <div onClick={changeSelectedTitle} 
                  className={classes}
-                 data-title={clip.title}>
+                 data-title={clip.title}
+                 data-author={clip.author}>
                 {clip.title}
             </div>
         );

@@ -42,6 +42,23 @@ function BuildMainMenu (app, win){
             
         ]
     }];
+
+    if (process.platform === 'darwin') {
+        //Remove the file menu
+        menuTemplate.shift();
+
+        //Add a Mac worthy menu
+        menuTemplate.unshift({
+            label:"Kindle Highlights Browser",
+            submenu: [
+                {
+                    role: "close",
+                    accelerator: "CmdOrCtrl+q"
+                }
+            ]
+        });
+    }
+  
     Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 }
 

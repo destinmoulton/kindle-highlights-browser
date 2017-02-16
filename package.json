@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile-react": "webpack --config webpack.config.js -d --watch",
     "app": "electron .",
-    "compile-windows": "electron-packager . --overwrite --out=dist/win32 --platform=win32 --arch=x64 --electron-version=1.4.15 --ignore=typings --ignore=.vscode --ignore=dist --ignore=node_modules"
+    "compile-windows": "electron-packager . --overwrite --out=dist/win32 --platform=win32 --arch=x64 --electron-version=1.4.15 --ignore=typings --ignore=.vscode --ignore=dist --ignore=node_modules",
+    "compile-osx":"electron-packager . --overwrite --out=dist/osx --platform=darwin --arch=x64 --electron-version=1.4.15 --ignore=typings --ignore .vscode --ignore=dist --ignore=node_modules"
   },
   "keywords": [
     "electron",

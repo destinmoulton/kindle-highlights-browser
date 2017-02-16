@@ -1,7 +1,7 @@
 {
-  "name": "kindlehighlights",
+  "name": "Kindle Highlights Browser",
   "version": "0.0.4",
-  "description": "A Kindle highlights viewer built using Node, Electron, and React.",
+  "description": "A Kindle highlights viewer. Built using Node, Electron, and React.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

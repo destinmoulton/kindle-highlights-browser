@@ -1,5 +1,5 @@
 {
-  "name": "Kindle Highlights Browser",
+  "name": "kindle-highlights-browser",
   "version": "0.0.4",
   "description": "A Kindle highlights viewer. Built using Node, Electron, and React.",
   "main": "index.js",

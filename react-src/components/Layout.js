@@ -23,18 +23,24 @@ export default class Layout extends React.Component{
         
         remote.dialog.showOpenDialog({properties:['openFile']},(fileName)=>{
             const clipParser = new MyClippingsParser();
-            const newClippings = clipParser.parseFile(fileName[0]);
+            const clippings = clipParser.parseFile(fileName[0]);
+            const authors = clipParser.getAuthorsAsSortedArray();
+            const titles = clipParser.getTitlesAsSortedArray();
             this.setState({
                 hasClippings: true,
-                clippings: newClippings
+                clippings,
+                authors,
+                titles
             });
         }); 
     }
 
     render(){
+        const {clippings, authors, titles} = this.state;
+
         let contents = <Home openClippingsDialogHandler={this.openClippingsDialog.bind(this)} />;
         if(this.state.hasClippings){
-            contents = <HighlightBrowser clippings={this.state.clippings}/>
+            contents = <HighlightBrowser clippings={clippings} authors={authors} titles={titles}/>
         }
 
         return (

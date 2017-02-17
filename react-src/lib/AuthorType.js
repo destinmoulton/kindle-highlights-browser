@@ -1,4 +1,4 @@
-class AuthorType {
+export default class AuthorType {
     constructor(firstName, lastName){
 
         this.firstName = firstName;
@@ -17,9 +17,13 @@ class AuthorType {
         let fullName = "";
         if(this.hasFirstName()){
             fullName = this.firstName;
-            if(this.lastName !== "undefined" )
-        }
 
-        
+            if(this.hasLastName()){
+                fullName += " " + this.lastName;
+            }
+        } else {
+            fullName = this.lastName;
+        }
+        return fullName;        
     }
 }

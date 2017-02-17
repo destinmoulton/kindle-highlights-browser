@@ -2,6 +2,8 @@ import fs from "fs";
 
 import moment from "moment";
 
+import AuthorType from "./AuthorType";
+
 const CLIPPING_SEPARATOR = "==========";
 const TITLEAUTHOR_SEPARATOR = " (";
 const LOCATION_HIGHLIGHT_PREFIX = "- Your Highlight on Location ";
@@ -12,7 +14,8 @@ const LOCATION_NOTE_PREFIX = "- Your Note on Location ";
 const LOCTIME_SEPARATOR = " | ";
 const TIME_PREFIX = "Added on ";
 const AUTHOR_SUFFIX = ")";
-const AUTHOR_SEPARATOR = ", ";
+const AUTHOR_COMMA_SEPARATOR = ", ";
+const AUTHOR_SPACE_SEPARATOR = ", ";
 const MOMENT_FORMAT = "dddd, MMMM DD, YYYY h:mm:ss a";
 
 export default class MyClippingsParser {
@@ -76,11 +79,30 @@ export default class MyClippingsParser {
 
         const title = parts[0];
 
-        const authorParts = parts[1].replace(AUTHOR_SUFFIX,"").split(AUTHOR_SEPARATOR);
-        const authorLastName = authorParts[0];
-        const authorFirstName = authorParts[1] || "";
+        let authorParts = parts[1].replace(AUTHOR_SUFFIX,"").split(AUTHOR_COMMA_SEPARATOR);
 
-        return { title, authorFirstName, authorLastName };
+        let authorFirstName = "";
+        let authorLastName = "";
+        if(authorParts.length > 1){
+            // Comma separated (last, first)
+            authorLastName = authorParts[0];
+            authorFirstName = authorParts[1];
+        } else {
+            // Try space separated
+            authorParts = authorParts.split(AUTHOR_SPACE_SEPARATOR);
+            if(authorParts.length > 1){
+                // Is space separated (first last)
+                authorFirstName = authorParts[0];
+                authorLastName = authorParts[1];
+            } else {
+                authorFirstName = authorParts[0];
+                authorLastName = "";
+            }
+        }
+
+        const author = new Author(authorFirstName, authorLastName);
+
+        return { title, author };
     }
 
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-
+import Filter from './Filter';
 import TreeSublist from './TreeSublist';
 
 class TreeList extends Component {
@@ -8,7 +8,8 @@ class TreeList extends Component {
         const { authors, titles, handleChangeSelectedFilter, filterField, filterContent} = this.props;
 
         return (
-            <span>
+            <div>
+                <Filter/>
                 <TreeSublist key="authors"
                              listData={authors} 
                              listTitle="Authors"
@@ -22,7 +23,7 @@ class TreeList extends Component {
                              currentFilterContent={filterContent}
                              handleChangeSelectedFilter={handleChangeSelectedFilter} />
 
-            </span>
+            </div>
         );
     }
 }

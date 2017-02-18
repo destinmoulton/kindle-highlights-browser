@@ -2,6 +2,8 @@ import fs from "fs";
 
 import moment from "moment";
 
+import AuthorType from "./AuthorType";
+
 const CLIPPING_SEPARATOR = "==========";
 const TITLEAUTHOR_SEPARATOR = " (";
 const LOCATION_HIGHLIGHT_PREFIX = "- Your Highlight on Location ";
@@ -12,11 +14,16 @@ const LOCATION_NOTE_PREFIX = "- Your Note on Location ";
 const LOCTIME_SEPARATOR = " | ";
 const TIME_PREFIX = "Added on ";
 const AUTHOR_SUFFIX = ")";
-const AUTHOR_SEPARATOR = ", ";
+const AUTHOR_COMMA_SEPARATOR = ", ";
+const AUTHOR_SPACE_SEPARATOR = ", ";
 const MOMENT_FORMAT = "dddd, MMMM DD, YYYY h:mm:ss a";
 
 export default class MyClippingsParser {
 
+    constructor(){
+        this.authors = {};
+        this.titles = {};
+    }
     parseFile(filename){
         const contents = this.getFileContents(filename);
 
@@ -35,40 +42,39 @@ export default class MyClippingsParser {
             if(lines[0]===""){
                 return;
             }
-            
+
+            const {title, author} = this.parseTitleAndAuthor(lines[0]);
+            const authorFullName = author.getFullName();
             let clipData = {};
-
-            const titleAuthor = this.parseTitleAndAuthor(lines[0]);
-
-            let author = "";
-            if(titleAuthor['authorFirstName']!=""){
-                author = titleAuthor['authorFirstName'] + " ";
-            }
-
-            author += titleAuthor['authorLastName'];
-            if(!clippings.hasOwnProperty(titleAuthor['title'])){
-                clippings[titleAuthor['title']] = {
-                    title:titleAuthor['title'],
-                    author:author,
-                    clips:[]
-                };
-
-            }
-
-            const locdate = this.parseLocationAndDate(lines[1]);
-            clipData['location'] = locdate['location'];
-            clipData['location_start'] = parseInt(locdate['location_start']);
-            clipData['date'] = locdate['date'];
-            clipData['unix_timestamp'] = locdate['unix_timestamp'];
+            const { location, location_start, date, unix_timestamp } = this.parseLocationAndDate(lines[1]);
             
-            clipData['text'] = lines[3];
-
-            if(clipData['location']['type']!=="bookmark"){
-                clippings[titleAuthor['title']]['clips'].push(clipData);
+            if(!clippings.hasOwnProperty(unix_timestamp)){
+                if(location.type !== "bookmark"){
+                    clippings[unix_timestamp] = {
+                        title,
+                        author,
+                        authorFullName,
+                        location,
+                        location_start,
+                        date,
+                        unix_timestamp,
+                        text:lines[3]
+                    };
+                }
             }
-
         });
         return clippings;
+    }
+
+    getAuthorsAsSortedArray(){
+        const authorNames = Object.keys(this.authors);
+
+        return authorNames.sort();
+    }
+
+    getTitlesAsSortedArray(){
+        const titles = Object.keys(this.titles);
+        return titles.sort();
     }
 
     parseTitleAndAuthor(str){
@@ -76,11 +82,44 @@ export default class MyClippingsParser {
 
         const title = parts[0];
 
-        const authorParts = parts[1].replace(AUTHOR_SUFFIX,"").split(AUTHOR_SEPARATOR);
-        const authorLastName = authorParts[0];
-        const authorFirstName = authorParts[1] || "";
+        let authorParts = parts[1].replace(AUTHOR_SUFFIX,"").split(AUTHOR_COMMA_SEPARATOR);
 
-        return { title, authorFirstName, authorLastName };
+        let authorFirstName = "";
+        let authorLastName = "";
+        if(authorParts.length > 1){
+            // Comma separated (last, first)
+            authorLastName = authorParts[0];
+            authorFirstName = authorParts[1];
+        } else {
+            // Try space separated
+            authorParts = authorParts[0].split(AUTHOR_SPACE_SEPARATOR);
+            if(authorParts.length > 1){
+                // Is space separated (first last)
+                authorFirstName = authorParts[0];
+                authorLastName = authorParts[1];
+            } else if(authorParts.length === 1){
+                authorFirstName = authorParts[0];
+                authorLastName = "";
+            } else {
+                authorFirstName = "Undefined"
+                authorLastName = "Author";
+            }
+        }
+
+        const authorFullName = authorFirstName + " " + authorLastName;
+        let author = {};
+        if(this.authors.hasOwnProperty(authorFullName)){
+            author = this.authors[authorFullName];
+        } else {
+            author = new AuthorType(authorFirstName, authorLastName);
+            this.authors[authorFullName] = author;
+        }
+
+        if(!this.titles.hasOwnProperty(title)){
+            this.titles[title] = title;
+        }
+
+        return { title, author };
     }
 
 
@@ -114,7 +153,7 @@ export default class MyClippingsParser {
             
         }
         
-        const location_start = location['value'].split('-')[0];
+        const location_start = parseInt(location['value'].split('-')[0]);
         const dateStr = parts[1].replace(TIME_PREFIX, "");
         const date = moment(dateStr, MOMENT_FORMAT);
         

@@ -6,7 +6,7 @@ import ClipRow from "./ClipRow";
 import ClipSorter from "../../lib/clipsorter";
 import ClipsButtonBar from "./ClipsButtonBar";
 
-export default class TitleList extends React.Component {
+export default class ClipsList extends React.Component {
 
     constructor(props){
         super(props);
@@ -24,10 +24,9 @@ export default class TitleList extends React.Component {
     }
 
     render(){
-        const { clips, sortParam, activeTitle, activeAuthor } = this.props;
-
+        const { clips, sortParam, filterField, filterContent } = this.props;
+        const { title, authorFullName } = clips[0];
         this.clipSorter.sortClips(clips, this.state.sortBy);
-
         const clipItems = [];
         clips.map(function(clip){
             clipItems.push(<ClipRow key={clip.date} clip={clip}/>);
@@ -37,10 +36,10 @@ export default class TitleList extends React.Component {
                 <ClipsButtonBar sortChangeHandler={this.sortChangeHandler.bind(this)} 
                                 sortBy={this.state.sortBy}
                                 clips={clips}
-                                activeTitle={activeTitle}/>                                    
+                                activeTitle={title}/>                                    
                 <Well>
-                <h3>{activeTitle}</h3>
-                <h4>{activeAuthor}</h4>
+                <h3>{title}</h3>
+                <h4>{authorFullName}</h4>
                 </Well>
                 {clipItems}
             </div>

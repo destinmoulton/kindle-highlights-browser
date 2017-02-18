@@ -2,7 +2,7 @@ import React from "react";
 
 import { Col } from "react-bootstrap";
 
-import TitleList from "./TitleList";
+import TreeList from "./Tree/TreeList";
 import ClipsList from "./Clips/ClipsList";
 import EmptyClipList from "./Clips/EmptyClipList";
 
@@ -11,40 +11,49 @@ export default class HighlightBrowser extends React.Component{
         super(props);
 
         this.state={
-            activeTitle:"",
-            activeAuthor:""
+            filterField:"",
+            filterContent:""
         }
     }
 
-    changeSelectedTitle(e){
-        document.getElementById('khb-clipscontainer').scrollTop = 0;
+    handleChangeSelectedFilter(e){
+        document.getElementById('khb-clips-container').scrollTop = 0;
+        
         this.setState({
-            activeTitle:e.target.getAttribute('data-title'),
-            activeAuthor:e.target.getAttribute('data-author')
+            filterField:e.target.getAttribute('data-filter-field'),
+            filterContent:e.target.getAttribute('data-filter-content')
         });
     }
 
     render(){
-        const { clippings } = this.props;
-        const { activeTitle, activeAuthor } = this.state;
+        const { clippings, authors, titles } = this.props;
+        const { filterField, filterContent } = this.state;
         let clips = [];
-        if(clippings[activeTitle]!==undefined){
-            clips = clippings[activeTitle]['clips'];
-        }
+
+        const clipKeys = Object.keys(clippings);
+        clipKeys.map(function(key){
+            if(clippings[key].hasOwnProperty(filterField)){
+                if(clippings[key][filterField]===filterContent){
+                    clips.push(clippings[key]);
+                }
+            }
+        });
 
         let clipsContents = <EmptyClipList/>;
         if(clips.length > 0){
-            clipsContents = <ClipsList clips={clips} activeTitle={activeTitle} activeAuthor={activeAuthor}/>;
+            clipsContents = <ClipsList clips={clips} filterField={filterField} filterContent={filterContent}/>;
         }
         
         return (
             <div>
-                <Col xs={4} id="khb-titlelist-container">
-                    <TitleList clippings={clippings} 
-                            changeSelectedTitle={this.changeSelectedTitle.bind(this)}
-                            activeTitle={activeTitle}/>
+                <Col xs={4} id="khb-treelist-container">
+                    <TreeList authors={authors}
+                              titles={titles}
+                              handleChangeSelectedFilter={this.handleChangeSelectedFilter.bind(this)}
+                              filterField={filterField} 
+                              filterContent={filterContent}/>
                 </Col>
-                <Col xs={8} id="khb-clipscontainer">
+                <Col xs={8} id="khb-clips-container">
                     {clipsContents}
                 </Col>
             </div>

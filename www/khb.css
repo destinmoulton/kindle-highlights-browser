@@ -13,7 +13,7 @@ h3{
 }
 
 @media (min-width: 768px){
-  #khb-titlelist-container {
+  #khb-treelist-container {
     position: absolute;
     top: 0px;
     bottom: 0;
@@ -22,7 +22,7 @@ h3{
     overflow-y: scroll; 
   }
   
-  #khb-clipscontainer {
+  #khb-clips-container {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -32,25 +32,42 @@ h3{
   }
 }
 
-#khb-titlelist-container{
+#khb-treelist-container{
     height:100%;
     text-align:left;
     padding:0px 0px 0px 0px;
 }
 
-.khb-titlelist-titlerow{
-    font-size:.9em;
-    font-weight:bold;
-    border-bottom:2px solid gray;
-    padding:5px 5px 5px 5px;
+div.khb-treelist-subtree-container{
+    margin-left:5px;
+}
+
+ul.khb-treelist-subtree{
+    list-style-type: none;
+    background: url(graphics/tree-vline.png) repeat-y;
+    margin: 0 0 0 7px;
+    padding-left:10px;
+}
+
+ul.khb-treelist-subtree > li{
+    margin-bottom:2px;
+    margin-left:-10px;
+    cursor:pointer;
+    padding: 0 12px;
+    line-height: 20px;
+    background: url(graphics/tree-item.png) no-repeat;
+    color: #369;
+    font-weight: bold;
+}
+ul.khb-treelist-subtree > li:last-child{
+    background: #fff url(graphics/tree-lastitem.png) no-repeat;
+}
+
+i.khb-treelist-icon {
     cursor:pointer;
 }
 
-.khb-titlelist-titlerow-active{
-    background-color:#EFEFEF;
-}
-
-#khb-clipscontainer{
+#khb-clips-container{
     height:100%;
     text-align:left;
     padding:5px;

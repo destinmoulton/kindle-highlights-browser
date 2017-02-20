@@ -15,7 +15,7 @@ class ClipsList extends Component {
     render() {
         const { clips, sortBy } = this.props;
         const { title, authorFullName } = clips[0];
-
+        
         this.clipSorter.sortClips(clips, sortBy);
         const clipItems = [];
         clips.map(function(clip){

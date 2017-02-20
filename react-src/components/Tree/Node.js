@@ -13,12 +13,11 @@ class Node extends Component {
         if(filterContent === itemName){
             className = "khb-treelist-activenode";
         }
-        return (<li key={itemName}
-                    
-                    onClick={handleChangeSelectedFilter}
-                    data-filter-field={filterFieldName}
-                    data-filter-content={itemName}>
-                    <div className={className}>{itemName}</div>
+        return (<li key={itemName}>
+                    <div data-filter-field={filterFieldName}
+                         data-filter-content={itemName}
+                         className={className} 
+                         onClick={handleChangeSelectedFilter}>{itemName}</div>
                 </li>);
     }
 }

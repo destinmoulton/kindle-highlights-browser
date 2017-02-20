@@ -14,10 +14,12 @@ class Node extends Component {
             className = "khb-treelist-activenode";
         }
         return (<li key={itemName}
-                    className={className}
+                    
                     onClick={handleChangeSelectedFilter}
                     data-filter-field={filterFieldName}
-                    data-filter-content={itemName}>{itemName}</li>);
+                    data-filter-content={itemName}>
+                    <div className={className}>{itemName}</div>
+                </li>);
     }
 }
 

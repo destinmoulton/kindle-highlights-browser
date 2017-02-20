@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile-react": "webpack --config webpack.config.js -d --watch",
+    "compile:react": "webpack --config webpack.config.js -d --watch",
     "dev": "electron .",
     "clean:osx": "rm -rf ./dist/osx",
     "clean:win": "rm -rf ./dist/win32",

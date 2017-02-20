@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Node from './Node'
+
 class TreeSublist extends Component {
     constructor(props){
         super(props);
@@ -17,15 +19,27 @@ class TreeSublist extends Component {
     }
 
     render() {
-        const { listData, listTitle, filterFieldName, handleChangeSelectedFilter } = this.props;
+        const { listData, listTitle, filterFieldName, handleChangeSelectedFilter, searchString } = this.props;
         const { isOpen } = this.state;
 
         let sublist = [];
-        listData.map(function(item){
-            sublist.push(<li key={item}
-                             onClick={handleChangeSelectedFilter}
-                             data-filter-field={filterFieldName}
-                             data-filter-content={item}>{item}</li>);
+        
+        listData.map(function(itemName){
+            const safeName = itemName.toLowerCase();
+
+            const node = <Node key={itemName}
+                               handleChangeSelectedFilter={handleChangeSelectedFilter}
+                               filterFieldName={filterFieldName}
+                               searchString={searchString}
+                               itemName={itemName}
+                            />;
+
+            if( searchString !=="" && safeName.includes(searchString)){
+                sublist.push(node);
+            } else if (searchString===""){
+                sublist.push(node);
+            }
+
         });
 
         let iconClasses = "fa fa-plus-circle khb-treelist-icon";

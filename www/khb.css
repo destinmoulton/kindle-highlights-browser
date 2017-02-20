@@ -38,6 +38,10 @@ h3{
     padding:0px 0px 0px 0px;
 }
 
+#khb-treelist-filter-container{
+    padding:10px 10px 0px 10px;
+}
+
 div.khb-treelist-subtree-container{
     margin-left:5px;
 }

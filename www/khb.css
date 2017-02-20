@@ -54,7 +54,7 @@ ul.khb-treelist-subtree{
 }
 
 ul.khb-treelist-subtree > li{
-    margin-bottom:2px;
+    margin-bottom:4px;
     margin-left:-10px;
     cursor:pointer;
     padding: 0 12px;
@@ -67,7 +67,12 @@ ul.khb-treelist-subtree > li:last-child{
     background: #fff url(graphics/tree-lastitem.png) no-repeat;
 }
 
+div.khb-treelist-node{
+    line-height: 1em;
+}
+
 div.khb-treelist-activenode{
+    padding:4px;
     background-color:lightgray;
 }
 

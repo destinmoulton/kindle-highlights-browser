@@ -11,15 +11,14 @@ export default class HighlightBrowser extends React.Component{
         super(props);
 
         this.state={
-            filterField:"",
+            filterField:"title",
             filterContent:""
         }
     }
 
     handleChangeSelectedFilter(e){
         document.getElementById('khb-clips-container').scrollTop = 0;
-        console.log('handleChangeSelectedFilter');
-        
+                
         this.setState({
             filterField:e.target.getAttribute('data-filter-field'),
             filterContent:e.target.getAttribute('data-filter-content')
@@ -34,7 +33,7 @@ export default class HighlightBrowser extends React.Component{
         const clipKeys = Object.keys(clippings);
         clipKeys.map(function(key){
             if(clippings[key].hasOwnProperty(filterField)){
-                if(clippings[key][filterField]===filterContent){
+                if(filterContent==="" || clippings[key][filterField]===filterContent){
                     if(!clips.hasOwnProperty(clippings[key]['title'])){
                         // Group the clips by title
                         clips[clippings[key]['title']] = [];

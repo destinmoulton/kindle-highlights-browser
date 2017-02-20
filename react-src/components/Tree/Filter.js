@@ -9,7 +9,7 @@ class Filter extends Component {
             <div id='khb-treelist-filter-container'>
                 <FormGroup>
                 <InputGroup>
-                    <FormControl type="text" placeholder="Search..." onChange={handleSearchChange}/>
+                    <FormControl type="text" placeholder="Search Authors/Titles..." onChange={handleSearchChange}/>
                     <InputGroup.Addon><i className='fa fa-search'></i></InputGroup.Addon>
                 </InputGroup>
                 </FormGroup>

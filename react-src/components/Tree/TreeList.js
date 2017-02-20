@@ -27,6 +27,7 @@ class TreeList extends Component {
                              listData={authors} 
                              listTitle="Authors"
                              filterFieldName="authorFullName"
+                             filterContent={filterContent}
                              currentFilterContent={filterContent}
                              searchString={searchString}
                              handleChangeSelectedFilter={handleChangeSelectedFilter} />
@@ -34,6 +35,7 @@ class TreeList extends Component {
                              listData={titles} 
                              listTitle="Titles"
                              filterFieldName="title"
+                             filterContent={filterContent}
                              currentFilterContent={filterContent}
                              searchString={searchString}
                              handleChangeSelectedFilter={handleChangeSelectedFilter} />

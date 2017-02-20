@@ -9,15 +9,16 @@ class Node extends Component {
     render() {
         const { itemName, handleChangeSelectedFilter, filterFieldName, filterContent} = this.props;
 
-        let className = "";
+        let className = "khb-treelist-node";
         if(filterContent === itemName){
-            className = "khb-treelist-activenode";
+            className += " khb-treelist-activenode";
         }
-        return (<li key={itemName}
-                    className={className}
-                    onClick={handleChangeSelectedFilter}
-                    data-filter-field={filterFieldName}
-                    data-filter-content={itemName}>{itemName}</li>);
+        return (<li key={itemName}>
+                    <div data-filter-field={filterFieldName}
+                         data-filter-content={itemName}
+                         className={className} 
+                         onClick={handleChangeSelectedFilter}>{itemName}</div>
+                </li>);
     }
 }
 

@@ -3,7 +3,7 @@ import React from "react";
 import { Col } from "react-bootstrap";
 
 import TreeList from "./Tree/TreeList";
-import ClipsList from "./Clips/ClipsList";
+import ClipsContainer from "./Clips/ClipsContainer";
 import EmptyClipList from "./Clips/EmptyClipList";
 
 export default class HighlightBrowser extends React.Component{
@@ -11,7 +11,7 @@ export default class HighlightBrowser extends React.Component{
         super(props);
 
         this.state={
-            filterField:"",
+            filterField:"title",
             filterContent:""
         }
     }
@@ -19,29 +19,50 @@ export default class HighlightBrowser extends React.Component{
     handleChangeSelectedFilter(e){
         document.getElementById('khb-clips-container').scrollTop = 0;
         
+        let newFilterField = e.target.getAttribute('data-filter-field');
+        let newFilterContent = e.target.getAttribute('data-filter-content');
+        if(this.state.filterContent === newFilterContent){
+            newFilterField = "title";
+            newFilterContent = "";
+        }
         this.setState({
-            filterField:e.target.getAttribute('data-filter-field'),
-            filterContent:e.target.getAttribute('data-filter-content')
+            filterField:newFilterField,
+            filterContent:newFilterContent
         });
+    }
+
+    filterClips(){
+        let clips = {};
+        const { clippings } = this.props;
+        const { filterField, filterContent } = this.state;
+
+        const clipKeys = Object.keys(clippings);
+        clipKeys.map(function(key){
+            if(clippings[key].hasOwnProperty(filterField)){
+                if(filterContent==="" || clippings[key][filterField]===filterContent){
+                    if(!clips.hasOwnProperty(clippings[key]['title'])){
+                        // Group the clips by title
+                        clips[clippings[key]['title']] = [];
+                    }
+                    clips[clippings[key]['title']].push(clippings[key]);
+                }
+            }
+        });
+
+        return clips;
     }
 
     render(){
         const { clippings, authors, titles } = this.props;
         const { filterField, filterContent } = this.state;
-        let clips = [];
-
-        const clipKeys = Object.keys(clippings);
-        clipKeys.map(function(key){
-            if(clippings[key].hasOwnProperty(filterField)){
-                if(clippings[key][filterField]===filterContent){
-                    clips.push(clippings[key]);
-                }
-            }
-        });
-
+        
+        const clips = this.filterClips();
+        
         let clipsContents = <EmptyClipList/>;
-        if(clips.length > 0){
-            clipsContents = <ClipsList clips={clips} filterField={filterField} filterContent={filterContent}/>;
+        if(Object.keys(clips).length > 0){
+            clipsContents = <ClipsContainer clips={clips} 
+                                            filterField={filterField} 
+                                            filterContent={filterContent}/>;
         }
         
         return (

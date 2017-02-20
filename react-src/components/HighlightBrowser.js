@@ -3,7 +3,7 @@ import React from "react";
 import { Col } from "react-bootstrap";
 
 import TreeList from "./Tree/TreeList";
-import ClipsList from "./Clips/ClipsList";
+import ClipsContainer from "./Clips/ClipsContainer";
 import EmptyClipList from "./Clips/EmptyClipList";
 
 export default class HighlightBrowser extends React.Component{
@@ -25,23 +25,38 @@ export default class HighlightBrowser extends React.Component{
         });
     }
 
-    render(){
-        const { clippings, authors, titles } = this.props;
+    filterClips(){
+        let clips = {};
+        const { clippings } = this.props;
         const { filterField, filterContent } = this.state;
-        let clips = [];
 
         const clipKeys = Object.keys(clippings);
         clipKeys.map(function(key){
             if(clippings[key].hasOwnProperty(filterField)){
                 if(clippings[key][filterField]===filterContent){
-                    clips.push(clippings[key]);
+                    if(!clips.hasOwnProperty(clippings[key]['title'])){
+                        // Group the clips by title
+                        clips[clippings[key]['title']] = [];
+                    }
+                    clips[clippings[key]['title']].push(clippings[key]);
                 }
             }
         });
 
+        return clips;
+    }
+
+    render(){
+        const { clippings, authors, titles } = this.props;
+        const { filterField, filterContent } = this.state;
+        
+        const clips = this.filterClips();
+        
         let clipsContents = <EmptyClipList/>;
-        if(clips.length > 0){
-            clipsContents = <ClipsList clips={clips} filterField={filterField} filterContent={filterContent}/>;
+        if(Object.keys(clips).length > 0){
+            clipsContents = <ClipsContainer clips={clips} 
+                                            filterField={filterField} 
+                                            filterContent={filterContent}/>;
         }
         
         return (

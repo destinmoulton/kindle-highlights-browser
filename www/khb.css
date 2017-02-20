@@ -48,7 +48,7 @@ div.khb-treelist-subtree-container{
 
 ul.khb-treelist-subtree{
     list-style-type: none;
-    background: url(graphics/tree-vline.png) repeat-y;
+    background: white url(graphics/tree-vline.png) repeat-y;
     margin: 0 0 0 7px;
     padding-left:10px;
 }

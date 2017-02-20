@@ -58,7 +58,7 @@ class ClipsExportModal extends Component {
     handleSaveClipsToFile(){
         const self = this;
 
-        const possibleTitle = CleanTitle(self.props.activeTitle);
+        const possibleTitle = CleanTitle(self.props.filterContent);
         remote.dialog.showSaveDialog({defaultPath:possibleTitle+FILE_EXT}, function(filename){
             const strToWrite = GenerateClipsString(self.props.clips, self.state.checkboxes, self.state.clipSeparator, EOL);
             fs.writeFile(filename, strToWrite, function(err){

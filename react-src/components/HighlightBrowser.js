@@ -18,10 +18,16 @@ export default class HighlightBrowser extends React.Component{
 
     handleChangeSelectedFilter(e){
         document.getElementById('khb-clips-container').scrollTop = 0;
-                
+        
+        let newFilterField = e.target.getAttribute('data-filter-field');
+        let newFilterContent = e.target.getAttribute('data-filter-content');
+        if(this.state.filterContent === newFilterContent){
+            newFilterField = "title";
+            newFilterContent = "";
+        }
         this.setState({
-            filterField:e.target.getAttribute('data-filter-field'),
-            filterContent:e.target.getAttribute('data-filter-content')
+            filterField:newFilterField,
+            filterContent:newFilterContent
         });
     }
 

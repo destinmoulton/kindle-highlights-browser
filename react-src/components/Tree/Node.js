@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
 
 class Node extends Component {
-    render() {
-        const { itemName, handleChangeSelectedFilter, filterFieldName} = this.props;
+    constructor(props){
+        super(props);
 
+    }
+
+    render() {
+        const { itemName, handleChangeSelectedFilter, filterFieldName, filterContent} = this.props;
+
+        let className = "";
+        if(filterContent === itemName){
+            className = "khb-treelist-activenode";
+        }
         return (<li key={itemName}
-                onClick={handleChangeSelectedFilter}
-                data-filter-field={filterFieldName}
-                data-filter-content={itemName}>{itemName}</li>);
+                    className={className}
+                    onClick={handleChangeSelectedFilter}
+                    data-filter-field={filterFieldName}
+                    data-filter-content={itemName}>{itemName}</li>);
     }
 }
 

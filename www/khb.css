@@ -67,6 +67,10 @@ ul.khb-treelist-subtree > li:last-child{
     background: #fff url(graphics/tree-lastitem.png) no-repeat;
 }
 
+ul.khb-treelist-subtree > li.khb-treelist-activenode{
+    background-color:lightgray;
+}
+
 i.khb-treelist-icon {
     cursor:pointer;
 }

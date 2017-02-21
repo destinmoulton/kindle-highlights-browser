@@ -1,13 +1,13 @@
 import _ from 'lodash';
 
-class Filters {
+export default class FiltersCollection {
 
     constructor (){
         this.filters = [];
     }
 
     _cleanFilterContent(dirtyContent){
-        return title.replace(/\W/g, '');
+        return dirtyContent.replace(/\W/g, '');
     }
 
     add(filterField, filterContent){
@@ -21,17 +21,25 @@ class Filters {
     }
 
     remove(filterField, filterContent){
-        if(this.has(filterField, filterContent)){
-            _.filter(this.filters, (o)=>{
-                return o.filterField !== filterField && o.filterContent !== filterContent;
+        const cleanContent = this._cleanFilterContent(filterContent);
+        if(this.has(filterField, cleanContent)){
+            this.filters = _.filter(this.filters, (o)=>{
+                return o.filterField !== filterField && o.filterContent !== cleanContent;
             });
         }
     }
 
     has(filterField, filterContent){
-        return _.find(this.filters, (o)=>{
-            return o.filterField === filterField && o.filterContent === filterContent;
+        const cleanContent = this._cleanFilterContent(filterContent);
+        const test = _.find(this.filters, (o)=>{
+            return o.filterField === filterField && o.filterContent === cleanContent;
         });
+
+        return (test !== undefined);
+    }
+
+    get length(){
+        return this.filters.length;
     }
 
     /**
@@ -41,9 +49,9 @@ class Filters {
         let searchString = "";
         this.filters.map(function(filterObj){
             if(searchString !== ""){
-                searchString
+                searchString += " OR ";
             }
-            searchString += `${filterObj.filterField}:"${filterObj.filterContent}"`;
+            searchString += `(${filterObj.filterField}:${filterObj.filterContent})`;
         });
         return searchString;
     }

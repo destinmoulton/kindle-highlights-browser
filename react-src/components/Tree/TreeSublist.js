@@ -19,7 +19,7 @@ class TreeSublist extends Component {
     }
 
     render() {
-        const { listData, listTitle, filterFieldName, filterContent, handleChangeSelectedFilter, searchString } = this.props;
+        const { listData, listTitle, filters, filterFieldName, handleChangeSelectedFilter, searchString } = this.props;
         const { isOpen } = this.state;
 
         let sublist = [];
@@ -30,7 +30,7 @@ class TreeSublist extends Component {
             const node = <Node key={itemName}
                                handleChangeSelectedFilter={handleChangeSelectedFilter}
                                filterFieldName={filterFieldName}
-                               filterContent={filterContent}
+                               filters={filters}
                                searchString={searchString}
                                itemName={itemName}
                             />;

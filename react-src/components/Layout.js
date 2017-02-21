@@ -1,12 +1,15 @@
 import React from 'react';
 import { remote } from 'electron';
 
+import Storage from '../lib/Storage';
+
 import Home from './Home';
 
 import HighlightBrowser from './HighlightBrowser.js';
 
 import MyClippingsParser from '../lib/myclippingsparser';
 
+const DB_LAST_SETTING_QUERY = { setting: 'last_open_myclippings_file' };
 export default class Layout extends React.Component{
    
     constructor(props){
@@ -17,21 +20,46 @@ export default class Layout extends React.Component{
             clippings:{}
         };
 
+        this.storage = new Storage();
+        
+        this.loadLastFileName();
+    }
+
+    loadLastFileName(){
+        this.storage.find(DB_LAST_SETTING_QUERY, (set)=>{
+            this.parseFile(set[0].value);
+        });
+    }
+
+    setLastFileName(fileName){
+        this.storage.find(DB_LAST_SETTING_QUERY, (set) => {
+            if (set.length === 0) {
+                this.storage.insert({ setting: 'last_open_myclippings_file', value: fileName });
+            } else {
+                this.storage.update(DB_LAST_SETTING_QUERY, { value: fileName });
+            }
+        });
+    }
+    parseFile(fileName){
+        const clipParser = new MyClippingsParser();
+        const clippings = clipParser.parseFile(fileName);
+        const authors = clipParser.getAuthorsAsSortedArray();
+        const titles = clipParser.getTitlesAsSortedArray();
+
+        this.setLastFileName(fileName);
+                
+        this.setState({
+            hasClippings: true,
+            clippings,
+            authors,
+            titles
+        });
     }
 
     openClippingsDialog(){
-        
+
         remote.dialog.showOpenDialog({properties:['openFile']},(fileName)=>{
-            const clipParser = new MyClippingsParser();
-            const clippings = clipParser.parseFile(fileName[0]);
-            const authors = clipParser.getAuthorsAsSortedArray();
-            const titles = clipParser.getTitlesAsSortedArray();
-            this.setState({
-                hasClippings: true,
-                clippings,
-                authors,
-                titles
-            });
+           this.parseFile(fileName[0]);
         }); 
     }
 

@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 
 class Node extends Component {
-    constructor(props){
-        super(props);
-
-    }
-
     render() {
         const { itemName, handleChangeSelectedFilter, filterFieldName, filters} = this.props;
 
@@ -16,7 +11,7 @@ class Node extends Component {
         return (<li key={itemName}>
                     <div data-filter-field={filterFieldName}
                          data-filter-content={itemName}
-                         className={className} 
+                         className={className}
                          onClick={handleChangeSelectedFilter}>{itemName}</div>
                 </li>);
     }

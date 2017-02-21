@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { find, remove } from 'lodash';
 
 export default class FiltersCollection {
 
@@ -45,7 +45,7 @@ export default class FiltersCollection {
     remove(fieldName, filterContent){
         const cleanContent = this._cleanFilterContent(filterContent);
         if(this.has(fieldName, cleanContent)){
-            _.remove(this.filters, (o)=>{
+            remove(this.filters, (o)=>{
                 return o.fieldName === fieldName && o.cleanContent === cleanContent;
             });
         }
@@ -61,7 +61,7 @@ export default class FiltersCollection {
      */
     has(fieldName, filterContent){
         const cleanContent = this._cleanFilterContent(filterContent);
-        const test = _.find(this.filters, (o)=>{
+        const test = find(this.filters, (o)=>{
             return o.fieldName === fieldName && o.cleanContent === cleanContent;
         });
 

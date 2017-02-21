@@ -34,9 +34,15 @@ export default class HighlightBrowser extends React.Component{
                 });
             }
         } else {
-            this.setState({
-                filters:this.state.filters.clear().add(newFilterField, newFilterContent)
-            });
+            if(this.state.filters.has(newFilterField, newFilterContent)){
+                this.setState({
+                    filters:this.state.filters.clear()
+                });
+            } else {
+                this.setState({
+                    filters:this.state.filters.clear().add(newFilterField, newFilterContent)
+                });
+            }
         }
     }
 

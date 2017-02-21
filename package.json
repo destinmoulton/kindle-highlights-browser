@@ -5,7 +5,7 @@
   "description": "A Kindle highlights viewer. Built using Node, Electron, and React.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --compilers js:babel-core/register",
     "compile:react": "webpack --config webpack.config.js -d --watch",
     "dev": "electron .",
     "clean:osx": "rm -rf ./dist/osx",
@@ -27,9 +27,11 @@
     "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.22.0",
+    "chai": "^3.5.0",
     "electron": "^1.4.15",
     "electron-packager": "^8.5.1",
     "lodash": "^4.17.4",
+    "mocha": "^3.2.0",
     "webpack": "^2.2.1"
   },
   "dependencies": {

@@ -11,7 +11,6 @@ export default class ClipsContainer extends React.Component {
     constructor(props){
         super(props);
 
-        
         this.state = {
             sortBy:'location_start|asc'
         }
@@ -24,7 +23,7 @@ export default class ClipsContainer extends React.Component {
     }
 
     render(){
-        const { clips, sortParam, filterField, filterContent } = this.props;
+        const { clips, sortParam, filters } = this.props;
         const { sortBy } = this.state;
         const clipsLists = [];
         const clipKeys = Object.keys(clips);
@@ -38,7 +37,7 @@ export default class ClipsContainer extends React.Component {
                 <ClipsButtonBar sortChangeHandler={this.sortChangeHandler.bind(this)} 
                                 sortBy={this.state.sortBy}
                                 clips={clips}
-                                filterContent={filterContent}/>                                    
+                                filters={filters}/>                                    
                 {clipsLists}
             </div>
         );

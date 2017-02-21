@@ -6,13 +6,14 @@ import TreeList from "./Tree/TreeList";
 import ClipsContainer from "./Clips/ClipsContainer";
 import EmptyClipList from "./Clips/EmptyClipList";
 
+import FiltersCollection from '../lib/FiltersCollection';
+
 export default class HighlightBrowser extends React.Component{
     constructor(props){
         super(props);
 
         this.state={
-            filterField:"title",
-            filterContent:""
+            filters: new FiltersCollection()
         }
     }
 
@@ -21,32 +22,43 @@ export default class HighlightBrowser extends React.Component{
         
         let newFilterField = e.target.getAttribute('data-filter-field');
         let newFilterContent = e.target.getAttribute('data-filter-content');
-        if(this.state.filterContent === newFilterContent){
-            newFilterField = "title";
-            newFilterContent = "";
+
+        if(e.ctrlKey){
+            if(this.state.filters.has(newFilterField, newFilterContent)){
+                this.setState({
+                    filters:this.state.filters.remove(newFilterField, newFilterContent)
+                });
+            } else {
+                this.setState({
+                    filters:this.state.filters.add(newFilterField, newFilterContent)
+                });
+            }
+        } else {
+            this.setState({
+                filters:this.state.filters.clear().add(newFilterField, newFilterContent)
+            });
         }
-        this.setState({
-            filterField:newFilterField,
-            filterContent:newFilterContent
-        });
     }
 
     filterClips(){
         let clips = {};
         const { clippings } = this.props;
-        const { filterField, filterContent } = this.state;
+        const { filters } = this.state;
 
         const clipKeys = Object.keys(clippings);
-        clipKeys.map(function(key){
-            if(clippings[key].hasOwnProperty(filterField)){
-                if(filterContent==="" || clippings[key][filterField]===filterContent){
-                    if(!clips.hasOwnProperty(clippings[key]['title'])){
-                        // Group the clips by title
-                        clips[clippings[key]['title']] = [];
+        clipKeys.map((key)=>{
+            filters.each((filterField, filterContent)=>{
+                if (clippings[key].hasOwnProperty(filterField)) {
+                    if (clippings[key][filterField] === filterContent) {
+                        if (!clips.hasOwnProperty(clippings[key]['title'])) {
+                            // Group the clips by title
+                            clips[clippings[key]['title']] = [];
+                        }
+                        clips[clippings[key]['title']].push(clippings[key]);
                     }
-                    clips[clippings[key]['title']].push(clippings[key]);
                 }
-            }
+            });
+
         });
 
         return clips;
@@ -54,15 +66,14 @@ export default class HighlightBrowser extends React.Component{
 
     render(){
         const { clippings, authors, titles } = this.props;
-        const { filterField, filterContent } = this.state;
+        const { filters } = this.state;
         
         const clips = this.filterClips();
         
         let clipsContents = <EmptyClipList/>;
         if(Object.keys(clips).length > 0){
             clipsContents = <ClipsContainer clips={clips} 
-                                            filterField={filterField} 
-                                            filterContent={filterContent}/>;
+                                            filters={filters}/>;
         }
         
         return (
@@ -71,8 +82,7 @@ export default class HighlightBrowser extends React.Component{
                     <TreeList authors={authors}
                               titles={titles}
                               handleChangeSelectedFilter={this.handleChangeSelectedFilter.bind(this)}
-                              filterField={filterField} 
-                              filterContent={filterContent}/>
+                              filters={filters}/>
                 </Col>
                 <Col xs={8} id="khb-clips-container">
                     {clipsContents}

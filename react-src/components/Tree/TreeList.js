@@ -18,7 +18,7 @@ class TreeList extends Component {
         });
     }
     render() {
-        const { authors, titles, handleChangeSelectedFilter, filterField, filterContent} = this.props;
+        const { authors, titles, handleChangeSelectedFilter, filters} = this.props;
         const { searchString } = this.state;
         return (
             <div>
@@ -27,16 +27,14 @@ class TreeList extends Component {
                              listData={authors} 
                              listTitle="Authors"
                              filterFieldName="authorFullName"
-                             filterContent={filterContent}
-                             currentFilterContent={filterContent}
+                             filters={filters}
                              searchString={searchString}
                              handleChangeSelectedFilter={handleChangeSelectedFilter} />
                 <TreeSublist key="titles"
                              listData={titles} 
                              listTitle="Titles"
                              filterFieldName="title"
-                             filterContent={filterContent}
-                             currentFilterContent={filterContent}
+                             filters={filters}
                              searchString={searchString}
                              handleChangeSelectedFilter={handleChangeSelectedFilter} />
 

@@ -7,10 +7,10 @@ class Node extends Component {
     }
 
     render() {
-        const { itemName, handleChangeSelectedFilter, filterFieldName, filterContent} = this.props;
+        const { itemName, handleChangeSelectedFilter, filterFieldName, filters} = this.props;
 
         let className = "khb-treelist-node";
-        if(filterContent === itemName){
+        if(filters.has(filterFieldName, itemName)){
             className += " khb-treelist-activenode";
         }
         return (<li key={itemName}>

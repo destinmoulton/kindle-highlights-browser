@@ -6,37 +6,46 @@ export function GenerateClipsString(clips, checkboxes, clipSeparator, EOL){
     const includeLocation = checkboxes.location;
     const includeDate = checkboxes.date;
     let clipsString = "";
-    clips.map(function(clip){
-        let quote = "";
-        if(clipsString !== ""){
-            clipsString += `${EOL}${clipSeparator}${EOL}`;
-        }
+    let titles = Object.keys(clips);
 
-        if(clip.location.type === 'highlight') {
-            clipsString += "Highlight at ";
-            quote=`"`;
-        } else if(clip.location.type === 'note'){
-            clipsString += "Note at ";
-        }
+    titles.map(function(title){
+        let bookBegin = true;
+        clipsString += `${EOL}=====================================${EOL}`;
+        clipsString += `${title}${EOL}`;
+        clipsString += `By ${clips[title][0]['authorFullName']}${EOL}`;
+        clipsString += `=====================================${EOL}${EOL}`;
+        clips[title].map(function (clip) {
+            let quote = "";
+            if (!bookBegin && clipsString !== "") {
+                clipsString += `${EOL}${clipSeparator}${EOL}`;
+            }
 
-        if(includeLocation){
-            clipsString += `Location: ${clip.location.value}`;
-        }
+            if (clip.location.type === 'highlight') {
+                clipsString += "Highlight at ";
+                quote = `"`;
+            } else if (clip.location.type === 'note') {
+                clipsString += "Note at ";
+            }
 
-        if(includeLocation && includeDate){
-            clipsString += " -- ";
-        }
+            if (includeLocation) {
+                clipsString += `Location: ${clip.location.value}`;
+            }
 
-        if(includeDate){
-            clipsString += `${clip.date.format("MMMM DD, YYYY h:mm:ss a")}`;
-        }
+            if (includeLocation && includeDate) {
+                clipsString += " -- ";
+            }
 
-        if(includeLocation || includeDate){
-            clipsString += `${EOL}`;
-        }
+            if (includeDate) {
+                clipsString += `${clip.date.format("MMMM DD, YYYY h:mm:ss a")}`;
+            }
 
-        clipsString += `${quote}${clip.text}${quote}`;
+            if (includeLocation || includeDate) {
+                clipsString += `${EOL}`;
+            }
 
+            clipsString += `${quote}${clip.text}${quote}`;
+            bookBegin = false;
+        });
     });
     return clipsString;
 }

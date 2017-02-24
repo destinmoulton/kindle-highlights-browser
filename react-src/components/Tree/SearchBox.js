@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import {FormControl, FormGroup, InputGroup} from 'react-bootstrap';
 
-class Filter extends Component {
+class SearchBox extends Component {
     render() {
         const { handleSearchChange } = this.props;
         return (
@@ -18,4 +18,4 @@ class Filter extends Component {
     }
 }
 
-export default Filter;
+export default SearchBox;

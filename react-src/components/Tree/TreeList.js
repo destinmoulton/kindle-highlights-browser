@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Filter from './Filter';
+import SearchBox from './SearchBox';
 import TreeSublist from './TreeSublist';
 
 class TreeList extends Component {
@@ -22,7 +22,7 @@ class TreeList extends Component {
         const { searchString } = this.state;
         return (
             <div>
-                <Filter handleSearchChange={this.handleSearchChange.bind(this)}/>
+                <SearchBox handleSearchChange={this.handleSearchChange.bind(this)}/>
                 <TreeSublist key="authors"
                              listData={authors} 
                              listTitle="Authors"

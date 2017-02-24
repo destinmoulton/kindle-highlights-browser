@@ -38,8 +38,13 @@ h3{
     padding:0px 0px 0px 0px;
 }
 
-#khb-treelist-filter-container{
+#khb-treelist-search-container{
     padding:10px 10px 0px 10px;
+}
+
+.khb-treelist-search-close-icon{
+    color:maroon;
+    cursor:pointer;
 }
 
 div.khb-treelist-subtree-container{

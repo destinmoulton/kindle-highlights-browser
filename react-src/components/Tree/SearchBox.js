@@ -4,13 +4,27 @@ import {FormControl, FormGroup, InputGroup} from 'react-bootstrap';
 
 class SearchBox extends Component {
     render() {
-        const { handleSearchChange } = this.props;
+        const { handleSearchChange, originalSearchString, handleClearSearch } = this.props;
+
+        let iconClassName = "fa fa-search";
+        let iconOnChange = handleSearchChange;
+        let addonClassName = "";
+        if(originalSearchString != ""){
+            addonClassName = "khb-treelist-search-close-icon";
+            iconClassName = "fa fa-times";
+            iconOnChange = handleClearSearch;
+        }
         return (
-            <div id='khb-treelist-filter-container'>
+            <div id='khb-treelist-search-container'>
                 <FormGroup>
                 <InputGroup>
-                    <FormControl type="text" placeholder="Search Authors/Titles..." onChange={handleSearchChange}/>
-                    <InputGroup.Addon><i className='fa fa-search'></i></InputGroup.Addon>
+                    <FormControl type="text" 
+                                 placeholder="Search Authors/Titles..."
+                                 value={originalSearchString}
+                                 onChange={handleSearchChange}/>
+                    <InputGroup.Addon className={addonClassName}>
+                        <i className={iconClassName} onClick={iconOnChange}></i>
+                    </InputGroup.Addon>
                 </InputGroup>
                 </FormGroup>
             </div>

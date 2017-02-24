@@ -8,21 +8,33 @@ class TreeList extends Component {
         super(props);
 
         this.state = {
-            searchString:""
+            searchString:"",
+            originalSearchString:""
         };
     }
 
     handleSearchChange(e){
+        let originalSearchString = e.target.value;
         this.setState({
-            searchString:e.target.value.toLowerCase().trim()
+            searchString:originalSearchString.toLowerCase().trim(),
+            originalSearchString
+        });
+    }
+
+    handleClearSearch(e){
+        this.setState({
+            searchString:"",
+            originalSearchString:""
         });
     }
     render() {
         const { authors, titles, handleChangeSelectedFilter, filters} = this.props;
-        const { searchString } = this.state;
+        const { searchString, originalSearchString } = this.state;
         return (
             <div>
-                <SearchBox handleSearchChange={this.handleSearchChange.bind(this)}/>
+                <SearchBox handleSearchChange={this.handleSearchChange.bind(this)}
+                           handleClearSearch={this.handleClearSearch.bind(this)}
+                           originalSearchString={originalSearchString}/>
                 <TreeSublist key="authors"
                              listData={authors} 
                              listTitle="Authors"

@@ -2,7 +2,7 @@ import React from "react";
 
 import {ButtonToolbar,Button, Col, ControlLabel, Form, FormControl, Panel} from "react-bootstrap";
 
-import ClipsExportModal from "./ClipsExportModal";
+import ExportModal from "./ExportModal";
 
 export default class ClipsButtonBar extends React.Component{
     constructor(props){
@@ -29,7 +29,7 @@ export default class ClipsButtonBar extends React.Component{
         const {sortBy, sortChangeHandler, clips, activeTitle} = this.props;
         return(
             <div>
-                <ClipsExportModal closeModalHandler={this.closeModal.bind(this)} 
+                <ExportModal closeModalHandler={this.closeModal.bind(this)} 
                                   modalIsActive={this.state.modalIsActive}
                                   clips={clips}
                                   activeTitle={activeTitle}/>

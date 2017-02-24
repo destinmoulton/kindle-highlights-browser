@@ -4,8 +4,8 @@ import { Checkbox, ControlLabel, FormControl, FormGroup } from 'react-bootstrap'
 
 class ExportOptions extends Component {
     render() {
-        const {checkboxes, clipSeparator} = this.props;
-        const {handleCheckboxChange, handleSeparatorChange} = this.props;
+        const {checkboxes, separators, handleCheckboxChange, handleSeparatorChange} = this.props;
+        
         return (
             
             <div>
@@ -26,10 +26,20 @@ class ExportOptions extends Component {
                     </Checkbox>
                 </FormGroup>
                 <FormGroup>
+                    <ControlLabel>Book Title Separator</ControlLabel>
+                    <FormControl
+                        type="text"
+                        name="title"
+                        value={separators.title}
+                        onChange={handleSeparatorChange}
+                    />
+                </FormGroup>
+                <FormGroup>
                     <ControlLabel>Clip Separator</ControlLabel>
                     <FormControl
                         type="text"
-                        value={clipSeparator}
+                        name="clip"
+                        value={separators.clip}
                         onChange={handleSeparatorChange}
                     />
                 </FormGroup>

@@ -31,9 +31,14 @@ class ClipsExportModal extends Component {
             date:true
         };
 
+        const separators = {
+            title:"=====================================",
+            clip:"--------------------------"
+        };
+
         this.state = {
             checkboxes,
-            clipSeparator:"--------------------------"
+            separators
         };
     }
 
@@ -50,8 +55,11 @@ class ClipsExportModal extends Component {
     }
 
     handleSeparatorChange(e){
+        let separators = this.state.separators;
+
+        separators[e.target.name] = e.target.value;
         this.setState({
-            clipSeparator:e.target.value
+            separators
         });
     }
 
@@ -82,7 +90,7 @@ class ClipsExportModal extends Component {
     
     render() {
         const { modalIsActive, closeModalHandler, clips } = this.props;
-        const { checkboxes, clipSeparator } = this.state;
+        const { checkboxes, separators } = this.state;
         return (
             <Modal show={modalIsActive} 
                    onHide={closeModalHandler}
@@ -94,13 +102,13 @@ class ClipsExportModal extends Component {
                     <Row>
                         <Col xs={4}>
                             <ExportOptions checkboxes={checkboxes}
-                                           clipSeparator={clipSeparator}
+                                           separators={separators}
                                            handleCheckboxChange={this.handleCheckboxChange.bind(this)}
                                            handleSeparatorChange={this.handleSeparatorChange.bind(this)}/>
                         </Col>
                         <Col xs={8}>
                             <ExportPreview checkboxes={checkboxes}
-                                clipSeparator={clipSeparator}
+                                separators={separators}
                                 clips={clips} />
                             <ButtonGroup>
                                 <Button onClick={this.handleSaveClipsToFile.bind(this)}>

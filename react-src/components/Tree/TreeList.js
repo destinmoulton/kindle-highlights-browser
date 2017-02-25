@@ -15,7 +15,7 @@ class TreeList extends Component {
 
     /**
      * Handle the event when the user types
-     * in the search box.
+     * in the SearchBox component
      * 
      * @param event e
      */
@@ -28,7 +28,8 @@ class TreeList extends Component {
     }
 
     /**
-     * Clear the search string
+     * Clear the search string, fired by the 
+     * X in the SearchBox component
      * 
      * @param event e
      */

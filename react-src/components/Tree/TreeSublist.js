@@ -10,6 +10,11 @@ class TreeSublist extends Component {
         };
     }
 
+    /**
+     * Fire when the user presses the +/- icons.
+     * 
+     * @param event e
+     */
     handleOpenClose(e){
         let isOpen = true;
         if(this.state.isOpen){

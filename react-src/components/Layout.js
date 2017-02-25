@@ -20,18 +20,28 @@ export default class Layout extends React.Component{
             clippings:{}
         };
 
+        // Local instance of the storage/db mechanism
         this.storage = new Storage();
         
-        this.loadLastFileName();
+        this.loadLastFileUsed();
     }
 
-    loadLastFileName(){
+    /**
+     * Load the last file used from the DB.
+     */
+    loadLastFileUsed(){
         this.storage.find(DB_LAST_SETTING_QUERY, (set)=>{
             this.parseFile(set[0].value);
         });
     }
 
-    setLastFileName(fileName){
+
+    /**
+     * Set the last file used in a DB entry.
+     * 
+     * @param String fileName
+     */
+    setLastFileUsed(fileName){
         this.storage.find(DB_LAST_SETTING_QUERY, (set) => {
             if (set.length === 0) {
                 this.storage.insert({ setting: 'last_open_myclippings_file', value: fileName });
@@ -40,13 +50,21 @@ export default class Layout extends React.Component{
             }
         });
     }
+
+    /**
+     * Parse an opened file.
+     * Get the clips, authors and titles and store
+     * in local state.
+     * 
+     * @param String fileName
+     */
     parseFile(fileName){
         const clipParser = new MyClippingsParser();
         const clippings = clipParser.parseFile(fileName);
         const authors = clipParser.getAuthorsAsSortedArray();
         const titles = clipParser.getTitlesAsSortedArray();
 
-        this.setLastFileName(fileName);
+        this.setLastFileUsed(fileName);
                 
         this.setState({
             hasClippings: true,

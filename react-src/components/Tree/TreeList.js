@@ -13,6 +13,12 @@ class TreeList extends Component {
         };
     }
 
+    /**
+     * Handle the event when the user types
+     * in the search box.
+     * 
+     * @param event e
+     */
     handleSearchChange(e){
         let originalSearchString = e.target.value;
         this.setState({
@@ -21,12 +27,18 @@ class TreeList extends Component {
         });
     }
 
+    /**
+     * Clear the search string
+     * 
+     * @param event e
+     */
     handleClearSearch(e){
         this.setState({
             searchString:"",
             originalSearchString:""
         });
     }
+
     render() {
         const { authors, titles, handleChangeSelectedFilter, filters} = this.props;
         const { searchString, originalSearchString } = this.state;

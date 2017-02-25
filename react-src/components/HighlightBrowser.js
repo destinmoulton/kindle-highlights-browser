@@ -17,6 +17,12 @@ export default class HighlightBrowser extends React.Component{
         }
     }
 
+    /**
+     * Fire when the user clicks on a Title or Author 
+     * in the TreeSublist component.
+     * 
+     * @param event e
+     */
     handleChangeSelectedFilter(e){
         document.getElementById('khb-clips-container').scrollTop = 0;
         

@@ -1,8 +1,5 @@
 import React from "react";
 
-
-
-
 import ClipsList from "./ClipsList";
 import ClipsButtonBar from "./ClipsButtonBar";
 
@@ -16,6 +13,11 @@ export default class ClipsContainer extends React.Component {
         }
     }
 
+    /**
+     * Handle the sort handler dropdown change.
+     * 
+     * @param Event e
+     */
     sortChangeHandler(e){
         this.setState({
             sortBy: e.target.value

@@ -13,12 +13,20 @@ export default class ClipsButtonBar extends React.Component{
         };
     }
 
+    /**
+     * Show the modal window by changing the
+     * state.
+     */
     openModal(){
         this.setState({
             modalIsActive:true
         });
     }
 
+    /**
+     * Close the modal window by changing the
+     * state.
+     */
     closeModal(){
         this.setState({
             modalIsActive:false

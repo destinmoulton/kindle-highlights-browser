@@ -42,6 +42,12 @@ class ClipsExportModal extends Component {
         };
     }
 
+    /**
+     * Handle the checkbox change event
+     * when a user checks or unchecks a checkbox  (ExportOptions component)
+     * 
+     * @param Event e
+     */
     handleCheckboxChange(e){
         let chks = this.state.checkboxes;
         if(e.target.checked){
@@ -54,6 +60,13 @@ class ClipsExportModal extends Component {
         });
     }
 
+    /**
+     * Handle a separator change event.
+     * ie When the user adds or removes characters
+     * from a separator input field (ExportOptions component)
+     * 
+     * @param Event e
+     */
     handleSeparatorChange(e){
         let separators = this.state.separators;
 
@@ -63,6 +76,10 @@ class ClipsExportModal extends Component {
         });
     }
 
+    /**
+     * Show the file save dialog box and save the clip
+     * string to the selected file.
+     */
     handleSaveClipsToFile(){
         const self = this;
 
@@ -78,12 +95,18 @@ class ClipsExportModal extends Component {
         });
     }
 
+    /**
+     * Copy generated clip string to the clipboard.
+     */
     handleCopyClips(){
         const strToCopy = GenerateClipsString(this.props.clips, this.state.checkboxes, this.state.clipSeparator, EOL);
 
         clipboard.writeText(strToCopy);
     }
 
+    /**
+     * Select all the clips in the textarea.
+     */
     handleSelectAll(){
         document.getElementById('khb-exportpreview-textarea').select();
     }

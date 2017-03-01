@@ -20,14 +20,14 @@ export function GenerateClipsString(clips, checkboxes, separators, EOL){
                 clipsString += `${EOL}${separators.clip}${EOL}`;
             }
 
-            if (clip.location.type === 'highlight') {
-                clipsString += "Highlight at ";
-                quote = `"`;
-            } else if (clip.location.type === 'note') {
-                clipsString += "Note at ";
-            }
-
             if (includeLocation) {
+                if (clip.location.type === 'highlight') {
+                    clipsString += "Highlight at ";
+                    quote = `"`;
+                } else if (clip.location.type === 'note') {
+                    clipsString += "Note at ";
+                }
+
                 clipsString += `Location: ${clip.location.value}`;
             }
 

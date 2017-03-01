@@ -32,4 +32,10 @@ class SearchBox extends Component {
     }
 }
 
+SearchBox.propTypes = {
+    handleSearchChange:React.PropTypes.func,
+    originalSearchString:React.PropTypes.string,
+    handleClearSearch:React.PropTypes.func
+};
+
 export default SearchBox;

@@ -3,7 +3,7 @@ import React from "react";
 import ClipsList from "./ClipsList";
 import ClipsButtonBar from "./ClipsButtonBar";
 
-export default class ClipsContainer extends React.Component {
+class ClipsContainer extends React.Component {
 
     constructor(props){
         super(props);
@@ -25,7 +25,7 @@ export default class ClipsContainer extends React.Component {
     }
 
     render(){
-        const { clips, sortParam, filters } = this.props;
+        const { clips, filters } = this.props;
         const { sortBy } = this.state;
         const clipsLists = [];
         const clipKeys = Object.keys(clips);
@@ -45,3 +45,10 @@ export default class ClipsContainer extends React.Component {
         );
     }
 }
+
+ClipsContainer.propTypes = {
+    clips: React.PropTypes.object,
+    filters: React.PropTypes.object
+};
+
+export default ClipsContainer;

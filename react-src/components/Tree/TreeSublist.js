@@ -68,4 +68,13 @@ class TreeSublist extends Component {
     }
 }
 
+TreeSublist.propTypes = {
+    listData:React.PropTypes.array, 
+    listTitle:React.PropTypes.string, 
+    filters:React.PropTypes.object, 
+    filterFieldName:React.PropTypes.string,
+    handleChangeSelectedFilter:React.PropTypes.func, 
+    searchString:React.PropTypes.string
+};
+
 export default TreeSublist;

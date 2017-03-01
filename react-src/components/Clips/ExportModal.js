@@ -155,5 +155,11 @@ class ClipsExportModal extends Component {
     }
 }
 
+ClipsExportModal.propTypes = { 
+    modalIsActive:React.PropTypes.bool,
+    closeModalHandler:React.PropTypes.func, 
+    clips:React.PropTypes.object
+};
+
 export default ClipsExportModal;
 

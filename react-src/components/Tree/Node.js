@@ -17,4 +17,11 @@ class Node extends Component {
     }
 }
 
+Node.propTypes = {
+    itemName: React.PropTypes.string,
+    handleChangeSelectedFilter: React.PropTypes.func,
+    filterFieldName: React.PropTypes.string,
+    filters: React.PropTypes.object
+};
+
 export default Node;

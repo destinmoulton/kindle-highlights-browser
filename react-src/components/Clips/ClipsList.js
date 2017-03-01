@@ -34,4 +34,9 @@ class ClipsList extends Component {
     }
 }
 
+ClipsList.propTypes = { 
+    clips:React.PropTypes.array, 
+    sortBy:React.PropTypes.string
+};
+
 export default ClipsList;

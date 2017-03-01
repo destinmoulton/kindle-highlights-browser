@@ -34,13 +34,12 @@ class ClipsButtonBar extends React.Component{
     }
 
     render(){
-        const {sortChangeHandler, clips, activeTitle} = this.props;
+        const {sortChangeHandler, clips} = this.props;
         return(
             <div>
                 <ExportModal closeModalHandler={this.closeModal.bind(this)} 
                                   modalIsActive={this.state.modalIsActive}
-                                  clips={clips}
-                                  activeTitle={activeTitle}/>
+                                  clips={clips}/>
                 <Panel>
                     <Col sm={6}>
                         <Button onClick={this.openModal.bind(this)}>Save or Copy Clips</Button>
@@ -66,8 +65,7 @@ class ClipsButtonBar extends React.Component{
 
 ClipsButtonBar.propTypes = { 
     sortChangeHandler:React.PropTypes.func, 
-    clips:React.PropTypes.object, 
-    activeTitle:React.PropTypes.string 
+    clips:React.PropTypes.object
 };
 
 export default ClipsButtonBar;

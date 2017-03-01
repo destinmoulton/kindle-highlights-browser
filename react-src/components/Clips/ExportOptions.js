@@ -48,5 +48,10 @@ class ExportOptions extends Component {
     }
 }
 
-
+ExportOptions.propTypes = {
+    checkboxes:React.PropTypes.object,
+    separators:React.PropTypes.object, 
+    handleCheckboxChange:React.PropTypes.func, 
+    handleSeparatorChange:React.PropTypes.func
+};
 export default ExportOptions;

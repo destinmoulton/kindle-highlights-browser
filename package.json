@@ -5,7 +5,7 @@
   "description": "A Kindle highlights viewer. Built using Node, Electron, and React.",
   "main": "index.js",
   "scripts": {
-    "test": "test jest",
+    "test": "jest",
     "compile:react": "webpack --config webpack.config.js -d --watch",
     "dev": "electron .",
     "clean:osx": "rm -rf ./dist/osx",

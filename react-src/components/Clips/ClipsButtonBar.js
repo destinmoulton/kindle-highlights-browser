@@ -4,7 +4,7 @@ import {ButtonToolbar,Button, Col, ControlLabel, Form, FormControl, Panel} from 
 
 import ExportModal from "./ExportModal";
 
-export default class ClipsButtonBar extends React.Component{
+class ClipsButtonBar extends React.Component{
     constructor(props){
         super(props);
 
@@ -34,7 +34,7 @@ export default class ClipsButtonBar extends React.Component{
     }
 
     render(){
-        const {sortBy, sortChangeHandler, clips, activeTitle} = this.props;
+        const {sortChangeHandler, clips, activeTitle} = this.props;
         return(
             <div>
                 <ExportModal closeModalHandler={this.closeModal.bind(this)} 
@@ -63,3 +63,11 @@ export default class ClipsButtonBar extends React.Component{
         );
     }
 }
+
+ClipsButtonBar.propTypes = { 
+    sortChangeHandler:React.PropTypes.func, 
+    clips:React.PropTypes.object, 
+    activeTitle:React.PropTypes.string 
+};
+
+export default ClipsButtonBar;

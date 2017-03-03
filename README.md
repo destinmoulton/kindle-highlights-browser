@@ -1,6 +1,8 @@
 ### Kindle Highlight Browser
 ----
-Browse the contents of your Kindle's "My Clippings.txt" file. 
+Browse the contents of your Kindle's "My Clippings.txt" file.
+
+The notes and highlights on your Kindle are stored in a "My Clippings.txt" file. Unfortunately this file can be hard to parse.
 
 Versions available for Windows and Mac OS.
 

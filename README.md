@@ -1,6 +1,19 @@
 ### Kindle Highlight Browser
 ----
-Browse the contents of your Kindle's "My Clippings.txt" file. Easily Save and Copy your kindle highlights and notes.
+Browse the contents of your Kindle's "My Clippings.txt" file. 
+
+Versions available for Windows and Mac OS.
+
+### Features
+----
+* Easily navigate and through your notes
+  * Browse by Title and Author
+  * Filter by Title and Author
+  * Select multiple for export
+  * Sort by location or date
+* Export your highlights and notes
+  * Save your notes directly to a file
+  * Copy your notes to the clipboard
 
 
 ### Running Electron

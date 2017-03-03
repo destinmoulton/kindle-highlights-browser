@@ -12,13 +12,19 @@ $ npm run dev
 
 ### Electron Packaging Instructions
 ----
+
+Windows
+```sh
+> npm run pack:win
+```
+
 Mac OS X
-```bash
+```sh
 $ npm run pack:osx
 ```
 
 
-### Compilation Notes
+### Packaging Notes
 ----
 electron-packager usage-notes and options can be found at:
 https://github.com/electron-userland/electron-packager/blob/master/usage.txt

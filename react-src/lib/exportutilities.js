@@ -7,14 +7,15 @@ export function GenerateClipsString(clips, checkboxes, separators, EOL){
     const includeDate = checkboxes.date;
     let clipsString = "";
     let titles = Object.keys(clips);
+    
+    titles.forEach((title)=>{
 
-    titles.map(function(title){
         let bookBegin = true;
         clipsString += `${EOL}${separators.title}${EOL}`;
         clipsString += `${title}${EOL}`;
         clipsString += `By ${clips[title][0]['authorFullName']}${EOL}`;
         clipsString += `${separators.title}${EOL}`;
-        clips[title].map(function (clip) {
+        clips[title].forEach((clip)=>{
             let quote = "";
             if (!bookBegin && clipsString !== "") {
                 clipsString += `${EOL}${separators.clip}${EOL}`;

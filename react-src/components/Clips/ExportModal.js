@@ -14,13 +14,15 @@ import { Button,
          Row } from 'react-bootstrap';
 
 import {clipboard,remote} from 'electron';
+import moment from 'moment';
 
 import ExportOptions from './ExportOptions';
 import ExportPreview from './ExportPreview';
 
 import {GenerateClipsString, CleanTitle} from '../../lib/exportutilities';
 import {ErrorDialog} from '../../lib/dialogboxes';
-
+const FILE_PREFIX = "kindle_highlights_";
+const FILE_DATE_SUFFIX = moment().format("MM_DD_YYYY_HH_mm_ss")
 const FILE_EXT = ".txt";
 class ClipsExportModal extends Component {
     constructor(props){
@@ -83,7 +85,7 @@ class ClipsExportModal extends Component {
     handleSaveClipsToFile(){
         const self = this;
 
-        const possibleTitle = CleanTitle(self.props.filterContent);
+        const possibleTitle = FILE_PREFIX+FILE_DATE_SUFFIX;
         remote.dialog.showSaveDialog({defaultPath:possibleTitle+FILE_EXT}, function(filename){
             const strToWrite = GenerateClipsString(self.props.clips, self.state.checkboxes, self.state.clipSeparator, EOL);
             fs.writeFile(filename, strToWrite, function(err){

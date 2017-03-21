@@ -85,13 +85,14 @@ class ClipsExportModal extends Component {
     handleSaveClipsToFile(){
         const possibleTitle = FILE_PREFIX+FILE_DATE_SUFFIX;
         remote.dialog.showSaveDialog({defaultPath:possibleTitle+FILE_EXT}, (filename)=>{
-            const strToWrite = GenerateClipsString(this.props.clips, this.state.checkboxes, this.state.separators, EOL);
-            fs.writeFile(filename, strToWrite, function(err){
-                if(err){
-                    return ErrorDialog("There was a problem saving the file.\n"+err);
-                }
-            });
-            
+            if(typeof filename === "string"){
+                const strToWrite = GenerateClipsString(this.props.clips, this.state.checkboxes, this.state.separators, EOL);
+                fs.writeFile(filename, strToWrite, function(err){
+                    if(err){
+                        return ErrorDialog("There was a problem saving the file.\n"+err);
+                    }
+                });
+            }
         });
     }
 

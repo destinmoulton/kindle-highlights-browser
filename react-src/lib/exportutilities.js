@@ -15,7 +15,9 @@ export function GenerateClipsString(clips, checkboxes, separators, EOL){
         clipsString += `${title}${EOL}`;
         clipsString += `By ${clips[title][0]['authorFullName']}${EOL}`;
         clipsString += `${separators.title}${EOL}`;
+        
         clips[title].forEach((clip)=>{
+            
             let quote = "";
             if (!bookBegin && clipsString !== "") {
                 clipsString += `${EOL}${separators.clip}${EOL}`;
@@ -50,13 +52,5 @@ export function GenerateClipsString(clips, checkboxes, separators, EOL){
         clipsString += `${EOL}`;
     });
     return clipsString;
-}
-
-/**
- * Strip the title of unnecessary characters,
- * and replace spaces with underscores.
- */
-export function CleanTitle(title){
-    return title.replace(/ /g, '_').replace(/\W/g, '');
 }
 

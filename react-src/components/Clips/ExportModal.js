@@ -19,7 +19,7 @@ import moment from 'moment';
 import ExportOptions from './ExportOptions';
 import ExportPreview from './ExportPreview';
 
-import {GenerateClipsString, CleanTitle} from '../../lib/exportutilities';
+import {GenerateClipsString} from '../../lib/exportutilities';
 import {ErrorDialog} from '../../lib/dialogboxes';
 const FILE_PREFIX = "kindle_highlights_";
 const FILE_DATE_SUFFIX = moment().format("MM_DD_YYYY_HH_mm_ss")
@@ -83,11 +83,9 @@ class ClipsExportModal extends Component {
      * string to the selected file.
      */
     handleSaveClipsToFile(){
-        const self = this;
-
         const possibleTitle = FILE_PREFIX+FILE_DATE_SUFFIX;
-        remote.dialog.showSaveDialog({defaultPath:possibleTitle+FILE_EXT}, function(filename){
-            const strToWrite = GenerateClipsString(self.props.clips, self.state.checkboxes, self.state.clipSeparator, EOL);
+        remote.dialog.showSaveDialog({defaultPath:possibleTitle+FILE_EXT}, (filename)=>{
+            const strToWrite = GenerateClipsString(this.props.clips, this.state.checkboxes, this.state.separators, EOL);
             fs.writeFile(filename, strToWrite, function(err){
                 if(err){
                     return ErrorDialog("There was a problem saving the file.\n"+err);
@@ -101,7 +99,7 @@ class ClipsExportModal extends Component {
      * Copy generated clip string to the clipboard.
      */
     handleCopyClips(){
-        const strToCopy = GenerateClipsString(this.props.clips, this.state.checkboxes, this.state.clipSeparator, EOL);
+        const strToCopy = GenerateClipsString(this.props.clips, this.state.checkboxes, this.state.separators, EOL);
 
         clipboard.writeText(strToCopy);
     }

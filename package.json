@@ -10,8 +10,10 @@
     "dev": "electron .",
     "clean:osx": "rm -rf ./dist/osx",
     "clean:win": "rm -rf ./dist/win32",
+    "clean:linux": "rm -rf ./dist/linux",
     "pack:win": "npm run clean:win && electron-packager . --overwrite --out=dist/win32 --platform=win32 --arch=x64 --electron-version=1.4.15 --appname='Kindle Highlights Browser' --icon=assets/icons/BlackvariantKindle.ico --ignore=assets --ignore=typings --ignore=.vscode --ignore=dist --ignore=node_modules",
-    "pack:osx": "npm run clean:osx && electron-packager . --overwrite --out=dist/osx --platform=darwin --arch=x64 --electron-version=1.4.15 --appname='Kindle Highlights Browser' --icon=assets/icons/BlackvariantKindle.icns --ignore=assets --ignore=typings --ignore .vscode --ignore=dist --ignore=node_modules"
+    "pack:osx": "npm run clean:osx && electron-packager . --overwrite --out=dist/osx --platform=darwin --arch=x64 --electron-version=1.4.15 --appname='Kindle Highlights Browser' --icon=assets/icons/BlackvariantKindle.icns --ignore=assets --ignore=typings --ignore .vscode --ignore=dist --ignore=node_modules",
+    "pack:linux": "npm run clean:linux && electron-packager . --overwrite --out=dist/linux --platform=linux --arch=x64 --electron-version=1.4.15 --appname='Kindle Highlights Browser' --icon=assets/icons/BlackvariantKindle.ico --ignore=assets --ignore=typings --ignore=.vscode --ignore=dist --ignore=node_modules"
   },
   "keywords": [
     "electron",

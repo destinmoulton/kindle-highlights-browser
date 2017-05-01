@@ -34,8 +34,9 @@ class ClipsExportModal extends Component {
         };
 
         const separators = {
-            title:"=====================================",
-            clip:"--------------------------"
+            title: "=====================================",
+            clip: "--------------------------",
+            eol: true
         };
 
         this.state = {

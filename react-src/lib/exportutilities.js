@@ -50,7 +50,7 @@ export function GenerateClipsString(clips, checkboxes, separators, EOL){
             bookBegin = false;
         });
 
-        if(separators.eol){
+        if(checkboxes.eol){
             clipsString += `${EOL}`;
         }
     });

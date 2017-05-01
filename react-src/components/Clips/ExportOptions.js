@@ -26,6 +26,14 @@ class ExportOptions extends Component {
                     </Checkbox>
                 </FormGroup>
                 <FormGroup>
+                    <Checkbox inline
+                        checked={checkboxes.eol}
+                        onChange={handleCheckboxChange}
+                        value="eol">
+                        Include Extra Line
+                    </Checkbox>
+                </FormGroup>
+                <FormGroup>
                     <ControlLabel>Book Title Separator</ControlLabel>
                     <FormControl
                         type="text"

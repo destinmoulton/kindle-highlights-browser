@@ -5,6 +5,7 @@
 export function GenerateClipsString(clips, checkboxes, separators, EOL){
     const includeLocation = checkboxes.location;
     const includeDate = checkboxes.date;
+    
     let clipsString = "";
     let titles = Object.keys(clips);
     
@@ -20,7 +21,13 @@ export function GenerateClipsString(clips, checkboxes, separators, EOL){
             
             let quote = "";
             if (!bookBegin && clipsString !== "") {
-                clipsString += `${EOL}${separators.clip}${EOL}`;
+                if(separators.clip !== ""){
+                    clipsString += `${EOL}${separators.clip}${EOL}`;
+                } else if(checkboxes.eol){
+                    clipsString += `${EOL}${EOL}`;
+                } else {
+                    clipsString += `${EOL}`;
+                }
             }
 
             if (includeLocation) {
@@ -50,9 +57,8 @@ export function GenerateClipsString(clips, checkboxes, separators, EOL){
             bookBegin = false;
         });
 
-        if(checkboxes.eol){
-            clipsString += `${EOL}`;
-        }
+        clipsString += `${EOL}`;
+
     });
     return clipsString;
 }

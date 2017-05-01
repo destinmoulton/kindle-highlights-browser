@@ -30,13 +30,13 @@ class ClipsExportModal extends Component {
 
         const checkboxes = {
             location:true,
-            date:true
+            date:true,
+            eol: true
         };
 
         const separators = {
             title: "=====================================",
-            clip: "--------------------------",
-            eol: true
+            clip: "--------------------------"
         };
 
         this.state = {

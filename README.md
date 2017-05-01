@@ -18,11 +18,16 @@ Versions available for Windows and Mac OS.
   * Copy your notes to the clipboard
 
 
-### Running Electron
+### Development Environment
 ----
 To run the electron app directly from the command line:
-```bash
+```sh
 $ npm run dev
+```
+
+To compile the react code:
+```sh
+$ npm run compile:react
 ```
 
 ### Electron Packaging Instructions
@@ -30,7 +35,7 @@ $ npm run dev
 
 Windows
 ```sh
-> npm run pack:win
+$ npm run pack:win
 ```
 
 Mac OS X

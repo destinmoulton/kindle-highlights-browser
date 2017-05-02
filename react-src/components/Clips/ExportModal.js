@@ -39,8 +39,13 @@ class ClipsExportModal extends Component {
             clip: "--------------------------"
         };
 
+        const radios = {
+            separator: "none"
+        }
+
         this.state = {
             checkboxes,
+            radios,
             separators
         };
     }

@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 
-import { Checkbox, ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
+import { 
+    Checkbox, 
+    ControlLabel, 
+    FormControl, 
+    FormGroup,
+    Radio
+} from 'react-bootstrap';
 
 class ExportOptions extends Component {
     render() {
-        const {checkboxes, separators, handleCheckboxChange, handleSeparatorChange} = this.props;
+        const {checkboxes, radios, separators, handleCheckboxChange, handleSeparatorChange} = this.props;
         
         return (
             
@@ -37,8 +43,10 @@ class ExportOptions extends Component {
                 </FormGroup>
                 <FormGroup>
                     <ControlLabel>Clip Separator</ControlLabel>
-                    <Radio name="clipSeparator" >None</Radio>
-                    <Radio name="clipSeparator" >Text
+                    <Radio name="clipSeparator" 
+                           checked={radios.separator === "none"}>None</Radio>
+                    <Radio name="clipSeparator" 
+                           checked={radios.separator === "text"}>Text
                         <FormControl
                             type="text"
                             name="clip"
@@ -47,7 +55,7 @@ class ExportOptions extends Component {
                         />
                     </Radio>
                     <Radio name="clipSeparator" 
-                           checked={radio.separator === "eol"}
+                           checked={radios.separator === "eol"}
                            onChange={handleRadioChange}
                            value="eol">Extra Line</Radio>
                     

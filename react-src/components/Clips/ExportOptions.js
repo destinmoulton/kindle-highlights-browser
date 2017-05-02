@@ -25,14 +25,7 @@ class ExportOptions extends Component {
                         Include Date
                     </Checkbox>
                 </FormGroup>
-                <FormGroup>
-                    <Checkbox inline
-                        checked={checkboxes.eol}
-                        onChange={handleCheckboxChange}
-                        value="eol">
-                        Include Extra Line
-                    </Checkbox>
-                </FormGroup>
+                
                 <FormGroup>
                     <ControlLabel>Book Title Separator</ControlLabel>
                     <FormControl
@@ -44,12 +37,20 @@ class ExportOptions extends Component {
                 </FormGroup>
                 <FormGroup>
                     <ControlLabel>Clip Separator</ControlLabel>
-                    <FormControl
-                        type="text"
-                        name="clip"
-                        value={separators.clip}
-                        onChange={handleSeparatorChange}
-                    />
+                    <Radio name="clipSeparator" >None</Radio>
+                    <Radio name="clipSeparator" >Text
+                        <FormControl
+                            type="text"
+                            name="clip"
+                            value={separators.clip}
+                            onChange={handleSeparatorChange}
+                        />
+                    </Radio>
+                    <Radio name="clipSeparator" 
+                           checked={radio.separator === "eol"}
+                           onChange={handleRadioChange}
+                           value="eol">Extra Line</Radio>
+                    
                 </FormGroup>
             </div>
         );

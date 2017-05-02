@@ -28,6 +28,7 @@ class ExportPreview extends Component {
 ExportPreview.propTypes = {
     clips:React.PropTypes.object,
     checkboxes:React.PropTypes.object,
+    radios:React.PropTypes.object,
     separators:React.PropTypes.object, 
 };
 

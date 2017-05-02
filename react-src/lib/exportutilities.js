@@ -2,7 +2,7 @@
 /**
  * Generate the string for a clip to export
  */
-export function GenerateClipsString(clips, checkboxes, separators, EOL){
+export function GenerateClipsString(clips, checkboxes, radios, separators, EOL){
     const includeLocation = checkboxes.location;
     const includeDate = checkboxes.date;
     
@@ -21,9 +21,9 @@ export function GenerateClipsString(clips, checkboxes, separators, EOL){
             
             let quote = "";
             if (!bookBegin && clipsString !== "") {
-                if(separators.clip !== ""){
+                if(radios.clip_separator === "text"){
                     clipsString += `${EOL}${separators.clip}${EOL}`;
-                } else if(checkboxes.eol){
+                } else if(radios.clip_separator === "eol"){
                     clipsString += `${EOL}${EOL}`;
                 } else {
                     clipsString += `${EOL}`;

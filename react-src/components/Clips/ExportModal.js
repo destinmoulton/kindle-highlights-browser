@@ -56,7 +56,7 @@ class ClipsExportModal extends Component {
      * @param Event e
      */
     handleCheckboxChange(e){
-        let chks = this.state.checkboxes;
+        let chks = Object.assign({}, this.state.checkboxes);
         if(e.target.checked){
             chks[e.target.value] = true;
         } else {
@@ -70,7 +70,7 @@ class ClipsExportModal extends Component {
     handleRadioChange(e){
         const targ = e.target;
 
-        let radios = Object.assign({}, ...this.state.radios);
+        let radios = Object.assign({}, this.state.radios);
         radios[targ.name] = targ.value;
         this.setState({
             radios
@@ -85,7 +85,7 @@ class ClipsExportModal extends Component {
      * @param Event e
      */
     handleSeparatorChange(e){
-        let separators = this.state.separators;
+        let separators = Object.assign({}, this.state.separators);
 
         separators[e.target.name] = e.target.value;
         this.setState({

@@ -149,8 +149,9 @@ class ClipsExportModal extends Component {
                         </Col>
                         <Col xs={8}>
                             <ExportPreview checkboxes={checkboxes}
-                                separators={separators}
-                                clips={clips} />
+                                            radios={radios}
+                                            separators={separators}
+                                            clips={clips} />
                             <ButtonGroup>
                                 <Button onClick={this.handleSaveClipsToFile.bind(this)}>
                                     <i className="fa fa-floppy-o"></i> Save All to File

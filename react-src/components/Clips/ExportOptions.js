@@ -10,7 +10,7 @@ import {
 
 class ExportOptions extends Component {
     render() {
-        const {checkboxes, radios, separators, handleCheckboxChange, handleSeparatorChange} = this.props;
+        const {checkboxes, radios, separators, handleCheckboxChange, handleRadioChange, handleSeparatorChange} = this.props;
         
         return (
             
@@ -43,19 +43,24 @@ class ExportOptions extends Component {
                 </FormGroup>
                 <FormGroup>
                     <ControlLabel>Clip Separator</ControlLabel>
-                    <Radio name="clipSeparator" 
-                           checked={radios.separator === "none"}>None</Radio>
-                    <Radio name="clipSeparator" 
-                           checked={radios.separator === "text"}>Text
+                    <Radio name="clip_separator" 
+                           checked={(radios.clip_separator === "none")}
+                           onChange={handleRadioChange}
+                           value="none">None</Radio>
+                    <Radio name="clip_separator" 
+                           checked={(radios.clip_separator === "text")}
+                           onChange={handleRadioChange}
+                           value="text">Text
                         <FormControl
                             type="text"
                             name="clip"
+                            disabled={!(radios.clip_separator === "text")}
                             value={separators.clip}
                             onChange={handleSeparatorChange}
                         />
                     </Radio>
-                    <Radio name="clipSeparator" 
-                           checked={radios.separator === "eol"}
+                    <Radio name="clip_separator" 
+                           checked={(radios.clip_separator === "eol")}
                            onChange={handleRadioChange}
                            value="eol">Extra Line</Radio>
                     

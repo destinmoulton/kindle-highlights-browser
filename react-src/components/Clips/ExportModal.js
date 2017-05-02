@@ -68,6 +68,19 @@ class ClipsExportModal extends Component {
         });
     }
 
+    handleRadioChange(e){
+        console.log(e.target);
+        // let chks = this.state.checkboxes;
+        // if(e.target.checked){
+        //     chks[e.target.value] = true;
+        // } else {
+        //     chks[e.target.value] = false;
+        // }
+        // this.setState({
+        //     checkboxes:chks
+        // });
+    }
+
     /**
      * Handle a separator change event.
      * ie When the user adds or removes characters
@@ -120,7 +133,7 @@ class ClipsExportModal extends Component {
     
     render() {
         const { modalIsActive, closeModalHandler, clips } = this.props;
-        const { checkboxes, separators } = this.state;
+        const { checkboxes, radios, separators } = this.state;
         return (
             <Modal show={modalIsActive} 
                    onHide={closeModalHandler}
@@ -132,8 +145,10 @@ class ClipsExportModal extends Component {
                     <Row>
                         <Col xs={4}>
                             <ExportOptions checkboxes={checkboxes}
+                                           radios={radios}
                                            separators={separators}
                                            handleCheckboxChange={this.handleCheckboxChange.bind(this)}
+                                           handleRadioChange={this.handleRadioChange.bind(this)}
                                            handleSeparatorChange={this.handleSeparatorChange.bind(this)}/>
                         </Col>
                         <Col xs={8}>

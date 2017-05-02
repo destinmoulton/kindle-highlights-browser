@@ -30,8 +30,7 @@ class ClipsExportModal extends Component {
 
         const checkboxes = {
             location:true,
-            date:true,
-            eol: true
+            date:true
         };
 
         const separators = {
@@ -40,7 +39,7 @@ class ClipsExportModal extends Component {
         };
 
         const radios = {
-            separator: "none"
+            clip_separator: "none"
         }
 
         this.state = {
@@ -69,16 +68,13 @@ class ClipsExportModal extends Component {
     }
 
     handleRadioChange(e){
-        console.log(e.target);
-        // let chks = this.state.checkboxes;
-        // if(e.target.checked){
-        //     chks[e.target.value] = true;
-        // } else {
-        //     chks[e.target.value] = false;
-        // }
-        // this.setState({
-        //     checkboxes:chks
-        // });
+        const targ = e.target;
+
+        let radios = Object.assign({}, ...this.state.radios);
+        radios[targ.name] = targ.value;
+        this.setState({
+            radios
+        });
     }
 
     /**

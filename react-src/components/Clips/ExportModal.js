@@ -40,7 +40,7 @@ class ClipsExportModal extends Component {
         };
 
         const radios = {
-            clip_separator: "none"
+            clip_separator: "line"
         }
 
         this.state = {

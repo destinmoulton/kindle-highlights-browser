@@ -51,6 +51,10 @@ class ExportOptions extends Component {
                 <FormGroup>
                     <ControlLabel>Clip Separator</ControlLabel>
                     <Radio name="clip_separator" 
+                           checked={(radios.clip_separator === "line")}
+                           onChange={handleRadioChange}
+                           value="line">Extra Line</Radio>
+                    <Radio name="clip_separator" 
                            checked={(radios.clip_separator === "none")}
                            onChange={handleRadioChange}
                            value="none">None</Radio>
@@ -66,11 +70,6 @@ class ExportOptions extends Component {
                             onChange={handleSeparatorChange}
                         />
                     </Radio>
-                    <Radio name="clip_separator" 
-                           checked={(radios.clip_separator === "eol")}
-                           onChange={handleRadioChange}
-                           value="eol">Extra Line</Radio>
-                    
                 </FormGroup>
             </div>
         );

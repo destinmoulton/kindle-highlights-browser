@@ -24,7 +24,7 @@ export function GenerateClipsString(clips, checkboxes, radios, separators, EOL){
             if (!bookBegin && clipsString !== "") {
                 if(radios.clip_separator === "text"){
                     clipsString += `${EOL}${separators.clip}${EOL}`;
-                } else if(radios.clip_separator === "eol"){
+                } else if(radios.clip_separator === "line"){
                     clipsString += `${EOL}${EOL}`;
                 } else {
                     clipsString += `${EOL}`;

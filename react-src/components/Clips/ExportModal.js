@@ -30,7 +30,8 @@ class ClipsExportModal extends Component {
 
         const checkboxes = {
             location:true,
-            date:true
+            date:true,
+            quote:true
         };
 
         const separators = {

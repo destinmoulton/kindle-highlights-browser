@@ -6,6 +6,8 @@ export function GenerateClipsString(clips, checkboxes, radios, separators, EOL){
     const includeLocation = checkboxes.location;
     const includeDate = checkboxes.date;
     
+    let quotationMark = (checkboxes.quote) ? '"' : '';
+
     let clipsString = "";
     let titles = Object.keys(clips);
     
@@ -18,8 +20,7 @@ export function GenerateClipsString(clips, checkboxes, radios, separators, EOL){
         clipsString += `${separators.title}${EOL}`;
         
         clips[title].forEach((clip)=>{
-            
-            let quote = "";
+
             if (!bookBegin && clipsString !== "") {
                 if(radios.clip_separator === "text"){
                     clipsString += `${EOL}${separators.clip}${EOL}`;
@@ -33,7 +34,6 @@ export function GenerateClipsString(clips, checkboxes, radios, separators, EOL){
             if (includeLocation) {
                 if (clip.location.type === 'highlight') {
                     clipsString += "Highlight at ";
-                    quote = `"`;
                 } else if (clip.location.type === 'note') {
                     clipsString += "Note at ";
                 }
@@ -53,7 +53,7 @@ export function GenerateClipsString(clips, checkboxes, radios, separators, EOL){
                 clipsString += `${EOL}`;
             }
 
-            clipsString += `${quote}${clip.text}${quote}`;
+            clipsString += `${quotationMark}${clip.text}${quotationMark}`;
             bookBegin = false;
         });
 

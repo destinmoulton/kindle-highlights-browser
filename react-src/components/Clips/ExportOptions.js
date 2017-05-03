@@ -31,7 +31,14 @@ class ExportOptions extends Component {
                         Include Date
                     </Checkbox>
                 </FormGroup>
-                
+                <FormGroup>
+                    <Checkbox inline
+                        checked={checkboxes.quote}
+                        onChange={handleCheckboxChange}
+                        value="quote">
+                        Include Quotation Marks
+                    </Checkbox>
+                </FormGroup>
                 <FormGroup>
                     <ControlLabel>Book Title Separator</ControlLabel>
                     <FormControl

@@ -14,7 +14,7 @@ export function GenerateClipsString(clips, checkboxes, radios, separators, EOL){
     titles.forEach((title)=>{
 
         let bookBegin = true;
-        clipsString += `${EOL}${separators.title}${EOL}`;
+        clipsString += `${separators.title}${EOL}`;
         clipsString += `${title}${EOL}`;
         clipsString += `By ${clips[title][0]['authorFullName']}${EOL}`;
         clipsString += `${separators.title}${EOL}`;

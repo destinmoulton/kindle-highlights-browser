@@ -11,8 +11,8 @@ class ExportPreview extends Component {
     }
 
     render() {
-        const {clips, checkboxes, radios, separators} = this.props;
-        const clipsPreview = GenerateClipsString(clips, checkboxes, radios, separators, TEXTAREA_EOL);
+        const {clips, exportOptions} = this.props;
+        const clipsPreview = GenerateClipsString(clips, exportOptions, TEXTAREA_EOL);
         return (
             <FormGroup controlId="khb-exportpreview-textarea">
                 <ControlLabel>Preview Export</ControlLabel>

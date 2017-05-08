@@ -87,11 +87,13 @@ class ClipsExportModal extends Component {
      * @param Event e
      */
     handleSeparatorChange(e){
-        let separators = Object.assign({}, this.state.separators);
-
+        let exportOptions = Object.assign({}, this.state.exportOptions);
+        let separators = Object.assign({}, exportOptions.separators);
+        
         separators[e.target.name] = e.target.value;
+        exportOptions.separators = separators;
         this.setState({
-            separators
+            exportOptions
         });
     }
 

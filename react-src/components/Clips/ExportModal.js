@@ -70,11 +70,12 @@ class ClipsExportModal extends Component {
 
     handleRadioChange(e){
         const targ = e.target;
-
-        let radios = Object.assign({}, this.state.radios);
+        let exportOptions = Object.assign({}, this.state.exportOptions);
+        let radios = Object.assign({}, exportOptions.radios);
         radios[targ.name] = targ.value;
+        exportOptions.radios = radios;
         this.setState({
-            radios
+            exportOptions
         });
     }
 

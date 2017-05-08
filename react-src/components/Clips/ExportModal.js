@@ -55,14 +55,16 @@ class ClipsExportModal extends Component {
      * @param Event e
      */
     handleCheckboxChange(e){
-        let chks = Object.assign({}, this.state.checkboxes);
+        let exportOptions = Object.assign({}, this.state.exportOptions);
+        let chks = Object.assign({}, exportOptions.checkboxes);
         if(e.target.checked){
             chks[e.target.value] = true;
         } else {
             chks[e.target.value] = false;
         }
+        exportOptions.checkboxes = chks;
         this.setState({
-            checkboxes:chks
+            exportOptions
         });
     }
 

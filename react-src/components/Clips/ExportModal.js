@@ -132,8 +132,8 @@ class ClipsExportModal extends Component {
     }
     
     render() {
-        const { modalIsActive, closeModalHandler, clips } = this.props;
-        const { checkboxes, radios, separators } = this.state.exportOptions;
+        const { exportOptions, modalIsActive, closeModalHandler, clips } = this.props;
+        
         return (
             <Modal show={modalIsActive} 
                    onHide={closeModalHandler}
@@ -144,18 +144,14 @@ class ClipsExportModal extends Component {
                 <Modal.Body>
                     <Row>
                         <Col xs={4}>
-                            <ExportOptions checkboxes={checkboxes}
-                                           radios={radios}
-                                           separators={separators}
+                            <ExportOptions exportOptions={exportOptions}
                                            handleCheckboxChange={this.handleCheckboxChange.bind(this)}
                                            handleRadioChange={this.handleRadioChange.bind(this)}
                                            handleSeparatorChange={this.handleSeparatorChange.bind(this)}/>
                         </Col>
                         <Col xs={8}>
-                            <ExportPreview checkboxes={checkboxes}
-                                            radios={radios}
-                                            separators={separators}
-                                            clips={clips} />
+                            <ExportPreview exportOptions={exportOptions}
+                                           clips={clips} />
                             <ButtonGroup>
                                 <Button onClick={this.handleSaveClipsToFile.bind(this)}>
                                     <i className="fa fa-floppy-o"></i> Save All to File

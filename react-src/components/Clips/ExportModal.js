@@ -28,25 +28,23 @@ class ClipsExportModal extends Component {
     constructor(props){
         super(props);
 
-        const checkboxes = {
-            location:true,
-            date:true,
-            quote:true
-        };
-
-        const separators = {
-            title: "=====================================",
-            clip: "--------------------------"
-        };
-
-        const radios = {
-            clip_separator: "line"
+        const exportOptions = {
+            checkboxes: {
+                location: true,
+                date: true,
+                quote: true
+            },
+            separators: {
+                title: "=====================================",
+                clip: "--------------------------"
+            },
+            radios: {
+                clip_separator: "line"
+            }
         }
 
         this.state = {
-            checkboxes,
-            radios,
-            separators
+            exportOptions
         };
     }
 

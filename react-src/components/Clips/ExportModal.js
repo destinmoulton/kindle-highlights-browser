@@ -28,25 +28,23 @@ class ClipsExportModal extends Component {
     constructor(props){
         super(props);
 
-        const checkboxes = {
-            location:true,
-            date:true,
-            quote:true
-        };
-
-        const separators = {
-            title: "=====================================",
-            clip: "--------------------------"
-        };
-
-        const radios = {
-            clip_separator: "line"
+        const exportOptions = {
+            checkboxes: {
+                location: true,
+                date: true,
+                quote: true
+            },
+            separators: {
+                title: "=====================================",
+                clip: "--------------------------"
+            },
+            radios: {
+                clip_separator: "line"
+            }
         }
 
         this.state = {
-            checkboxes,
-            radios,
-            separators
+            exportOptions
         };
     }
 
@@ -57,24 +55,27 @@ class ClipsExportModal extends Component {
      * @param Event e
      */
     handleCheckboxChange(e){
-        let chks = Object.assign({}, this.state.checkboxes);
+        let exportOptions = Object.assign({}, this.state.exportOptions);
+        let chks = Object.assign({}, exportOptions.checkboxes);
         if(e.target.checked){
             chks[e.target.value] = true;
         } else {
             chks[e.target.value] = false;
         }
+        exportOptions.checkboxes = chks;
         this.setState({
-            checkboxes:chks
+            exportOptions
         });
     }
 
     handleRadioChange(e){
         const targ = e.target;
-
-        let radios = Object.assign({}, this.state.radios);
+        let exportOptions = Object.assign({}, this.state.exportOptions);
+        let radios = Object.assign({}, exportOptions.radios);
         radios[targ.name] = targ.value;
+        exportOptions.radios = radios;
         this.setState({
-            radios
+            exportOptions
         });
     }
 
@@ -86,11 +87,13 @@ class ClipsExportModal extends Component {
      * @param Event e
      */
     handleSeparatorChange(e){
-        let separators = Object.assign({}, this.state.separators);
-
+        let exportOptions = Object.assign({}, this.state.exportOptions);
+        let separators = Object.assign({}, exportOptions.separators);
+        
         separators[e.target.name] = e.target.value;
+        exportOptions.separators = separators;
         this.setState({
-            separators
+            exportOptions
         });
     }
 
@@ -102,7 +105,7 @@ class ClipsExportModal extends Component {
         const possibleTitle = FILE_PREFIX+FILE_DATE_SUFFIX;
         remote.dialog.showSaveDialog({defaultPath:possibleTitle+FILE_EXT}, (filename)=>{
             if(typeof filename === "string"){
-                const strToWrite = GenerateClipsString(this.props.clips, this.state.checkboxes, this.state.radios, this.state.separators, EOL);
+                const strToWrite = GenerateClipsString(this.props.clips, this.state.exportOptions, EOL);
                 fs.writeFile(filename, strToWrite, function(err){
                     if(err){
                         return ErrorDialog("There was a problem saving the file.\n"+err);
@@ -116,7 +119,7 @@ class ClipsExportModal extends Component {
      * Copy generated clip string to the clipboard.
      */
     handleCopyClips(){
-        const strToCopy = GenerateClipsString(this.props.clips, this.state.checkboxes, this.state.radios, this.state.separators, EOL);
+        const strToCopy = GenerateClipsString(this.props.clips, this.state.exportOptions, EOL);
 
         clipboard.writeText(strToCopy);
     }
@@ -130,7 +133,7 @@ class ClipsExportModal extends Component {
     
     render() {
         const { modalIsActive, closeModalHandler, clips } = this.props;
-        const { checkboxes, radios, separators } = this.state;
+        const { exportOptions } = this.state;
         return (
             <Modal show={modalIsActive} 
                    onHide={closeModalHandler}
@@ -141,18 +144,14 @@ class ClipsExportModal extends Component {
                 <Modal.Body>
                     <Row>
                         <Col xs={4}>
-                            <ExportOptions checkboxes={checkboxes}
-                                           radios={radios}
-                                           separators={separators}
+                            <ExportOptions exportOptions={exportOptions}
                                            handleCheckboxChange={this.handleCheckboxChange.bind(this)}
                                            handleRadioChange={this.handleRadioChange.bind(this)}
                                            handleSeparatorChange={this.handleSeparatorChange.bind(this)}/>
                         </Col>
                         <Col xs={8}>
-                            <ExportPreview checkboxes={checkboxes}
-                                            radios={radios}
-                                            separators={separators}
-                                            clips={clips} />
+                            <ExportPreview exportOptions={exportOptions}
+                                           clips={clips} />
                             <ButtonGroup>
                                 <Button onClick={this.handleSaveClipsToFile.bind(this)}>
                                     <i className="fa fa-floppy-o"></i> Save All to File

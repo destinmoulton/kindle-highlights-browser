@@ -132,8 +132,8 @@ class ClipsExportModal extends Component {
     }
     
     render() {
-        const { exportOptions, modalIsActive, closeModalHandler, clips } = this.props;
-        
+        const { modalIsActive, closeModalHandler, clips } = this.props;
+        const { exportOptions } = this.state;
         return (
             <Modal show={modalIsActive} 
                    onHide={closeModalHandler}

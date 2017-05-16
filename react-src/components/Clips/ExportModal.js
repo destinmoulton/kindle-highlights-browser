@@ -19,7 +19,7 @@ import moment from 'moment';
 import ExportOptions from './ExportOptions';
 import ExportPreview from './ExportPreview';
 
-import {GenerateClipsString} from '../../lib/exportutilities';
+import { GenerateClipsString } from '../../lib/ClipStringGenerator';
 import {ErrorDialog} from '../../lib/dialogboxes';
 const FILE_PREFIX = "kindle_highlights_";
 const FILE_DATE_SUFFIX = moment().format("MM_DD_YYYY_HH_mm_ss")

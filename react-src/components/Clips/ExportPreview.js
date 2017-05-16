@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-import {ControlLabel, FormControl, FormGroup} from 'react-bootstrap';
+import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
 
-import {GenerateClipsString} from '../../lib/exportutilities';
+import { GenerateClipsString } from '../../lib/ClipStringGenerator';
 
 const TEXTAREA_EOL = "\n";
 class ExportPreview extends Component {

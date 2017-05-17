@@ -10,8 +10,8 @@ import {
 
 class ExportOptions extends Component {
     render() {
-        const { exportOptions, handleCheckboxChange, handleRadioChange, handleSeparatorChange } = this.props;
-        const { checkboxes, radios, separators } = exportOptions;
+        const {checkboxes, radios, separators, handleCheckboxChange, handleRadioChange, handleSeparatorChange} = this.props;
+        
         return (
             
             <div>
@@ -77,7 +77,8 @@ class ExportOptions extends Component {
 }
 
 ExportOptions.propTypes = {
-    exportOptions:React.PropTypes.object,
+    checkboxes:React.PropTypes.object,
+    separators:React.PropTypes.object, 
     handleCheckboxChange:React.PropTypes.func, 
     handleSeparatorChange:React.PropTypes.func
 };

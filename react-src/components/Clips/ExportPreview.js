@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
+import {ControlLabel, FormControl, FormGroup} from 'react-bootstrap';
 
-import { GenerateClipsString } from '../../lib/ClipStringGenerator';
+import {GenerateClipsString} from '../../lib/exportutilities';
 
 const TEXTAREA_EOL = "\n";
 class ExportPreview extends Component {
@@ -11,8 +11,8 @@ class ExportPreview extends Component {
     }
 
     render() {
-        const {clips, exportOptions} = this.props;
-        const clipsPreview = GenerateClipsString(clips, exportOptions, TEXTAREA_EOL);
+        const {clips, checkboxes, radios, separators} = this.props;
+        const clipsPreview = GenerateClipsString(clips, checkboxes, radios, separators, TEXTAREA_EOL);
         return (
             <FormGroup controlId="khb-exportpreview-textarea">
                 <ControlLabel>Preview Export</ControlLabel>

@@ -2,8 +2,7 @@
 /**
  * Generate the string for a clip to export
  */
-export function GenerateClipsString(clips, exportOptions, EOL){
-    const { checkboxes, radios, separators } = exportOptions;
+export function GenerateClipsString(clips, checkboxes, radios, separators, EOL){
     const includeLocation = checkboxes.location;
     const includeDate = checkboxes.date;
     

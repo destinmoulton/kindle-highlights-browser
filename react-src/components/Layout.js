@@ -7,7 +7,7 @@ import Home from './Home';
 
 import HighlightBrowser from './HighlightBrowser.js';
 
-import MyClippingsParser from '../lib/MyClippingsParser';
+import MyClippingsParser from '../lib/myclippingsparser';
 
 const DB_LAST_SETTING_QUERY = { setting: 'last_open_myclippings_file' };
 export default class Layout extends React.Component{

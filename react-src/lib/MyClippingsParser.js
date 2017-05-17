@@ -22,12 +22,11 @@ export default class MyClippingsParser {
         this.authors = {};
         this.titles = {};
     }
+
     parseFile(filename){
         const contents = this.getFileContents(filename);
-
-        //const lines = contents.split(/\r?\n/);
         const clips = contents.split(CLIPPING_SEPARATOR);
-
+        
         let clippings = {};
         let current_title = "";
         clips.map((clip)=>{

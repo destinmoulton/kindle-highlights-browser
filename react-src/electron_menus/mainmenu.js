@@ -5,6 +5,12 @@ function BuildMainMenu (app, win){
         label: "File",
         submenu: [
             {
+                label: "Open My Clippings",
+                click: (menuItem, currentWindow) => {
+                    currentWindow.webContents.send('open-my-clippings');
+                }
+            },
+            {
                 label: "Exit",
                 role: "close",
                 accelerator: "CmdOrCtrl+q"

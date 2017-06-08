@@ -26,7 +26,7 @@ export default class Layout extends React.Component{
         this.loadLastFileUsed();
 
         ipcMain.on('open-my-clippings', (event, fileName)=>{
-            this.parseFile(fileName);
+            this.openClippingsDialog();
         });
     }
 

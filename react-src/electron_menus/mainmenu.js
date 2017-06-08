@@ -6,6 +6,7 @@ function BuildMainMenu (app, win){
         submenu: [
             {
                 label: "Open My Clippings",
+                accelerator: 'CommandOrControl+O',
                 click: (menuItem, currentWindow) => {
                     currentWindow.webContents.send('open-my-clippings');
                 }

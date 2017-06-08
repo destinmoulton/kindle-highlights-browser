@@ -1,5 +1,5 @@
 import React from 'react';
-import { remote } from 'electron';
+import { remote, ipcMain } from 'electron';
 
 import Storage from '../lib/Storage';
 
@@ -24,6 +24,10 @@ export default class Layout extends React.Component{
         this.storage = new Storage();
         
         this.loadLastFileUsed();
+
+        ipcMain.on('open-my-clippings', (event, fileName)=>{
+            this.parseFile(fileName);
+        });
     }
 
     /**

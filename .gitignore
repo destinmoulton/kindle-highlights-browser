@@ -3,3 +3,4 @@ node_modules
 typings.json
 typings
 dist
+.khb-nedb-storage

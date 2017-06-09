@@ -1,16 +1,18 @@
 const { Menu } = require("electron");
 
+const OpenFile = {
+    label: "Open My Clippings",
+    accelerator: 'CommandOrControl+O',
+    click: (menuItem, currentWindow) => {
+        currentWindow.webContents.send('open-my-clippings');
+    }
+};
+
 function BuildMainMenu (app, win){
     var menuTemplate = [{
         label: "File",
         submenu: [
-            {
-                label: "Open My Clippings",
-                accelerator: 'CommandOrControl+O',
-                click: (menuItem, currentWindow) => {
-                    currentWindow.webContents.send('open-my-clippings');
-                }
-            },
+            OpenFile,
             {
                 label: "Exit",
                 role: "close",
@@ -54,7 +56,7 @@ function BuildMainMenu (app, win){
         //Remove the file menu
         menuTemplate.shift();
 
-        //Add a Mac worthy menu
+        //Add a Mac "File" menu
         menuTemplate.unshift({
             label:"Kindle Highlights Browser",
             submenu: [

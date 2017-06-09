@@ -60,6 +60,7 @@ function BuildMainMenu (app, win){
         menuTemplate.unshift({
             label:"Kindle Highlights Browser",
             submenu: [
+                OpenFile,
                 {
                     role: "close",
                     accelerator: "CmdOrCtrl+q"

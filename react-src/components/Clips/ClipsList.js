@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Well } from "react-bootstrap";
 
 import ClipRow from "./ClipRow";
-import ClipSorter from "../../lib/clipsorter";
+import ClipSorter from "../../lib/ClipSorter";
 
 class ClipsList extends Component {
     constructor(props){

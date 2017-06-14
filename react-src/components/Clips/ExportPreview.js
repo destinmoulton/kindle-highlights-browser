@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
 
-import { GenerateClipsString } from '../../lib/ClipStringGenerator';
+import { GenerateClipsString } from '../../lib/GenerateClipsString';
 
 const TEXTAREA_EOL = "\n";
 class ExportPreview extends Component {

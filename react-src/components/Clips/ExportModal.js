@@ -20,7 +20,7 @@ import ExportOptions from './ExportOptions';
 import ExportPreview from './ExportPreview';
 
 import { generateClipsString } from '../../lib/generateClipsString';
-import {ErrorDialog} from '../../lib/dialogboxes';
+import {errorDialog} from '../../lib/errorDialog';
 const FILE_PREFIX = "kindle_highlights_";
 const FILE_DATE_SUFFIX = moment().format("MM_DD_YYYY_HH_mm_ss")
 const FILE_EXT = ".txt";
@@ -108,7 +108,7 @@ class ClipsExportModal extends Component {
                 const strToWrite = generateClipsString(this.props.clips, this.state.exportOptions, EOL);
                 fs.writeFile(filename, strToWrite, function(err){
                     if(err){
-                        return ErrorDialog("There was a problem saving the file.\n"+err);
+                        return errorDialog("There was a problem saving the file.\n"+err);
                     }
                 });
             }

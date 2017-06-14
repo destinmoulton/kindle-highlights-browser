@@ -3,7 +3,7 @@
  * Generate the formatted export string.
  *  The export options are set in the modal export popover.
  */
-export function GenerateClipsString(clips, exportOptions, EOL){
+export function generateClipsString(clips, exportOptions, EOL){
     const { checkboxes, radios, separators } = exportOptions;
     const includeLocation = checkboxes.location;
     const includeDate = checkboxes.date;

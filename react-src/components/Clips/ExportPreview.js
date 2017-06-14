@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
 
-import { GenerateClipsString } from '../../lib/GenerateClipsString';
+import { generateClipsString } from '../../lib/generateClipsString';
 
 const TEXTAREA_EOL = "\n";
 class ExportPreview extends Component {
@@ -12,7 +12,7 @@ class ExportPreview extends Component {
 
     render() {
         const {clips, exportOptions} = this.props;
-        const clipsPreview = GenerateClipsString(clips, exportOptions, TEXTAREA_EOL);
+        const clipsPreview = generateClipsString(clips, exportOptions, TEXTAREA_EOL);
         return (
             <FormGroup controlId="khb-exportpreview-textarea">
                 <ControlLabel>Preview Export</ControlLabel>

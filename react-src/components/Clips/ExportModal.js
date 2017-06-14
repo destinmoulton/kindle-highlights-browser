@@ -19,7 +19,7 @@ import moment from 'moment';
 import ExportOptions from './ExportOptions';
 import ExportPreview from './ExportPreview';
 
-import { GenerateClipsString } from '../../lib/GenerateClipsString';
+import { generateClipsString } from '../../lib/generateClipsString';
 import {ErrorDialog} from '../../lib/dialogboxes';
 const FILE_PREFIX = "kindle_highlights_";
 const FILE_DATE_SUFFIX = moment().format("MM_DD_YYYY_HH_mm_ss")
@@ -105,7 +105,7 @@ class ClipsExportModal extends Component {
         const possibleTitle = FILE_PREFIX+FILE_DATE_SUFFIX;
         remote.dialog.showSaveDialog({defaultPath:possibleTitle+FILE_EXT}, (filename)=>{
             if(typeof filename === "string"){
-                const strToWrite = GenerateClipsString(this.props.clips, this.state.exportOptions, EOL);
+                const strToWrite = generateClipsString(this.props.clips, this.state.exportOptions, EOL);
                 fs.writeFile(filename, strToWrite, function(err){
                     if(err){
                         return ErrorDialog("There was a problem saving the file.\n"+err);
@@ -119,7 +119,7 @@ class ClipsExportModal extends Component {
      * Copy generated clip string to the clipboard.
      */
     handleCopyClips(){
-        const strToCopy = GenerateClipsString(this.props.clips, this.state.exportOptions, EOL);
+        const strToCopy = generateClipsString(this.props.clips, this.state.exportOptions, EOL);
 
         clipboard.writeText(strToCopy);
     }

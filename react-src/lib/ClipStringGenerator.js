@@ -1,6 +1,7 @@
 
 /**
- * Generate the string for a clip to export
+ * Generate the formatted export string.
+ *  The export options are set in the modal export popover.
  */
 export function GenerateClipsString(clips, exportOptions, EOL){
     const { checkboxes, radios, separators } = exportOptions;

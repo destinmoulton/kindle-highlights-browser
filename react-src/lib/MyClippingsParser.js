@@ -91,32 +91,32 @@ export default class MyClippingsParser {
     }
 
     determineAuthorName(fullAuthorString){
-        let authorParts = fullAuthorString.replace(AUTHOR_SUFFIX,"").split(AUTHOR_COMMA_SEPARATOR);
+        let nameParts = fullAuthorString.replace(AUTHOR_SUFFIX,"").split(AUTHOR_COMMA_SEPARATOR);
 
-        let authorFirstName = "";
-        let authorLastName = "";
+        let firstName = "";
+        let lastName = "";
         let space = " ";
-        if(authorParts.length > 1){
+        if(nameParts.length > 1){
             // Comma separated (last, first)
-            authorLastName = authorParts[0];
-            authorFirstName = authorParts[1];
+            lastName = nameParts[0];
+            firstName = nameParts[1];
         } else {
             // Try space separated
-            authorParts = authorParts[0].split(AUTHOR_SPACE_SEPARATOR);
-            if(authorParts.length > 1){
+            nameParts = nameParts[0].split(AUTHOR_SPACE_SEPARATOR);
+            if(nameParts.length > 1){
                 // Is space separated (first last)
-                authorFirstName = authorParts[0];
-                authorLastName = authorParts[1];
-            } else if(authorParts.length === 1){
+                firstName = nameParts[0];
+                lastName = nameParts[1];
+            } else if(nameParts.length === 1){
                 space = "";
-                authorFirstName = authorParts[0];
-                authorLastName = "";
+                firstName = nameParts[0];
+                lastName = "";
             } else {
-                authorFirstName = "Undefined"
-                authorLastName = "Author";
+                firstName = "Undefined"
+                lastName = "Author";
             }
         }
-        return authorFirstName + space + authorLastName;
+        return firstName + space + lastName;
     }
 
     parseLocationAndDate(str){

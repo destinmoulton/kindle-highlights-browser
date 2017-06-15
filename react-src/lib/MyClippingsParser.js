@@ -85,12 +85,12 @@ export default class MyClippingsParser {
 
         const title = parts[0].trim();
 
-        const authorFullName = this.buildAuthorName(parts[1]);
+        const authorFullName = this.determineAuthorName(parts[1]);
 
         return { title, authorFullName };
     }
 
-    buildAuthorName(fullAuthorString){
+    determineAuthorName(fullAuthorString){
         let authorParts = fullAuthorString.replace(AUTHOR_SUFFIX,"").split(AUTHOR_COMMA_SEPARATOR);
 
         let authorFirstName = "";

@@ -4,12 +4,29 @@ import moment from "moment";
 
 const CLIPPING_SEPARATOR = "==========";
 const TITLEAUTHOR_SEPARATOR = " (";
-const LOCATION_HIGHLIGHT_PREFIX = "- Your Highlight on Location ";
-const LOCATION_PAGE_PREFIX = "- Your Highlight on page ";
-const LOCATION_BOOKMARK_PREFIX = "- Your Bookmark on Location ";
-const LOCATION_SHORT_PREFIX = "Location ";
-const LOCATION_NOTE_PREFIX = "- Your Note on Location ";
 const LOCATION_DATE_SEPARATOR = " | ";
+
+const LOCATION_TYPES = [
+    {
+        name: "bookmark",
+        prefix: "- Your Bookmark on Location "
+    },
+    {
+        name: "highlight",
+        prefix: "- Your Highlight on Location "
+    },
+    {
+        name: "note",
+        prefix: "- Your Note on Location "
+    },
+    {
+        name: "highlight",
+        prefix: "- Your Highlight on page ",
+        shift: true,
+        replacePrefix: "Location "
+    }
+];
+
 const TIME_PREFIX = "Added on ";
 const AUTHOR_SUFFIX = ")";
 const AUTHOR_COMMA_SEPARATOR = ", ";
@@ -123,30 +140,24 @@ export default class MyClippingsParser {
         const parts = locationAndDate.split(LOCATION_DATE_SEPARATOR);
         let location = {};
 
-        if(parts[0].startsWith(LOCATION_BOOKMARK_PREFIX)){
-            location = {
-                'type':'bookmark',
-                'value':parts[0].replace(LOCATION_BOOKMARK_PREFIX, "")
-            }
-        } else if(parts[0].startsWith(LOCATION_HIGHLIGHT_PREFIX)){
-            location = {
-                'type':'highlight',
-                'value':parts[0].replace(LOCATION_HIGHLIGHT_PREFIX, "")
-            };
-        } else if(parts[0].startsWith(LOCATION_NOTE_PREFIX)){
-            location = {
-                'type':'note',
-                'value':parts[0].replace(LOCATION_NOTE_PREFIX, "")
-            };
-        } else if(parts[0].startsWith(LOCATION_PAGE_PREFIX)){
-            // Ignore the Page (meaningless)
-            parts.shift();
+        for(let i=0; i<LOCATION_TYPES.length; i++){
+            const possibleType = LOCATION_TYPES[i];
 
-            location = {
-                'type':'highlight',
-                'value':parts[0].replace(LOCATION_SHORT_PREFIX, "")
-            }
-            
+            if (parts[0].startsWith(possibleType.prefix)) {
+                if(possibleType.hasOwnProperty('shift')){
+                    parts.shift();
+                }
+
+                let replacePrefix = possibleType.prefix;
+                if(possibleType.hasOwnProperty('replacePrefix')){
+                    replacePrefix = possibleType.replacePrefix;
+                }
+
+                location = {
+                    'type': possibleType.name,
+                    'value': parts[0].replace(replacePrefix, "")
+                }
+            }   
         }
         
         const location_start = parseInt(location['value'].split('-')[0]);

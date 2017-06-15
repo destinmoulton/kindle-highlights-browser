@@ -9,7 +9,7 @@ const LOCATION_PAGE_PREFIX = "- Your Highlight on page ";
 const LOCATION_BOOKMARK_PREFIX = "- Your Bookmark on Location ";
 const LOCATION_SHORT_PREFIX = "Location ";
 const LOCATION_NOTE_PREFIX = "- Your Note on Location ";
-const LOCTIME_SEPARATOR = " | ";
+const LOCATION_DATE_SEPARATOR = " | ";
 const TIME_PREFIX = "Added on ";
 const AUTHOR_SUFFIX = ")";
 const AUTHOR_COMMA_SEPARATOR = ", ";
@@ -119,8 +119,8 @@ export default class MyClippingsParser {
         return firstName + space + lastName;
     }
 
-    parseLocationAndDate(str){
-        const parts = str.split(LOCTIME_SEPARATOR);
+    parseLocationAndDate(locationAndDate){
+        const parts = locationAndDate.split(LOCATION_DATE_SEPARATOR);
         let location = {};
 
         if(parts[0].startsWith(LOCATION_BOOKMARK_PREFIX)){

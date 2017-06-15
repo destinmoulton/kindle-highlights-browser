@@ -90,8 +90,8 @@ export default class MyClippingsParser {
         return { title, authorFullName };
     }
 
-    buildAuthorName(authString){
-        let authorParts = authString.replace(AUTHOR_SUFFIX,"").split(AUTHOR_COMMA_SEPARATOR);
+    buildAuthorName(fullAuthorString){
+        let authorParts = fullAuthorString.replace(AUTHOR_SUFFIX,"").split(AUTHOR_COMMA_SEPARATOR);
 
         let authorFirstName = "";
         let authorLastName = "";

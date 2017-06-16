@@ -8,24 +8,26 @@ import EXPECTED_CLIPPINGS from './data/MyClippings.expected';
 
 const TEST_FILE = path.resolve(__dirname + '/data/', 'MyClippings.test.txt');
 describe("MyClippingsParser", () => {
-    describe("parseFile", () => {
-        test("parses a test clips file", () => {
-            const myClippingsParser = new MyClippingsParser();
+    let myClippingsParser = {};
 
-            const clippings = myClippingsParser.parseFile(TEST_FILE);
-            const clippingsJSON = JSON.stringify(clippings);
-            expect(clippingsJSON).toBe(EXPECTED_CLIPPINGS);
-        });
+    beforeEach(() => {
+        myClippingsParser = new MyClippingsParser();
+    });
+
+    test("parseTitleAndAuthor", ()=>{
+        const ORIGINAL_TITLEAUTHOR = " Moonwalking With Einstein (Joshua Foer)";
+
+        const EXPECTED_TITLE = "Moonwalking With Einstein";
+        const EXPECTED_AUTHOR = "Joshua Foer";
+
+        const {testTitle, testAuthorFullName} = myClippingsParser.parseTitleAndAuthor(ORIGINAL_TITLEAUTHOR);
+        console.log(testTitle);
+        expect(testTitle).toBe(EXPECTED_TITLE);
+        expect(testAuthorFullName).toBe(EXPECTED_AUTHOR);
     });
 
     describe("determineAuthorName parses the author's name", () => {
-        const EXPECTED_ONEPART_NAME = "Prince";
         const EXPECTED_TWOPART_NAME = "Jason Bourne";
-        const EXPECTED_UNDEFINED_NAME = "";
-        let myClippingsParser = {};
-        beforeEach(() => {
-            myClippingsParser = new MyClippingsParser();
-        });
 
         test('last, first', () => {
             const testName = "Bourne, Jason";
@@ -38,23 +40,19 @@ describe("MyClippingsParser", () => {
         });
 
         test('one-name', () => {
+            const EXPECTED_ONEPART_NAME = "Prince";
             const testName = "Prince";
             expect(myClippingsParser.determineAuthorName(testName)).toBe(EXPECTED_ONEPART_NAME);
         });
 
         test('no-name', () => {
+            const EXPECTED_UNDEFINED_NAME = "";
             const testName = "";
             expect(myClippingsParser.determineAuthorName(testName)).toBe(EXPECTED_UNDEFINED_NAME);
         })
     });
 
     describe("parseLocationAndDate parses the location and date/time", () => {
-
-        let myClippingsParser = {};
-        beforeEach(() => {
-            myClippingsParser = new MyClippingsParser();
-        });
-
         test('bookmark', () => {
             const bookmarkStr = "- Your Bookmark on Location 1515 | Added on Monday, May 19, 2014 5:37:57 PM";
             const expectedObject = {
@@ -122,5 +120,11 @@ describe("MyClippingsParser", () => {
             expect(parsedObject.location_start).toBe(expectedObject.location_start);
             expect(parsedObject.unix_timestamp).toBe(expectedObject.unix_timestamp);
         })
+    });
+
+    test("parseFile parses a test clips file", () => {
+        const clippings = myClippingsParser.parseFile(TEST_FILE);
+        const clippingsJSON = JSON.stringify(clippings);
+        expect(clippingsJSON).toBe(EXPECTED_CLIPPINGS);
     });
 });

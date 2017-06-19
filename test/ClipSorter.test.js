@@ -41,22 +41,22 @@ describe("ClipSorter", ()=>{
 
     test("sortClips descending", ()=>{
         const FILTER = "location_start|desc";
-        const EXPECTED_DESC = {
-            "15": {
+        const EXPECTED_DESC = [
+            {
                 location_start: 15
             },
-            "10": {
+            {
                 location_start: 10
             },
-            "5": {
+            {
                 location_start: 5
             },
-            "3": {
+            {
                 location_start: 3
             }
-        };
+        ];
 
-        let clipsToSort = Object.create(CLIPS_ORIGINAL);
+        let clipsToSort = [...CLIPS_ORIGINAL];
         const clipSorter = new ClipSorter();
         clipSorter.sortClips(clipsToSort, FILTER);
         expect(clipsToSort).toEqual(EXPECTED_DESC);

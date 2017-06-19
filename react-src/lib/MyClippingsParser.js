@@ -3,7 +3,7 @@ import fs from "fs";
 import moment from "moment";
 
 const CLIPPING_SEPARATOR = "==========";
-const TITLEAUTHOR_SEPARATOR = " (";
+
 const LOCATION_DATE_SEPARATOR = " | ";
 
 const LOCATION_TYPES = [
@@ -28,6 +28,7 @@ const LOCATION_TYPES = [
 ];
 
 const TIME_PREFIX = "Added on ";
+const TITLEAUTHOR_SEPARATOR = " (";
 const AUTHOR_SUFFIX = ")";
 const AUTHOR_COMMA_SEPARATOR = ", ";
 const AUTHOR_SPACE_SEPARATOR = ", ";
@@ -57,7 +58,7 @@ export default class MyClippingsParser {
                 return;
             }
 
-            const {title, authorFullName} = this.parseTitleAndAuthor(lines[0]);
+            const [ title, authorFullName ] = this.parseTitleAndAuthor(lines[0]);
 
             let clipData = {};
             const { location, location_start, date, unix_timestamp } = this.parseLocationAndDate(lines[1]);
@@ -99,12 +100,12 @@ export default class MyClippingsParser {
 
     parseTitleAndAuthor(str){
         const parts = str.split(TITLEAUTHOR_SEPARATOR);
-
+        
         const title = parts[0].trim();
 
         const authorFullName = this.determineAuthorName(parts[1]);
 
-        return { title, authorFullName };
+        return [ title, authorFullName ];
     }
 
     determineAuthorName(fullAuthorString){

@@ -14,16 +14,18 @@ describe("MyClippingsParser", () => {
         myClippingsParser = new MyClippingsParser();
     });
 
-    test("parseTitleAndAuthor", ()=>{
-        const ORIGINAL_TITLEAUTHOR = " Moonwalking With Einstein (Joshua Foer)";
+    describe("parseTitleAndAuthor", ()=>{
+        test("parses the title and author", ()=>{
+            const ORIGINAL_TITLEAUTHOR = " Moonwalking With Einstein (Joshua Foer)";
 
-        const EXPECTED_TITLE = "Moonwalking With Einstein";
-        const EXPECTED_AUTHOR = "Joshua Foer";
+            const EXPECTED_TITLE = "Moonwalking With Einstein";
+            const EXPECTED_AUTHOR = "Joshua Foer";
 
-        const {testTitle, testAuthorFullName} = myClippingsParser.parseTitleAndAuthor(ORIGINAL_TITLEAUTHOR);
-        console.log(testTitle);
-        expect(testTitle).toBe(EXPECTED_TITLE);
-        expect(testAuthorFullName).toBe(EXPECTED_AUTHOR);
+            const [ testTitle, testAuthorFullName ] = myClippingsParser.parseTitleAndAuthor(ORIGINAL_TITLEAUTHOR);
+            expect(testTitle).toBe(EXPECTED_TITLE);
+            expect(testAuthorFullName).toBe(EXPECTED_AUTHOR);
+        });
+
     });
 
     describe("determineAuthorName parses the author's name", () => {

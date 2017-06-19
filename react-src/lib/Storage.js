@@ -10,7 +10,7 @@ const DB_PATH = path.join(app.getAppPath(), '.khb-nedb-storage');
  */
 export default class Storage {
     constructor(){
-        console.log(DB_PATH);
+        
         this.db = new Datastore({
             filename:DB_PATH
         });

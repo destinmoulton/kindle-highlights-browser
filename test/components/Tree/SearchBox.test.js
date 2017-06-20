@@ -24,18 +24,20 @@ describe('Tree/SearchBox Component', ()=>{
         expect(formControl.prop('value')).toBe(SEARCH_STRING);
     });
 
-    test("icon/button is X and set to clear function when search text is set", ()=>{
-        const iconWrapper = enzymeWrapper.find('span.input-group-addon');
-        expect(iconWrapper.exists()).toBe(true);
-        expect(iconWrapper.hasClass("khb-treelist-search-close-icon")).toBe(true);
+    describe("clear/X icon", ()=>{
+        test("icon/button is X and set to clear function when search text is set", ()=>{
+            const iconWrapper = enzymeWrapper.find('span.input-group-addon');
+            expect(iconWrapper.exists()).toBe(true);
+            expect(iconWrapper.hasClass("khb-treelist-search-close-icon")).toBe(true);
 
-        const icon = iconWrapper.find('i');
-        expect(icon.exists()).toBe(true);
-        expect(icon.hasClass("fa-times")).toBe(true);
+            const icon = iconWrapper.find('i');
+            expect(icon.exists()).toBe(true);
+            expect(icon.hasClass("fa-times")).toBe(true);
 
-        expect(props.handleClearSearch.mock.calls.length).toBe(0);
-        icon.props().onClick();
-        expect(props.handleClearSearch.mock.calls.length).toBe(1);
+            expect(props.handleClearSearch.mock.calls.length).toBe(0);
+            icon.props().onClick();
+            expect(props.handleClearSearch.mock.calls.length).toBe(1);
 
-    })
+        })
+    });
 });

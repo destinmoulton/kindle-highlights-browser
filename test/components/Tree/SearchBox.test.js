@@ -19,11 +19,30 @@ describe('Tree/SearchBox Component', ()=>{
             enzymeWrapper = mount(<SearchBox {...props}/>)
         });
 
-        test("should render the search text input box an initial placeholder string", ()=>{
+        test("should render the search text input box with an initial placeholder string", ()=>{
             const formControl = enzymeWrapper.find('input.form-control');
             expect(formControl.exists()).toBe(true);
             expect(formControl.prop('value')).toBe("");
             expect(formControl.prop('placeholder')).toBe("Search Authors/Titles...");
+        });
+
+        describe("search/magnifier icon", ()=>{
+            let iconWrapper = {};
+            let icon = {};
+
+            beforeEach(()=>{
+                iconWrapper = enzymeWrapper.find('span.input-group-addon');
+                icon = iconWrapper.find('i');
+            });
+
+            test("wrapper exists", ()=>{
+                expect(iconWrapper.exists()).toBe(true);
+            });
+
+            test("exists as i and search/magnifier icon is set", ()=>{
+                expect(icon.exists()).toBe(true);
+                expect(icon.hasClass("fa-search")).toBe(true);
+            });
         });
     });
     describe("search string is set", ()=>{

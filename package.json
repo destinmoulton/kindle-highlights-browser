@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watchAll",
     "compile:react": "webpack --config webpack.config.js -d --watch",
     "dev": "electron .",
     "clean:osx": "rm -rf ./dist/osx",

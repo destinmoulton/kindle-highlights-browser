@@ -6,6 +6,26 @@ import SearchBox from '../../../react-src/components/Tree/SearchBox.js';
 
 describe('Tree/SearchBox Component', ()=>{
 
+    describe("search string is NOT set", ()=>{
+        let props = {};
+        let enzymeWrapper = {};
+        beforeEach(()=>{
+            props = {
+                handleSearchChange: jest.fn(),
+                originalSearchString: "",
+                handleClearSearch: jest.fn()
+            };
+
+            enzymeWrapper = mount(<SearchBox {...props}/>)
+        });
+
+        test("should render the search text input box an initial placeholder string", ()=>{
+            const formControl = enzymeWrapper.find('input.form-control');
+            expect(formControl.exists()).toBe(true);
+            expect(formControl.prop('value')).toBe("");
+            expect(formControl.prop('placeholder')).toBe("Search Authors/Titles...");
+        });
+    });
     describe("search string is set", ()=>{
         const SEARCH_STRING = "Mobius Strip";
         let props = {};
@@ -39,7 +59,7 @@ describe('Tree/SearchBox Component', ()=>{
                 expect(iconWrapper.exists()).toBe(true);
                 expect(iconWrapper.hasClass("khb-treelist-search-close-icon")).toBe(true);
             });
-            
+
             test("exists as i and X icon is set", ()=>{
                 expect(icon.exists()).toBe(true);
                 expect(icon.hasClass("fa-times")).toBe(true);

@@ -16,5 +16,7 @@ describe('Tree/SearchBox Component', ()=>{
         enzymeWrapper = mount(<SearchBox {...props}/>)
     });
 
-    
+    test("should render the search box and clear x", ()=>{
+       expect(enzymeWrapper.find('FormControl').exists()).toBe(true);
+    });
 });

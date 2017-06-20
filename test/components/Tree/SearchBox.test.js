@@ -43,8 +43,15 @@ describe('Tree/SearchBox Component', ()=>{
                 expect(icon.exists()).toBe(true);
                 expect(icon.hasClass("fa-search")).toBe(true);
             });
+
+            test("fires handleSearchChange fn when clicked", ()=>{
+                expect(props.handleSearchChange.mock.calls.length).toBe(0);
+                icon.props().onClick();
+                expect(props.handleSearchChange.mock.calls.length).toBe(1);
+            });
         });
     });
+    
     describe("search string is set", ()=>{
         const SEARCH_STRING = "Mobius Strip";
         let props = {};
@@ -88,8 +95,7 @@ describe('Tree/SearchBox Component', ()=>{
                 expect(props.handleClearSearch.mock.calls.length).toBe(0);
                 icon.props().onClick();
                 expect(props.handleClearSearch.mock.calls.length).toBe(1);
-
-            })
+            });
         });
     });
 });

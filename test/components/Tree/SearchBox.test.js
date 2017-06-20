@@ -29,5 +29,13 @@ describe('Tree/SearchBox Component', ()=>{
         expect(iconWrapper.exists()).toBe(true);
         expect(iconWrapper.hasClass("khb-treelist-search-close-icon")).toBe(true);
 
+        const icon = iconWrapper.find('i');
+        expect(icon.exists()).toBe(true);
+        expect(icon.hasClass("fa-times")).toBe(true);
+
+        expect(props.handleClearSearch.mock.calls.length).toBe(0);
+        icon.props().onClick();
+        expect(props.handleClearSearch.mock.calls.length).toBe(1);
+
     })
 });

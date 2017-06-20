@@ -33,7 +33,9 @@ describe('Tree/SearchBox Component', ()=>{
             const icon = iconWrapper.find('i');
             expect(icon.exists()).toBe(true);
             expect(icon.hasClass("fa-times")).toBe(true);
-
+        });
+        
+        test("fires handleClearSearch fn when clicked", ()=>{
             expect(props.handleClearSearch.mock.calls.length).toBe(0);
             icon.props().onClick();
             expect(props.handleClearSearch.mock.calls.length).toBe(1);

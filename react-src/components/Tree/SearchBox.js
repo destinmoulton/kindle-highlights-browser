@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
 import {FormControl, FormGroup, InputGroup} from 'react-bootstrap';
 
 class SearchBox extends Component {
+    static propTypes = {
+        handleSearchChange: PropTypes.func,
+        originalSearchString: PropTypes.string,
+        handleClearSearch: PropTypes.func
+    }
+
     render() {
         const { handleSearchChange, originalSearchString, handleClearSearch } = this.props;
 
@@ -31,11 +38,5 @@ class SearchBox extends Component {
         );
     }
 }
-
-SearchBox.propTypes = {
-    handleSearchChange:React.PropTypes.func,
-    originalSearchString:React.PropTypes.string,
-    handleClearSearch:React.PropTypes.func
-};
 
 export default SearchBox;

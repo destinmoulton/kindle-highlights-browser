@@ -1,6 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-class ClipRow extends React.Component {
+class ClipRow extends Component {
+    static propTypes = {
+        clip: PropTypes.object
+    };
+
     render(){
         const {clip} = this.props;
         let loc = "";
@@ -27,9 +32,5 @@ class ClipRow extends React.Component {
         );
     }
 }
-
-ClipRow.propTypes = {
-    clip:React.PropTypes.object
-};
 
 export default ClipRow;

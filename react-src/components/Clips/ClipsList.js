@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
 import { Well } from "react-bootstrap";
 
@@ -6,6 +7,12 @@ import ClipRow from "./ClipRow";
 import ClipSorter from "../../lib/ClipSorter";
 
 class ClipsList extends Component {
+
+    static propTypes = { 
+        clips: PropTypes.array, 
+        sortBy: PropTypes.string
+    };
+
     constructor(props){
         super(props);
 
@@ -33,10 +40,5 @@ class ClipsList extends Component {
         );
     }
 }
-
-ClipsList.propTypes = { 
-    clips:React.PropTypes.array, 
-    sortBy:React.PropTypes.string
-};
 
 export default ClipsList;

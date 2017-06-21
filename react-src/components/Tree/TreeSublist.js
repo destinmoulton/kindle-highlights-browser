@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
 import Node from './Node'
 
 class TreeSublist extends Component {
+
+    static propTypes = {
+        listData: PropTypes.array, 
+        listTitle: PropTypes.string, 
+        filters: PropTypes.object, 
+        filterFieldName: PropTypes.string,
+        handleChangeSelectedFilter: PropTypes.func, 
+        searchString: PropTypes.string
+    };
+
     constructor(props){
         super(props);
         this.state = {
@@ -67,14 +78,5 @@ class TreeSublist extends Component {
         );
     }
 }
-
-TreeSublist.propTypes = {
-    listData:React.PropTypes.array, 
-    listTitle:React.PropTypes.string, 
-    filters:React.PropTypes.object, 
-    filterFieldName:React.PropTypes.string,
-    handleChangeSelectedFilter:React.PropTypes.func, 
-    searchString:React.PropTypes.string
-};
 
 export default TreeSublist;

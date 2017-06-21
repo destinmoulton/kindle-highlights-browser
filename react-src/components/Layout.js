@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { remote, ipcRenderer } from 'electron';
 
 import Storage from '../lib/Storage';

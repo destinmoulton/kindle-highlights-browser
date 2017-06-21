@@ -5,6 +5,11 @@ import {ButtonToolbar,Button, Col, ControlLabel, Form, FormControl, Panel} from 
 import ExportModal from "./ExportModal";
 
 class ClipsButtonBar extends React.Component{
+    static propTypes = { 
+        sortChangeHandler:React.PropTypes.func, 
+        clips:React.PropTypes.object
+    };
+
     constructor(props){
         super(props);
 
@@ -63,9 +68,6 @@ class ClipsButtonBar extends React.Component{
     }
 }
 
-ClipsButtonBar.propTypes = { 
-    sortChangeHandler:React.PropTypes.func, 
-    clips:React.PropTypes.object
-};
+
 
 export default ClipsButtonBar;

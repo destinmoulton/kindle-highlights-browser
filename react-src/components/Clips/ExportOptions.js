@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
 import { 
     Checkbox, 
@@ -9,11 +10,11 @@ import {
 } from 'react-bootstrap';
 
 class ExportOptions extends Component {
-    
+
     static propTypes = {
-        exportOptions:React.PropTypes.object,
-        handleCheckboxChange:React.PropTypes.func, 
-        handleSeparatorChange:React.PropTypes.func
+        exportOptions: PropTypes.object,
+        handleCheckboxChange: PropTypes.func, 
+        handleSeparatorChange: PropTypes.func
     };
 
     render() {

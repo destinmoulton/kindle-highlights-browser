@@ -2,6 +2,7 @@ import fs from 'fs';
 import {EOL} from 'os';
 
 import React, {Component} from 'react';
+import PropTypes from "prop-types";
 
 import { Button, 
          ButtonGroup,
@@ -28,9 +29,9 @@ const FILE_EXT = ".txt";
 class ClipsExportModal extends Component {
 
     static propTypes = { 
-        modalIsActive:React.PropTypes.bool,
-        closeModalHandler:React.PropTypes.func, 
-        clips:React.PropTypes.object
+        modalIsActive: PropTypes.bool,
+        closeModalHandler: PropTypes.func, 
+        clips: PropTypes.object
     };
 
     constructor(props){

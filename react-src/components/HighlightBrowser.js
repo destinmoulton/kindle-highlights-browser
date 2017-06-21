@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Col } from "react-bootstrap";
 
@@ -11,9 +12,9 @@ import FiltersCollection from '../lib/FiltersCollection';
 class HighlightBrowser extends React.Component{
 
     static propTypes = {
-        clippings:React.PropTypes.object, 
-        authors:React.PropTypes.array, 
-        titles:React.PropTypes.array
+        clippings: PropTypes.object, 
+        authors: PropTypes.array, 
+        titles: PropTypes.array
     };
 
     constructor(props){

@@ -5,6 +5,11 @@ import ClipsButtonBar from "./ClipsButtonBar";
 
 class ClipsContainer extends React.Component {
 
+    static propTypes = {
+        clips: React.PropTypes.object,
+        filters: React.PropTypes.object
+    };
+
     constructor(props){
         super(props);
 
@@ -45,10 +50,5 @@ class ClipsContainer extends React.Component {
         );
     }
 }
-
-ClipsContainer.propTypes = {
-    clips: React.PropTypes.object,
-    filters: React.PropTypes.object
-};
 
 export default ClipsContainer;

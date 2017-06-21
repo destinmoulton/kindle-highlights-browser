@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 
 class Node extends Component {
+    static propTypes = {
+        itemName: React.PropTypes.string,
+        handleChangeSelectedFilter: React.PropTypes.func,
+        filterFieldName: React.PropTypes.string,
+        filters: React.PropTypes.object
+    };
+
     render() {
         const { itemName, handleChangeSelectedFilter, filterFieldName, filters} = this.props;
 
@@ -18,10 +25,7 @@ class Node extends Component {
 }
 
 Node.propTypes = {
-    itemName: React.PropTypes.string,
-    handleChangeSelectedFilter: React.PropTypes.func,
-    filterFieldName: React.PropTypes.string,
-    filters: React.PropTypes.object
+    
 };
 
 export default Node;

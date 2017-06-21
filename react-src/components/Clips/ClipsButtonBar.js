@@ -1,13 +1,14 @@
-import React from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import {ButtonToolbar,Button, Col, ControlLabel, Form, FormControl, Panel} from "react-bootstrap";
 
 import ExportModal from "./ExportModal";
 
-class ClipsButtonBar extends React.Component{
+class ClipsButtonBar extends Component{
     static propTypes = { 
-        sortChangeHandler:React.PropTypes.func, 
-        clips:React.PropTypes.object
+        sortChangeHandler: PropTypes.func, 
+        clips: PropTypes.object
     };
 
     constructor(props){

@@ -9,6 +9,13 @@ import EmptyClipList from "./Clips/EmptyClipList";
 import FiltersCollection from '../lib/FiltersCollection';
 
 class HighlightBrowser extends React.Component{
+
+    static propTypes = {
+        clippings:React.PropTypes.object, 
+        authors:React.PropTypes.array, 
+        titles:React.PropTypes.array
+    };
+
     constructor(props){
         super(props);
 
@@ -104,11 +111,5 @@ class HighlightBrowser extends React.Component{
 
     }
 }
-
-HighlightBrowser.propTypes = {
-    clippings:React.PropTypes.object, 
-    authors:React.PropTypes.array, 
-    titles:React.PropTypes.array
-};
 
 export default HighlightBrowser;

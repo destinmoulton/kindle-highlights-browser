@@ -1,13 +1,14 @@
-import React from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import ClipsList from "./ClipsList";
 import ClipsButtonBar from "./ClipsButtonBar";
 
-class ClipsContainer extends React.Component {
+class ClipsContainer extends Component {
 
     static propTypes = {
-        clips: React.PropTypes.object,
-        filters: React.PropTypes.object
+        clips: PropTypes.object,
+        filters: PropTypes.object
     };
 
     constructor(props){

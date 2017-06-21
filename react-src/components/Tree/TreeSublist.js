@@ -3,6 +3,16 @@ import React, { Component } from 'react';
 import Node from './Node'
 
 class TreeSublist extends Component {
+
+    static propTypes = {
+        listData:React.PropTypes.array, 
+        listTitle:React.PropTypes.string, 
+        filters:React.PropTypes.object, 
+        filterFieldName:React.PropTypes.string,
+        handleChangeSelectedFilter:React.PropTypes.func, 
+        searchString:React.PropTypes.string
+    };
+
     constructor(props){
         super(props);
         this.state = {
@@ -67,14 +77,5 @@ class TreeSublist extends Component {
         );
     }
 }
-
-TreeSublist.propTypes = {
-    listData:React.PropTypes.array, 
-    listTitle:React.PropTypes.string, 
-    filters:React.PropTypes.object, 
-    filterFieldName:React.PropTypes.string,
-    handleChangeSelectedFilter:React.PropTypes.func, 
-    searchString:React.PropTypes.string
-};
 
 export default TreeSublist;

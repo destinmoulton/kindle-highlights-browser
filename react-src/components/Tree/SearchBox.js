@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
 import {FormControl, FormGroup, InputGroup} from 'react-bootstrap';
 
 class SearchBox extends Component {
     static propTypes = {
-        handleSearchChange:React.PropTypes.func,
-        originalSearchString:React.PropTypes.string,
-        handleClearSearch:React.PropTypes.func
+        handleSearchChange: PropTypes.func,
+        originalSearchString: PropTypes.string,
+        handleClearSearch: PropTypes.func
     }
 
     render() {

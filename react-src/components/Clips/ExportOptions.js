@@ -9,6 +9,13 @@ import {
 } from 'react-bootstrap';
 
 class ExportOptions extends Component {
+    
+    static propTypes = {
+        exportOptions:React.PropTypes.object,
+        handleCheckboxChange:React.PropTypes.func, 
+        handleSeparatorChange:React.PropTypes.func
+    };
+
     render() {
         const { exportOptions, handleCheckboxChange, handleRadioChange, handleSeparatorChange } = this.props;
         const { checkboxes, radios, separators } = exportOptions;
@@ -76,9 +83,4 @@ class ExportOptions extends Component {
     }
 }
 
-ExportOptions.propTypes = {
-    exportOptions:React.PropTypes.object,
-    handleCheckboxChange:React.PropTypes.func, 
-    handleSeparatorChange:React.PropTypes.func
-};
 export default ExportOptions;

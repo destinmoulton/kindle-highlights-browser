@@ -26,7 +26,7 @@ class ClipRow extends Component {
         return (
             <div>
                 <div>{icon}&nbsp;<span className='khb-clipslist-cliploc'>{loc}</span> -- <span className='khb-clipslist-clipdate'>{clip.date.format("MMMM DD, YYYY h:mm:ss a")}</span></div>
-                <div>{quote}{clip.text}{quote}</div>
+                <div className='khb-clipslist-cliptext'>{quote}{clip.text}{quote}</div>
                 <hr/>
             </div>
         );

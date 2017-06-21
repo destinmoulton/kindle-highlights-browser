@@ -6,6 +6,12 @@ import ClipRow from "./ClipRow";
 import ClipSorter from "../../lib/ClipSorter";
 
 class ClipsList extends Component {
+    
+    static propTypes = { 
+        clips:React.PropTypes.array, 
+        sortBy:React.PropTypes.string
+    };
+
     constructor(props){
         super(props);
 
@@ -33,10 +39,5 @@ class ClipsList extends Component {
         );
     }
 }
-
-ClipsList.propTypes = { 
-    clips:React.PropTypes.array, 
-    sortBy:React.PropTypes.string
-};
 
 export default ClipsList;

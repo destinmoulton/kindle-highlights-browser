@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
 import { ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
 
@@ -8,10 +9,10 @@ const TEXTAREA_EOL = "\n";
 class ExportPreview extends Component {
 
     static propTypes = {
-        clips:React.PropTypes.object,
-        checkboxes:React.PropTypes.object,
-        radios:React.PropTypes.object,
-        separators:React.PropTypes.object, 
+        clips: PropTypes.object,
+        checkboxes: PropTypes.object,
+        radios: PropTypes.object,
+        separators: PropTypes.object, 
     };
 
     constructor(props){

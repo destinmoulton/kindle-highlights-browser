@@ -68,6 +68,4 @@ class ClipsButtonBar extends React.Component{
     }
 }
 
-
-
 export default ClipsButtonBar;

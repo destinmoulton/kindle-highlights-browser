@@ -4,6 +4,13 @@ import SearchBox from './SearchBox';
 import TreeSublist from './TreeSublist';
 
 class TreeList extends Component {
+    static propTypes = {
+        authors:React.PropTypes.array,
+        titles:React.PropTypes.array,
+        handleChangeSelectedFilter:React.PropTypes.func,
+        filters:React.PropTypes.object
+    };
+
     constructor(props){
         super(props);
 
@@ -68,11 +75,6 @@ class TreeList extends Component {
     }
 }
 
-TreeList.propTypes = {
-    authors:React.PropTypes.array,
-    titles:React.PropTypes.array,
-    handleChangeSelectedFilter:React.PropTypes.func,
-    filters:React.PropTypes.object
-};
+
 
 export default TreeList;

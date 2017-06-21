@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-class ClipRow extends React.Component {
+class ClipRow extends Component {
     static propTypes = {
-        clip:React.PropTypes.object
+        clip: PropTypes.object
     };
 
     render(){

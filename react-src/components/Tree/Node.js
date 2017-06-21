@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
 class Node extends Component {
     static propTypes = {
-        itemName: React.PropTypes.string,
-        handleChangeSelectedFilter: React.PropTypes.func,
-        filterFieldName: React.PropTypes.string,
-        filters: React.PropTypes.object
+        itemName: PropTypes.string,
+        handleChangeSelectedFilter: PropTypes.func,
+        filterFieldName: PropTypes.string,
+        filters: PropTypes.object
     };
 
     render() {

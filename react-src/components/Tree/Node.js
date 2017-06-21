@@ -24,8 +24,4 @@ class Node extends Component {
     }
 }
 
-Node.propTypes = {
-    
-};
-
 export default Node;

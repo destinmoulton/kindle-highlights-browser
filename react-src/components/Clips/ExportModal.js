@@ -24,7 +24,15 @@ import {errorDialog} from '../../lib/errorDialog';
 const FILE_PREFIX = "kindle_highlights_";
 const FILE_DATE_SUFFIX = moment().format("MM_DD_YYYY_HH_mm_ss")
 const FILE_EXT = ".txt";
+
 class ClipsExportModal extends Component {
+
+    static propTypes = { 
+        modalIsActive:React.PropTypes.bool,
+        closeModalHandler:React.PropTypes.func, 
+        clips:React.PropTypes.object
+    };
+
     constructor(props){
         super(props);
 
@@ -174,11 +182,4 @@ class ClipsExportModal extends Component {
     }
 }
 
-ClipsExportModal.propTypes = { 
-    modalIsActive:React.PropTypes.bool,
-    closeModalHandler:React.PropTypes.func, 
-    clips:React.PropTypes.object
-};
-
 export default ClipsExportModal;
-

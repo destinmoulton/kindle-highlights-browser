@@ -6,6 +6,14 @@ import { generateClipsString } from '../../lib/generateClipsString';
 
 const TEXTAREA_EOL = "\n";
 class ExportPreview extends Component {
+
+    static propTypes = {
+        clips:React.PropTypes.object,
+        checkboxes:React.PropTypes.object,
+        radios:React.PropTypes.object,
+        separators:React.PropTypes.object, 
+    };
+
     constructor(props){
         super(props);
     }
@@ -24,12 +32,5 @@ class ExportPreview extends Component {
         );
     }
 }
-
-ExportPreview.propTypes = {
-    clips:React.PropTypes.object,
-    checkboxes:React.PropTypes.object,
-    radios:React.PropTypes.object,
-    separators:React.PropTypes.object, 
-};
 
 export default ExportPreview;

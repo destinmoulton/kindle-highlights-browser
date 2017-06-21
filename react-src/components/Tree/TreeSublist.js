@@ -40,7 +40,7 @@ class TreeSublist extends Component {
 
         let sublist = [];
         
-        listData.map(function(itemName){
+        listData.forEach(function(itemName){
             const safeName = itemName.toLowerCase();
 
             const node = <Node key={itemName}

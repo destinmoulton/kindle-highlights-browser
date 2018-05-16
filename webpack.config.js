@@ -3,33 +3,29 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: './react-src/app.js',
-    output: { 
-        path: path.join(__dirname, 'www/js'), 
+    devtool: 'source-map',
+    output: {
+        path: path.join(__dirname, 'www/js'),
         filename: 'react-app.js'
     },
-    devtool: 'eval-source-map',
+
     module: {
-        loaders: [
-            {
-                test: /.js?$/,
+        rules: [{
+            test: /.js?$/,
+
+            exclude: /node_modules/,
+            use: {
                 loader: 'babel-loader',
-                exclude: /node_modules/,
-                query: {
-                    presets: ['es2015', 'react'],
+                options: {
+                    presets: ['env', 'react'],
                     plugins: ["transform-class-properties"]
                 }
             }
-        ]
+        }]
     },
     plugins: [
-        new webpack.DefinePlugin({ // <-- key to reducing React's size
-            'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin(),
-        new webpack.optimize.AggressiveMergingPlugin()
+
     ],
-    target: 'electron'
+    target: 'electron-main'
 
 };

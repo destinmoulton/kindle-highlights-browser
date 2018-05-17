@@ -1,12 +1,11 @@
-var path = require('path');
-var webpack = require('webpack');
+var path = require("path");
 
 module.exports = {
-    entry: './react-src/app.js',
-    devtool: 'source-map',
+    entry: "./react-src/App.js",
+    devtool: "source-map",
     output: {
-        path: path.join(__dirname, 'www/js'),
-        filename: 'react-app.js'
+        path: path.join(__dirname, "www/js"),
+        filename: "react-app.js"
     },
 
     module: {
@@ -15,9 +14,9 @@ module.exports = {
 
             exclude: /node_modules/,
             use: {
-                loader: 'babel-loader',
+                loader: "babel-loader",
                 options: {
-                    presets: ['env', 'react'],
+                    presets: ["env", "react"],
                     plugins: ["transform-class-properties"]
                 }
             }
@@ -26,6 +25,6 @@ module.exports = {
     plugins: [
 
     ],
-    target: 'electron-main'
+    target: "electron-main"
 
 };

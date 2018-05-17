@@ -1,36 +1,33 @@
-
 /**
  * Generate the formatted export string.
  *  The export options are set in the modal export popover.
  */
-export function generateClipsString(clips, exportOptions, EOL){
+export function generateClipsString(clips, exportOptions, EOL) {
     const { checkboxes, radios, separators } = exportOptions;
     const includeLocation = checkboxes.location;
     const includeDate = checkboxes.date;
-    
-    let quotationMark = (checkboxes.quote) ? '"' : '';
+
+    let quotationMark = checkboxes.quote ? '"' : "";
 
     let clipsString = "";
     let titles = Object.keys(clips);
     let bookBegin = true;
-    titles.forEach((title)=>{
-
-        if(!bookBegin){
+    titles.forEach(title => {
+        if (!bookBegin) {
             // Extra newline before the next book
             clipsString += `${EOL}`;
         }
         clipsString += `${separators.title}${EOL}`;
         clipsString += `${title}${EOL}`;
-        clipsString += `By ${clips[title][0]['authorFullName']}${EOL}`;
+        clipsString += `By ${clips[title][0]["authorFullName"]}${EOL}`;
         clipsString += `${separators.title}${EOL}`;
-        
-        bookBegin = true;
-        clips[title].forEach((clip)=>{
 
+        bookBegin = true;
+        clips[title].forEach(clip => {
             if (!bookBegin && clipsString !== "") {
-                if(radios.clip_separator === "text"){
+                if (radios.clip_separator === "text") {
                     clipsString += `${EOL}${separators.clip}${EOL}`;
-                } else if(radios.clip_separator === "line"){
+                } else if (radios.clip_separator === "line") {
                     clipsString += `${EOL}${EOL}`;
                 } else {
                     clipsString += `${EOL}`;
@@ -38,9 +35,9 @@ export function generateClipsString(clips, exportOptions, EOL){
             }
 
             if (includeLocation) {
-                if (clip.location.type === 'highlight') {
+                if (clip.location.type === "highlight") {
                     clipsString += "Highlight at ";
-                } else if (clip.location.type === 'note') {
+                } else if (clip.location.type === "note") {
                     clipsString += "Note at ";
                 }
 
@@ -64,8 +61,6 @@ export function generateClipsString(clips, exportOptions, EOL){
         });
 
         clipsString += `${EOL}`;
-
     });
     return clipsString;
 }
-

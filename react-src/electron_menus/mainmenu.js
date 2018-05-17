@@ -2,63 +2,63 @@ const { Menu } = require("electron");
 
 const OpenFile = {
     label: "Open My Clippings",
-    accelerator: 'CommandOrControl+O',
+    accelerator: "CommandOrControl+O",
     click: (menuItem, currentWindow) => {
-        currentWindow.webContents.send('open-my-clippings');
+        currentWindow.webContents.send("open-my-clippings");
     }
 };
 
-function BuildMainMenu (app, win){
-    var menuTemplate = [{
-        label: "File",
-        submenu: [
-            OpenFile,
-            {
-                label: "Exit",
-                role: "close",
-                accelerator: "CmdOrCtrl+q"
-            }
-        ]
-    },
-    {
-        label: "Edit",
-        submenu: [
-            {
-                label: "Copy",
-                role: "copy",
-            }
-        ]
-    },
+function BuildMainMenu(app, win) {
+    var menuTemplate = [
+        {
+            label: "File",
+            submenu: [
+                OpenFile,
+                {
+                    label: "Exit",
+                    role: "close",
+                    accelerator: "CmdOrCtrl+q"
+                }
+            ]
+        },
+        {
+            label: "Edit",
+            submenu: [
+                {
+                    label: "Copy",
+                    role: "copy"
+                }
+            ]
+        },
 
-    {
-        label: "Help",
-        submenu: [
-            {
-                label: "Dev",
-                submenu: [
-                    {
-                        label: "Reload",
-                        role: 'reload'
+        {
+            label: "Help",
+            submenu: [
+                {
+                    label: "Dev",
+                    submenu: [
+                        {
+                            label: "Reload",
+                            role: "reload"
+                        },
+                        {
+                            role: "toggledevtools",
+                            label: "Developer Tools",
+                            accelerator: "F12"
+                        }
+                    ]
+                }
+            ]
+        }
+    ];
 
-                    },
-                    {
-                        role: 'toggledevtools',
-                        label: "Developer Tools",
-                        accelerator: "F12"
-                    }
-                ]
-            },
-            
-        ]
-    }];
-
-    if (process.platform === 'darwin') {
+    if (process.platform === "darwin") {
         //Remove the file menu
         menuTemplate.shift();
 
         //Add a Mac "File" menu
         menuTemplate.unshift({
-            label:"Kindle Highlights Browser",
+            label: "Kindle Highlights Browser",
             submenu: [
                 OpenFile,
                 {
@@ -68,7 +68,7 @@ function BuildMainMenu (app, win){
             ]
         });
     }
-  
+
     Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 }
 

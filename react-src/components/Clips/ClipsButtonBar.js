@@ -1,21 +1,29 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import {ButtonToolbar,Button, Col, ControlLabel, Form, FormControl, Panel} from "react-bootstrap";
+import {
+    ButtonToolbar,
+    Button,
+    Col,
+    ControlLabel,
+    Form,
+    FormControl,
+    Panel
+} from "react-bootstrap";
 
 import ExportModal from "./ExportModal";
 
-class ClipsButtonBar extends Component{
-    static propTypes = { 
-        sortChangeHandler: PropTypes.func, 
+class ClipsButtonBar extends Component {
+    static propTypes = {
+        sortChangeHandler: PropTypes.func,
         clips: PropTypes.object
     };
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
-            modalIsActive:false
+            modalIsActive: false
         };
     }
 
@@ -23,9 +31,9 @@ class ClipsButtonBar extends Component{
      * Show the modal window by changing the
      * state.
      */
-    openModal(){
+    openModal() {
         this.setState({
-            modalIsActive:true
+            modalIsActive: true
         });
     }
 
@@ -33,35 +41,47 @@ class ClipsButtonBar extends Component{
      * Close the modal window by changing the
      * state.
      */
-    closeModal(){
+    closeModal() {
         this.setState({
-            modalIsActive:false
+            modalIsActive: false
         });
     }
 
-    render(){
-        const {sortChangeHandler, clips} = this.props;
-        return(
+    render() {
+        const { sortChangeHandler, clips } = this.props;
+        return (
             <div>
-                <ExportModal closeModalHandler={this.closeModal.bind(this)} 
-                                  modalIsActive={this.state.modalIsActive}
-                                  clips={clips}/>
+                <ExportModal
+                    closeModalHandler={this.closeModal.bind(this)}
+                    modalIsActive={this.state.modalIsActive}
+                    clips={clips}
+                />
                 <Panel>
                     <Col sm={6}>
-                        <Button onClick={this.openModal.bind(this)}>Save or Copy Clips</Button>
+                        <Button onClick={this.openModal.bind(this)}>
+                            Save or Copy Clips
+                        </Button>
                     </Col>
                     <Form horizontal>
-                    <Col componentClass={ControlLabel} sm={2}>
-                        Sort By:
-                    </Col>
-                    <Col sm={4}>
-                        <FormControl componentClass="select"
-                            onChange={sortChangeHandler}>
-                            <option value="location_start|asc">Location</option>
-                            <option value="unix_timestamp|asc">Date - Oldest First</option>
-                            <option value="unix_timestamp|desc">Date - Newest First</option>
-                        </FormControl>
-                    </Col>
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Sort By:
+                        </Col>
+                        <Col sm={4}>
+                            <FormControl
+                                componentClass="select"
+                                onChange={sortChangeHandler}
+                            >
+                                <option value="location_start|asc">
+                                    Location
+                                </option>
+                                <option value="unix_timestamp|asc">
+                                    Date - Oldest First
+                                </option>
+                                <option value="unix_timestamp|desc">
+                                    Date - Newest First
+                                </option>
+                            </FormControl>
+                        </Col>
                     </Form>
                 </Panel>
             </div>

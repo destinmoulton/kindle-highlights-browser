@@ -13,9 +13,7 @@ class Main {
 
         const routing = (
             <BrowserRouter>
-                <Route path="/" component={Layout}>
-                    {" "}
-                </Route>
+                <Route path="/" component={Layout} />
             </BrowserRouter>
         );
 

@@ -1,49 +1,58 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { 
-    Checkbox, 
-    ControlLabel, 
-    FormControl, 
+import {
+    Checkbox,
+    ControlLabel,
+    FormControl,
     FormGroup,
     Radio
-} from 'react-bootstrap';
+} from "react-bootstrap";
 
 class ExportOptions extends Component {
-
     static propTypes = {
         exportOptions: PropTypes.object,
-        handleCheckboxChange: PropTypes.func, 
+        handleCheckboxChange: PropTypes.func,
         handleSeparatorChange: PropTypes.func
     };
 
     render() {
-        const { exportOptions, handleCheckboxChange, handleRadioChange, handleSeparatorChange } = this.props;
+        const {
+            exportOptions,
+            handleCheckboxChange,
+            handleRadioChange,
+            handleSeparatorChange
+        } = this.props;
         const { checkboxes, radios, separators } = exportOptions;
         return (
-            
             <div>
                 <FormGroup>
-                    <Checkbox inline
+                    <Checkbox
+                        inline
                         checked={checkboxes.location}
                         onChange={handleCheckboxChange}
-                        value="location">
+                        value="location"
+                    >
                         Include Location
                     </Checkbox>
                 </FormGroup>
                 <FormGroup>
-                    <Checkbox inline
+                    <Checkbox
+                        inline
                         checked={checkboxes.date}
                         onChange={handleCheckboxChange}
-                        value="date">
+                        value="date"
+                    >
                         Include Date
                     </Checkbox>
                 </FormGroup>
                 <FormGroup>
-                    <Checkbox inline
+                    <Checkbox
+                        inline
                         checked={checkboxes.quote}
                         onChange={handleCheckboxChange}
-                        value="quote">
+                        value="quote"
+                    >
                         Include Quotation Marks
                     </Checkbox>
                 </FormGroup>
@@ -58,18 +67,29 @@ class ExportOptions extends Component {
                 </FormGroup>
                 <FormGroup>
                     <ControlLabel>Clip Separator</ControlLabel>
-                    <Radio name="clip_separator" 
-                           checked={(radios.clip_separator === "line")}
-                           onChange={handleRadioChange}
-                           value="line">Extra Line</Radio>
-                    <Radio name="clip_separator" 
-                           checked={(radios.clip_separator === "none")}
-                           onChange={handleRadioChange}
-                           value="none">None</Radio>
-                    <Radio name="clip_separator" 
-                           checked={(radios.clip_separator === "text")}
-                           onChange={handleRadioChange}
-                           value="text">Text
+                    <Radio
+                        name="clip_separator"
+                        checked={radios.clip_separator === "line"}
+                        onChange={handleRadioChange}
+                        value="line"
+                    >
+                        Extra Line
+                    </Radio>
+                    <Radio
+                        name="clip_separator"
+                        checked={radios.clip_separator === "none"}
+                        onChange={handleRadioChange}
+                        value="none"
+                    >
+                        None
+                    </Radio>
+                    <Radio
+                        name="clip_separator"
+                        checked={radios.clip_separator === "text"}
+                        onChange={handleRadioChange}
+                        value="text"
+                    >
+                        Text
                         <FormControl
                             type="text"
                             name="clip"

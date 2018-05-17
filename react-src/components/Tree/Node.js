@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 class Node extends Component {
@@ -10,18 +10,29 @@ class Node extends Component {
     };
 
     render() {
-        const { itemName, handleChangeSelectedFilter, filterFieldName, filters} = this.props;
+        const {
+            itemName,
+            handleChangeSelectedFilter,
+            filterFieldName,
+            filters
+        } = this.props;
 
         let className = "khb-treelist-node";
-        if(filters.has(filterFieldName, itemName)){
+        if (filters.has(filterFieldName, itemName)) {
             className += " khb-treelist-activenode";
         }
-        return (<li key={itemName}>
-                    <div data-filter-field={filterFieldName}
-                         data-filter-content={itemName}
-                         className={className}
-                         onClick={handleChangeSelectedFilter}>{itemName}</div>
-                </li>);
+        return (
+            <li key={itemName}>
+                <div
+                    data-filter-field={filterFieldName}
+                    data-filter-content={itemName}
+                    className={className}
+                    onClick={handleChangeSelectedFilter}
+                >
+                    {itemName}
+                </div>
+            </li>
+        );
     }
 }
 

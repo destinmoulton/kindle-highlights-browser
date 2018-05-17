@@ -1,40 +1,41 @@
-import fs from 'fs';
-import {EOL} from 'os';
+import fs from "fs";
+import { EOL } from "os";
 
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { Button, 
-         ButtonGroup,
-         Checkbox, 
-         Col, 
-         ControlLabel, 
-         FormControl, 
-         FormGroup, 
-         Modal, 
-         Row } from 'react-bootstrap';
+import {
+    Button,
+    ButtonGroup,
+    Checkbox,
+    Col,
+    ControlLabel,
+    FormControl,
+    FormGroup,
+    Modal,
+    Row
+} from "react-bootstrap";
 
-import {clipboard,remote} from 'electron';
-import moment from 'moment';
+import { clipboard, remote } from "electron";
+import moment from "moment";
 
-import ExportOptions from './ExportOptions';
-import ExportPreview from './ExportPreview';
+import ExportOptions from "./ExportOptions";
+import ExportPreview from "./ExportPreview";
 
-import { generateClipsString } from '../../lib/generateClipsString';
-import {errorDialog} from '../../lib/errorDialog';
+import { generateClipsString } from "../../lib/generateClipsString";
+import { errorDialog } from "../../lib/errorDialog";
 const FILE_PREFIX = "kindle_highlights_";
-const FILE_DATE_SUFFIX = moment().format("MM_DD_YYYY_HH_mm_ss")
+const FILE_DATE_SUFFIX = moment().format("MM_DD_YYYY_HH_mm_ss");
 const FILE_EXT = ".txt";
 
 class ClipsExportModal extends Component {
-
-    static propTypes = { 
+    static propTypes = {
         modalIsActive: PropTypes.bool,
-        closeModalHandler: PropTypes.func, 
+        closeModalHandler: PropTypes.func,
         clips: PropTypes.object
     };
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
         const exportOptions = {
@@ -50,7 +51,7 @@ class ClipsExportModal extends Component {
             radios: {
                 clip_separator: "line"
             }
-        }
+        };
 
         this.state = {
             exportOptions
@@ -60,13 +61,13 @@ class ClipsExportModal extends Component {
     /**
      * Handle the checkbox change event
      * when a user checks or unchecks a checkbox  (ExportOptions component)
-     * 
+     *
      * @param Event e
      */
-    handleCheckboxChange(e){
+    handleCheckboxChange(e) {
         let exportOptions = Object.assign({}, this.state.exportOptions);
         let chks = Object.assign({}, exportOptions.checkboxes);
-        if(e.target.checked){
+        if (e.target.checked) {
             chks[e.target.value] = true;
         } else {
             chks[e.target.value] = false;
@@ -77,7 +78,7 @@ class ClipsExportModal extends Component {
         });
     }
 
-    handleRadioChange(e){
+    handleRadioChange(e) {
         const targ = e.target;
         let exportOptions = Object.assign({}, this.state.exportOptions);
         let radios = Object.assign({}, exportOptions.radios);
@@ -92,13 +93,13 @@ class ClipsExportModal extends Component {
      * Handle a separator change event.
      * ie When the user adds or removes characters
      * from a separator input field (ExportOptions component)
-     * 
+     *
      * @param Event e
      */
-    handleSeparatorChange(e){
+    handleSeparatorChange(e) {
         let exportOptions = Object.assign({}, this.state.exportOptions);
         let separators = Object.assign({}, exportOptions.separators);
-        
+
         separators[e.target.name] = e.target.value;
         exportOptions.separators = separators;
         this.setState({
@@ -110,25 +111,38 @@ class ClipsExportModal extends Component {
      * Show the file save dialog box and save the clip
      * string to the selected file.
      */
-    handleSaveClipsToFile(){
-        const possibleTitle = FILE_PREFIX+FILE_DATE_SUFFIX;
-        remote.dialog.showSaveDialog({defaultPath:possibleTitle+FILE_EXT}, (filename)=>{
-            if(typeof filename === "string"){
-                const strToWrite = generateClipsString(this.props.clips, this.state.exportOptions, EOL);
-                fs.writeFile(filename, strToWrite, function(err){
-                    if(err){
-                        return errorDialog("There was a problem saving the file.\n"+err);
-                    }
-                });
+    handleSaveClipsToFile() {
+        const possibleTitle = FILE_PREFIX + FILE_DATE_SUFFIX;
+        remote.dialog.showSaveDialog(
+            { defaultPath: possibleTitle + FILE_EXT },
+            filename => {
+                if (typeof filename === "string") {
+                    const strToWrite = generateClipsString(
+                        this.props.clips,
+                        this.state.exportOptions,
+                        EOL
+                    );
+                    fs.writeFile(filename, strToWrite, function(err) {
+                        if (err) {
+                            return errorDialog(
+                                "There was a problem saving the file.\n" + err
+                            );
+                        }
+                    });
+                }
             }
-        });
+        );
     }
 
     /**
      * Copy generated clip string to the clipboard.
      */
-    handleCopyClips(){
-        const strToCopy = generateClipsString(this.props.clips, this.state.exportOptions, EOL);
+    handleCopyClips() {
+        const strToCopy = generateClipsString(
+            this.props.clips,
+            this.state.exportOptions,
+            EOL
+        );
 
         clipboard.writeText(strToCopy);
     }
@@ -136,43 +150,68 @@ class ClipsExportModal extends Component {
     /**
      * Select all the clips in the textarea.
      */
-    handleSelectAll(){
-        document.getElementById('khb-exportpreview-textarea').select();
+    handleSelectAll() {
+        document.getElementById("khb-exportpreview-textarea").select();
     }
-    
+
     render() {
         const { modalIsActive, closeModalHandler, clips } = this.props;
         const { exportOptions } = this.state;
         return (
-            <Modal show={modalIsActive} 
-                   onHide={closeModalHandler}
-                   bsSize="large" >
+            <Modal
+                show={modalIsActive}
+                onHide={closeModalHandler}
+                bsSize="large"
+            >
                 <Modal.Header closeButton>
                     <Modal.Title>Export Clips</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Row>
                         <Col xs={4}>
-                            <ExportOptions exportOptions={exportOptions}
-                                           handleCheckboxChange={this.handleCheckboxChange.bind(this)}
-                                           handleRadioChange={this.handleRadioChange.bind(this)}
-                                           handleSeparatorChange={this.handleSeparatorChange.bind(this)}/>
+                            <ExportOptions
+                                exportOptions={exportOptions}
+                                handleCheckboxChange={this.handleCheckboxChange.bind(
+                                    this
+                                )}
+                                handleRadioChange={this.handleRadioChange.bind(
+                                    this
+                                )}
+                                handleSeparatorChange={this.handleSeparatorChange.bind(
+                                    this
+                                )}
+                            />
                         </Col>
                         <Col xs={8}>
-                            <ExportPreview exportOptions={exportOptions}
-                                           clips={clips} />
+                            <ExportPreview
+                                exportOptions={exportOptions}
+                                clips={clips}
+                            />
                             <ButtonGroup>
-                                <Button onClick={this.handleSaveClipsToFile.bind(this)}>
-                                    <i className="fa fa-floppy-o"></i> Save All to File
+                                <Button
+                                    onClick={this.handleSaveClipsToFile.bind(
+                                        this
+                                    )}
+                                >
+                                    <i className="fa fa-floppy-o" /> Save All to
+                                    File
                                 </Button>
-                                <Button onClick={this.handleCopyClips.bind(this)}>
-                                    <i className="fa fa-clipboard"></i> Copy All
+                                <Button
+                                    onClick={this.handleCopyClips.bind(this)}
+                                >
+                                    <i className="fa fa-clipboard" /> Copy All
                                 </Button>
-                                <Button onClick={this.handleSelectAll.bind(this)}>
-                                    <i className="fa fa-hand-rock-o"></i> Select All
+                                <Button
+                                    onClick={this.handleSelectAll.bind(this)}
+                                >
+                                    <i className="fa fa-hand-rock-o" /> Select
+                                    All
                                 </Button>
                             </ButtonGroup>
-                            <Button onClick={closeModalHandler} className="pull-right">
+                            <Button
+                                onClick={closeModalHandler}
+                                className="pull-right"
+                            >
                                 Close
                             </Button>
                         </Col>

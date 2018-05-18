@@ -1,6 +1,6 @@
 import React from "react";
 
-import WhereClipboard from "./Help/WhereClipboard";
+import WhereAreMyClippings from "./Help/WhereAreMyClippings";
 
 export default class Help extends React.Component {
     render() {
@@ -8,7 +8,7 @@ export default class Help extends React.Component {
 
         return (
             <div>
-                <WhereClipboard />
+                <WhereAreMyClippings />
             </div>
         );
     }

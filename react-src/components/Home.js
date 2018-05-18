@@ -8,7 +8,7 @@ export default class Home extends React.Component {
     render() {
         return (
             <Col lg={12} md={12} sm={12}>
-                <Panel>
+                <Panel className="khb-home-panel text-center">
                     <Button
                         onClick={this.props.openClippingsDialogHandler.bind(
                             this

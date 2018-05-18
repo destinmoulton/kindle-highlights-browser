@@ -33,11 +33,13 @@ h3 {
 }
 
 .khb-home-panel {
-    border: 1px solid gray;
+    border: 1px solid lightgray;
     border-radius: 4px;
     width: 500px;
-    padding: 5px;
+    padding: 10px;
     margin: 5px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #khb-treelist-container {
@@ -66,7 +68,7 @@ ul.khb-treelist-subtree {
     padding-left: 10px;
 }
 
-ul.khb-treelist-subtree > li {
+ul.khb-treelist-subtree>li {
     margin-bottom: 4px;
     margin-left: -10px;
     cursor: pointer;
@@ -77,7 +79,7 @@ ul.khb-treelist-subtree > li {
     font-weight: bold;
 }
 
-ul.khb-treelist-subtree > li:last-child {
+ul.khb-treelist-subtree>li:last-child {
     background: #fff url(graphics/tree-lastitem.png) no-repeat;
 }
 

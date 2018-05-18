@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Panel } from "react-bootstrap";
 
-class WhereClipboard extends Component {
+class WhereAreMyClippings extends Component {
     render() {
         return (
             <Panel className="khb-home-panel">
@@ -23,4 +23,4 @@ class WhereClipboard extends Component {
     }
 }
 
-export default WhereClipboard;
+export default WhereAreMyClippings;

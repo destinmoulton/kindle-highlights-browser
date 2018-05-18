@@ -5,26 +5,25 @@ module.exports = {
     devtool: "source-map",
     output: {
         path: path.join(__dirname, "www/js"),
-        filename: "react-app.js"
+        filename: "khb-app.js"
     },
 
     module: {
-        rules: [{
-            test: /.js?$/,
+        rules: [
+            {
+                test: /.js?$/,
 
-            exclude: /node_modules/,
-            use: {
-                loader: "babel-loader",
-                options: {
-                    presets: ["env", "react"],
-                    plugins: ["transform-class-properties"]
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ["env", "react"],
+                        plugins: ["transform-class-properties"]
+                    }
                 }
             }
-        }]
+        ]
     },
-    plugins: [
-
-    ],
+    plugins: [],
     target: "electron-main"
-
 };

@@ -8,7 +8,8 @@ import {
     ControlLabel,
     Form,
     FormControl,
-    Panel
+    Panel,
+    Row
 } from "react-bootstrap";
 
 import ExportModal from "./ExportModal";
@@ -56,7 +57,7 @@ class ClipsButtonBar extends Component {
                     modalIsActive={this.state.modalIsActive}
                     clips={clips}
                 />
-                <Panel>
+                <Row>
                     <Col sm={6}>
                         <Button onClick={this.openModal.bind(this)}>
                             Save or Copy Clips
@@ -83,7 +84,7 @@ class ClipsButtonBar extends Component {
                             </FormControl>
                         </Col>
                     </Form>
-                </Panel>
+                </Row>
             </div>
         );
     }

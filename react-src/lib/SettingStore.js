@@ -1,9 +1,13 @@
-class SettingsStore {
+class SettingStore {
+    has(name) {
+        return this.get(name) !== null;
+    }
+
     set(name, value) {
         return localStorage.setItem(name, value);
     }
 
-    get(name, value) {
+    get(name) {
         return localStorage.getItem(name);
     }
 
@@ -12,4 +16,4 @@ class SettingsStore {
     }
 }
 
-export default SettingsStore;
+export default SettingStore;

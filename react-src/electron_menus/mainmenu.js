@@ -8,12 +8,21 @@ const OpenFile = {
     }
 };
 
+const CloseFile = {
+    label: "Close File",
+    accelerator: "CommandOrControl+W",
+    click: (menuItem, currentWindow) => {
+        currentWindow.webContents.send("close-my-clippings");
+    }
+};
+
 function BuildMainMenu(app, win) {
     var menuTemplate = [
         {
             label: "File",
             submenu: [
                 OpenFile,
+                CloseFile,
                 {
                     label: "Exit",
                     role: "close",

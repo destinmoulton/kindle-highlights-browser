@@ -2,7 +2,7 @@ import React from "react";
 
 import { remote, ipcRenderer } from "electron";
 
-import Storage from "../lib/Storage";
+import SettingStore from "../lib/SettingStore";
 
 import Home from "./Home";
 
@@ -10,7 +10,7 @@ import HighlightBrowser from "./HighlightBrowser.js";
 
 import MyClippingsParser from "../lib/MyClippingsParser";
 
-const DB_LAST_SETTING_QUERY = { setting: "last_open_myclippings_file" };
+const SETTING_LAST_OPEN_FILE = "last_open_myclippings_file";
 
 const INITIAL_STATE = {
     hasClippings: false,
@@ -26,17 +26,20 @@ export default class Layout extends React.Component {
         this.state = Object.assign({}, INITIAL_STATE);
 
         // Local instance of the storage/db mechanism
-        this.storage = new Storage();
-
-        this.loadLastFileUsed();
+        this.settingStore = new SettingStore();
 
         ipcRenderer.on("open-my-clippings", event => {
             this.openClippingsDialog();
         });
 
         ipcRenderer.on("close-my-clippings", event => {
+            this.settingStore.delete(SETTING_LAST_OPEN_FILE);
             this.clearClippings();
         });
+    }
+
+    componentDidMount() {
+        this.loadLastFileUsed();
     }
 
     clearClippings() {
@@ -47,9 +50,9 @@ export default class Layout extends React.Component {
      * Load the last file used from the DB.
      */
     loadLastFileUsed() {
-        this.storage.find(DB_LAST_SETTING_QUERY, set => {
-            this.parseFile(set[0].value);
-        });
+        if (this.settingStore.has(SETTING_LAST_OPEN_FILE)) {
+            this.parseFile(this.settingStore.get(SETTING_LAST_OPEN_FILE));
+        }
     }
 
     /**
@@ -58,16 +61,7 @@ export default class Layout extends React.Component {
      * @param String fileName
      */
     setLastFileUsed(fileName) {
-        this.storage.find(DB_LAST_SETTING_QUERY, set => {
-            if (set.length === 0) {
-                this.storage.insert({
-                    setting: "last_open_myclippings_file",
-                    value: fileName
-                });
-            } else {
-                this.storage.update(DB_LAST_SETTING_QUERY, { value: fileName });
-            }
-        });
+        this.settingStore.set(SETTING_LAST_OPEN_FILE, fileName);
     }
 
     /**

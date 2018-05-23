@@ -28,6 +28,17 @@ export default class Layout extends React.Component {
         ipcRenderer.on("open-my-clippings", event => {
             this.openClippingsDialog();
         });
+
+        ipcRenderer.on("close-my-clippings", event => {
+            this.clearClippings();
+        });
+    }
+
+    clearClippings() {
+        this.setState({
+            hasClippings: false,
+            clippings: {}
+        });
     }
 
     /**

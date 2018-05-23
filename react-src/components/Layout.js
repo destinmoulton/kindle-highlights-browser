@@ -11,14 +11,19 @@ import HighlightBrowser from "./HighlightBrowser.js";
 import MyClippingsParser from "../lib/MyClippingsParser";
 
 const DB_LAST_SETTING_QUERY = { setting: "last_open_myclippings_file" };
+
+const INITIAL_STATE = {
+    hasClippings: false,
+    clippings: {},
+    authors: [],
+    titles: []
+};
+
 export default class Layout extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            hasClippings: false,
-            clippings: {}
-        };
+        this.state = Object.assign({}, INITIAL_STATE);
 
         // Local instance of the storage/db mechanism
         this.storage = new Storage();
@@ -35,10 +40,7 @@ export default class Layout extends React.Component {
     }
 
     clearClippings() {
-        this.setState({
-            hasClippings: false,
-            clippings: {}
-        });
+        this.setState(Object.assign({}, INITIAL_STATE));
     }
 
     /**

@@ -1,13 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import {
-    Checkbox,
-    ControlLabel,
-    FormControl,
-    FormGroup,
-    Radio
-} from "react-bootstrap";
+import Form from "react-bootstrap/Form";
 
 function ExportOptions(props) {
     const {
@@ -18,81 +12,81 @@ function ExportOptions(props) {
     } = props;
     const { checkboxes, radios, separators } = exportOptions;
     return (
-        <div>
-            <FormGroup>
-                <Checkbox
+        <Form>
+            <Form.Group>
+                <Form.Check
                     inline
                     checked={checkboxes.location}
                     onChange={handleCheckboxChange}
                     value="location"
                 >
                     Include Location
-                </Checkbox>
-            </FormGroup>
-            <FormGroup>
-                <Checkbox
+                </Form.Check>
+            </Form.Group>
+            <Form.Group>
+                <Form.Check
                     inline
                     checked={checkboxes.date}
                     onChange={handleCheckboxChange}
                     value="date"
                 >
                     Include Date
-                </Checkbox>
-            </FormGroup>
-            <FormGroup>
-                <Checkbox
+                </Form.Check>
+            </Form.Group>
+            <Form.Group>
+                <Form.Check
                     inline
                     checked={checkboxes.quote}
                     onChange={handleCheckboxChange}
                     value="quote"
                 >
                     Include Quotation Marks
-                </Checkbox>
-            </FormGroup>
-            <FormGroup>
-                <ControlLabel>Book Title Separator</ControlLabel>
-                <FormControl
+                </Form.Check>
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Book Title Separator</Form.Label>
+                <Form.Control
                     type="text"
                     name="title"
                     value={separators.title}
                     onChange={handleSeparatorChange}
                 />
-            </FormGroup>
-            <FormGroup>
-                <ControlLabel>Clip Separator</ControlLabel>
-                <Radio
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Clip Separator</Form.Label>
+                <Form.Radio
                     name="clip_separator"
                     checked={radios.clip_separator === "line"}
                     onChange={handleRadioChange}
                     value="line"
                 >
                     Extra Line
-                </Radio>
-                <Radio
+                </Form.Radio>
+                <Form.Radio
                     name="clip_separator"
                     checked={radios.clip_separator === "none"}
                     onChange={handleRadioChange}
                     value="none"
                 >
                     None
-                </Radio>
-                <Radio
+                </Form.Radio>
+                <Form.Radio
                     name="clip_separator"
                     checked={radios.clip_separator === "text"}
                     onChange={handleRadioChange}
                     value="text"
                 >
                     Text
-                    <FormControl
+                    <Form.Control
                         type="text"
                         name="clip"
                         disabled={!(radios.clip_separator === "text")}
                         value={separators.clip}
                         onChange={handleSeparatorChange}
                     />
-                </Radio>
-            </FormGroup>
-        </div>
+                </Form.Radio>
+            </Form.Group>
+        </Form>
     );
 }
 

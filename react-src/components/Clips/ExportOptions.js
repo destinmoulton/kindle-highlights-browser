@@ -54,27 +54,30 @@ function ExportOptions(props) {
             </Form.Group>
             <Form.Group>
                 <Form.Label>Clip Separator</Form.Label>
-                <Form.Radio
+                <Form.Check
                     name="clip_separator"
                     checked={radios.clip_separator === "line"}
                     onChange={handleRadioChange}
                     value="line"
+                    type="radio"
                 >
                     Extra Line
-                </Form.Radio>
-                <Form.Radio
+                </Form.Check>
+                <Form.Check
                     name="clip_separator"
                     checked={radios.clip_separator === "none"}
                     onChange={handleRadioChange}
                     value="none"
+                    type="radio"
                 >
                     None
-                </Form.Radio>
-                <Form.Radio
+                </Form.Check>
+                <Form.Check
                     name="clip_separator"
                     checked={radios.clip_separator === "text"}
                     onChange={handleRadioChange}
                     value="text"
+                    type="radio"
                 >
                     Text
                     <Form.Control
@@ -84,7 +87,7 @@ function ExportOptions(props) {
                         value={separators.clip}
                         onChange={handleSeparatorChange}
                     />
-                </Form.Radio>
+                </Form.Check>
             </Form.Group>
         </Form>
     );

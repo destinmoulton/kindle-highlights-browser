@@ -4,17 +4,11 @@ import { EOL } from "os";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import {
-    Button,
-    ButtonGroup,
-    Checkbox,
-    Col,
-    ControlLabel,
-    FormControl,
-    FormGroup,
-    Modal,
-    Row
-} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Col from "react-bootstrap/Col";
+import Modal from "react-bootstrap/Modal";
+import Row from "react-bootstrap/Row";
 
 import { clipboard, remote } from "electron";
 import moment from "moment";
@@ -152,11 +146,7 @@ class ClipsExportModal extends Component {
         const { modalIsActive, closeModalHandler, clips } = this.props;
         const { exportOptions } = this.state;
         return (
-            <Modal
-                show={modalIsActive}
-                onHide={closeModalHandler}
-                bsSize="large"
-            >
+            <Modal show={modalIsActive} onHide={closeModalHandler} size="lg">
                 <Modal.Header closeButton>
                     <Modal.Title>Export Clips</Modal.Title>
                 </Modal.Header>

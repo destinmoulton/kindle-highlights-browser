@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import {
-    Button,
-    Col,
-    ControlLabel,
-    Form,
-    FormControl,
-    Row
-} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
 
 import ExportModal from "./ExportModal";
 
@@ -56,14 +52,12 @@ class ClipsButtonBar extends Component {
                             Save or Copy Clips
                         </Button>
                     </Col>
-                    <Form horizontal>
-                        <Col componentClass={ControlLabel} sm={2}>
-                            Sort By:
-                        </Col>
+                    <Form>
+                        <Col sm={2}>Sort By:</Col>
                         <Col sm={4}>
-                            <FormControl
-                                componentClass="select"
+                            <Form.Control
                                 onChange={sortChangeHandler}
+                                as="select"
                             >
                                 <option value="location_start|asc">
                                     Location
@@ -74,7 +68,7 @@ class ClipsButtonBar extends Component {
                                 <option value="unix_timestamp|desc">
                                     Date - Newest First
                                 </option>
-                            </FormControl>
+                            </Form.Control>
                         </Col>
                     </Form>
                 </Row>

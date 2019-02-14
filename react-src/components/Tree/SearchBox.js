@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
-import { FormControl, FormGroup, InputGroup } from "react-bootstrap";
-
-function SearchBox(props) {
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+export default props => {
     const {
         handleSearchChange,
         originalSearchString,
@@ -20,27 +19,17 @@ function SearchBox(props) {
     }
     return (
         <div id="khb-treelist-search-container">
-            <FormGroup>
-                <InputGroup>
-                    <FormControl
-                        type="text"
-                        placeholder="Search Authors/Titles..."
-                        value={originalSearchString}
-                        onChange={handleSearchChange}
-                    />
-                    <InputGroup.Addon className={addonClassName}>
-                        <i className={iconClassName} onClick={iconOnChange} />
-                    </InputGroup.Addon>
-                </InputGroup>
-            </FormGroup>
+            <InputGroup>
+                <Form.Control
+                    type="text"
+                    placeholder="Search Authors/Titles..."
+                    value={originalSearchString}
+                    onChange={handleSearchChange}
+                />
+                <InputGroup.Append className={addonClassName}>
+                    <i className={iconClassName} onClick={iconOnChange} />
+                </InputGroup.Append>
+            </InputGroup>
         </div>
     );
-}
-
-SearchBox.propTypes = {
-    handleSearchChange: PropTypes.func,
-    originalSearchString: PropTypes.string,
-    handleClearSearch: PropTypes.func
 };
-
-export default SearchBox;

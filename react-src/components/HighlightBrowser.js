@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Col } from "react-bootstrap";
-
+import Col from "react-bootstrap/Col";
 import TreeList from "./Tree/TreeList";
 import ClipsContainer from "./Clips/ClipsContainer";
 import EmptyClipList from "./Clips/EmptyClipList";

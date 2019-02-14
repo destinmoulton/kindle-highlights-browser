@@ -32,6 +32,7 @@
         "babel-loader": "^8.0.5",
         "electron": "^4.0.4",
         "electron-packager": "^13.0.1",
+        "electron-react-devtools": "^0.5.3",
         "enzyme": "^3.8.0",
         "eslint-plugin-react": "^7.12.4",
         "jest": "^24.1.0",

@@ -37,6 +37,16 @@ To compile the react code:
 $ npm run compile:react
 ```
 
+#### React Devtools
+
+The package electron-react-devtools is already installed in the packages.json
+
+Run the following in the dev console after you `npm run dev`:
+
+```
+require('electron-react-devtools').install()
+```
+
 ### Electron Packaging Instructions
 
 ---

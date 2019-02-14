@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { ControlLabel, FormControl, FormGroup } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
 
 import { generateClipsString } from "../../lib/generateClipsString";
 
@@ -19,15 +19,17 @@ class ExportPreview extends Component {
             TEXTAREA_EOL
         );
         return (
-            <FormGroup controlId="khb-exportpreview-textarea">
-                <ControlLabel>Preview Export</ControlLabel>
-                <FormControl
-                    componentClass="textarea"
-                    placeholder="textarea"
-                    value={clipsPreview}
-                    readOnly
-                />
-            </FormGroup>
+            <Form>
+                <Form.Group controlId="khb-exportpreview-textarea">
+                    <Form.Label>Preview Export</Form.Label>
+                    <Form.Control
+                        componentClass="textarea"
+                        placeholder="textarea"
+                        value={clipsPreview}
+                        readOnly
+                    />
+                </Form.Group>
+            </Form>
         );
     }
 }

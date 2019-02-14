@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { Well } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
 
 import ClipRow from "./ClipRow";
 import ClipSorter from "../../lib/ClipSorter";
@@ -25,10 +25,12 @@ class ClipsList extends Component {
 
         return (
             <div>
-                <Well>
-                    <h3>{title}</h3>
-                    <h4>{authorFullName}</h4>
-                </Well>
+                <Card>
+                    <Card.Title>
+                        <h3>{title}</h3>
+                        <h4>{authorFullName}</h4>
+                    </Card.Title>
+                </Card>
                 {clipItems}
             </div>
         );

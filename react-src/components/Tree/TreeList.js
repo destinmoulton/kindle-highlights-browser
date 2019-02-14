@@ -5,13 +5,6 @@ import SearchBox from "./SearchBox";
 import TreeSublist from "./TreeSublist";
 
 class TreeList extends Component {
-    static propTypes = {
-        authors: PropTypes.array,
-        titles: PropTypes.array,
-        handleChangeSelectedFilter: PropTypes.func,
-        filters: PropTypes.object
-    };
-
     constructor(props) {
         super(props);
 
@@ -85,5 +78,12 @@ class TreeList extends Component {
         );
     }
 }
+
+TreeList.propTypes = {
+    authors: PropTypes.array,
+    titles: PropTypes.array,
+    handleChangeSelectedFilter: PropTypes.func,
+    filters: PropTypes.object
+};
 
 export default TreeList;

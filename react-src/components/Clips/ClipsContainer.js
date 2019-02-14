@@ -5,11 +5,6 @@ import ClipsList from "./ClipsList";
 import ClipsButtonBar from "./ClipsButtonBar";
 
 class ClipsContainer extends Component {
-    static propTypes = {
-        clips: PropTypes.object,
-        filters: PropTypes.object
-    };
-
     constructor(props) {
         super(props);
 
@@ -56,5 +51,10 @@ class ClipsContainer extends Component {
         );
     }
 }
+
+ClipsContainer.propTypes = {
+    clips: PropTypes.object,
+    filters: PropTypes.object
+};
 
 export default ClipsContainer;

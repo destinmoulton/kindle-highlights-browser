@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 class ClipRow extends Component {
-    static propTypes = {
-        clip: PropTypes.object
-    };
-
     render() {
         const { clip } = this.props;
         let loc = "";
@@ -36,10 +32,8 @@ class ClipRow extends Component {
         return (
             <div>
                 <div>
-                    {icon}&nbsp;<span className="khb-clipslist-cliploc">
-                        {loc}
-                    </span>{" "}
-                    --{" "}
+                    {icon}&nbsp;
+                    <span className="khb-clipslist-cliploc">{loc}</span> --{" "}
                     <span className="khb-clipslist-clipdate">
                         {clip.date.format("MMMM DD, YYYY h:mm:ss a")}
                     </span>
@@ -54,5 +48,9 @@ class ClipRow extends Component {
         );
     }
 }
+
+ClipRow.propTypes = {
+    clip: PropTypes.object
+};
 
 export default ClipRow;

@@ -26,10 +26,10 @@ class ClipsList extends Component {
         return (
             <div>
                 <Card>
-                    <Card.Title>
-                        <h3>{title}</h3>
-                        <h4>{authorFullName}</h4>
-                    </Card.Title>
+                    <Card.Body>
+                        <Card.Title>{title}</Card.Title>
+                        <Card.Subtitle>{authorFullName}</Card.Subtitle>
+                    </Card.Body>
                 </Card>
                 {clipItems}
             </div>

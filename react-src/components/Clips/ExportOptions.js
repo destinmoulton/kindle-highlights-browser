@@ -19,9 +19,9 @@ function ExportOptions(props) {
                     checked={checkboxes.location}
                     onChange={handleCheckboxChange}
                     value="location"
-                >
-                    Include Location
-                </Form.Check>
+                    type="checkbox"
+                    label="Include Location"
+                />
             </Form.Group>
             <Form.Group>
                 <Form.Check
@@ -29,9 +29,9 @@ function ExportOptions(props) {
                     checked={checkboxes.date}
                     onChange={handleCheckboxChange}
                     value="date"
-                >
-                    Include Date
-                </Form.Check>
+                    type="checkbox"
+                    label="Include Date"
+                />
             </Form.Group>
             <Form.Group>
                 <Form.Check
@@ -39,9 +39,9 @@ function ExportOptions(props) {
                     checked={checkboxes.quote}
                     onChange={handleCheckboxChange}
                     value="quote"
-                >
-                    Include Quotation Marks
-                </Form.Check>
+                    type="checkbox"
+                    label="Include Quotation Marks"
+                />
             </Form.Group>
             <Form.Group>
                 <Form.Label>Book Title Separator</Form.Label>
@@ -60,34 +60,31 @@ function ExportOptions(props) {
                     onChange={handleRadioChange}
                     value="line"
                     type="radio"
-                >
-                    Extra Line
-                </Form.Check>
+                    label="Extra Line"
+                />
                 <Form.Check
                     name="clip_separator"
                     checked={radios.clip_separator === "none"}
                     onChange={handleRadioChange}
                     value="none"
                     type="radio"
-                >
-                    None
-                </Form.Check>
+                    label="None"
+                />
                 <Form.Check
                     name="clip_separator"
                     checked={radios.clip_separator === "text"}
                     onChange={handleRadioChange}
                     value="text"
                     type="radio"
-                >
-                    Text
-                    <Form.Control
-                        type="text"
-                        name="clip"
-                        disabled={!(radios.clip_separator === "text")}
-                        value={separators.clip}
-                        onChange={handleSeparatorChange}
-                    />
-                </Form.Check>
+                    label="Text"
+                />
+                <Form.Control
+                    type="text"
+                    name="clip"
+                    disabled={!(radios.clip_separator === "text")}
+                    value={separators.clip}
+                    onChange={handleSeparatorChange}
+                />
             </Form.Group>
         </Form>
     );

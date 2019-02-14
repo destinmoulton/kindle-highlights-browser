@@ -22,12 +22,7 @@ class ExportPreview extends Component {
             <Form>
                 <Form.Group controlId="khb-exportpreview-textarea">
                     <Form.Label>Preview Export</Form.Label>
-                    <Form.Control
-                        type="textarea"
-                        placeholder="textarea"
-                        value={clipsPreview}
-                        readOnly
-                    />
+                    <Form.Control as="textarea" value={clipsPreview} readOnly />
                 </Form.Group>
             </Form>
         );

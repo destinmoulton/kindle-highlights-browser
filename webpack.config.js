@@ -11,18 +11,14 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /.js?$/,
-
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: ["env", "react"],
-                        plugins: ["transform-class-properties"]
-                    }
-                }
+                use: ['babel-loader']
             }
         ]
+    },
+    resolve: {
+        extensions: ['*', '.js', '.jsx']
     },
     plugins: [],
     target: "electron-main"

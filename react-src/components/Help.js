@@ -2,12 +2,10 @@ import React from "react";
 
 import WhereAreMyClippings from "./Help/WhereAreMyClippings";
 
-function Help() {
+export default () => {
     return (
         <div>
             <WhereAreMyClippings />
         </div>
     );
-}
-
-export default Help;
+};

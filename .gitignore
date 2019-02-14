@@ -4,3 +4,4 @@ typings.json
 typings
 dist
 .khb-nedb-storage
+.vscode-file-history

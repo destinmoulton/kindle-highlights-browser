@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
 export default props => {
     const {
@@ -20,14 +20,16 @@ export default props => {
     return (
         <div id="khb-treelist-search-container">
             <InputGroup>
-                <Form.Control
+                <FormControl
                     type="text"
                     placeholder="Search Authors/Titles..."
                     value={originalSearchString}
                     onChange={handleSearchChange}
                 />
                 <InputGroup.Append className={addonClassName}>
-                    <i className={iconClassName} onClick={iconOnChange} />
+                    <InputGroup.Text>
+                        <i className={iconClassName} onClick={iconOnChange} />
+                    </InputGroup.Text>
                 </InputGroup.Append>
             </InputGroup>
         </div>

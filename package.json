@@ -26,10 +26,9 @@
     "author": "Destin Moulton",
     "license": "MIT",
     "dependencies": {
-        "@babel/core": "^7.2.2",
-        "@babel/preset-env": "^7.3.1",
-        "@babel/preset-react": "^7.0.0",
-        "babel-loader": "^8.0.5",
+        "@types/react": "^16.8.3",
+        "@types/react-dom": "^16.8.1",
+        "awesome-typescript-loader": "^5.2.1",
         "electron": "^4.0.4",
         "electron-packager": "^13.0.1",
         "electron-react-devtools": "^0.5.3",
@@ -46,6 +45,8 @@
         "react-router-dom": "^4.3.1",
         "react-sortable-hoc": "^1.6.1",
         "react-test-renderer": "^16.8.1",
+        "source-map-loader": "^0.2.4",
+        "typescript": "^3.3.3",
         "webpack": "^4.29.3",
         "webpack-cli": "^3.2.3"
     },

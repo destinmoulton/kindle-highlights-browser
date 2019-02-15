@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { remote, ipcRenderer } from "electron";
 
@@ -9,18 +9,28 @@ import Home from "./Home";
 import HighlightBrowser from "./HighlightBrowser.js";
 
 import MyClippingsParser from "../lib/MyClippingsParser";
+import * as Types from "../types";
 
 const SETTING_LAST_OPEN_FILE = "last_open_myclippings_file";
 
-const INITIAL_STATE = {
+const INITIAL_STATE: IState = {
     hasClippings: false,
-    clippings: {},
+    clippings: new Map(),
     authors: [],
     titles: []
 };
 
-export default class Layout extends React.Component {
-    constructor(props) {
+interface IProps {}
+interface IState {
+    clippings: Types.Clippings;
+    hasClippings: boolean;
+    authors: Types.Authors;
+    titles: Types.Titles;
+}
+
+export default class Layout extends React.Component<IProps, IState> {
+    settingStore: SettingStore;
+    constructor(props: IProps) {
         super(props);
 
         this.state = Object.assign({}, INITIAL_STATE);
@@ -28,11 +38,11 @@ export default class Layout extends React.Component {
         // Local instance of the storage/db mechanism
         this.settingStore = new SettingStore();
 
-        ipcRenderer.on("open-my-clippings", event => {
+        ipcRenderer.on("open-my-clippings", (e: any) => {
             this.openClippingsDialog();
         });
 
-        ipcRenderer.on("close-my-clippings", event => {
+        ipcRenderer.on("close-my-clippings", (e: any) => {
             this.settingStore.delete(SETTING_LAST_OPEN_FILE);
             this.clearClippings();
         });
@@ -60,7 +70,7 @@ export default class Layout extends React.Component {
      *
      * @param String fileName
      */
-    setLastFileUsed(fileName) {
+    setLastFileUsed(fileName: string) {
         this.settingStore.set(SETTING_LAST_OPEN_FILE, fileName);
     }
 
@@ -71,7 +81,7 @@ export default class Layout extends React.Component {
      *
      * @param String fileName
      */
-    parseFile(fileName) {
+    parseFile(fileName: string) {
         const clipParser = new MyClippingsParser();
         const clippings = clipParser.parseFile(fileName);
         const authors = clipParser.getAuthorsAsSortedArray();

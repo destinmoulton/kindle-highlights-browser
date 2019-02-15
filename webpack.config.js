@@ -1,7 +1,7 @@
 var path = require("path");
 
 module.exports = {
-    entry: "./react-src/App.jsx",
+    entry: "./src/App.jsx",
     devtool: "source-map",
     output: {
         path: path.join(__dirname, "www/js"),

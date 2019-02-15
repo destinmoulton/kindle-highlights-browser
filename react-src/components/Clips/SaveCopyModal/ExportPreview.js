@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import Form from "react-bootstrap/Form";
 
-import { generateClipsString } from "../../lib/generateClipsString";
+import { generateClipsString } from "../../../lib/generateClipsString";
 
 const TEXTAREA_EOL = "\n";
 class ExportPreview extends Component {

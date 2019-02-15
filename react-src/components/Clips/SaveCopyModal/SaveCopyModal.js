@@ -16,13 +16,13 @@ import moment from "moment";
 import ExportOptions from "./ExportOptions";
 import ExportPreview from "./ExportPreview";
 
-import { generateClipsString } from "../../lib/generateClipsString";
-import { errorDialog } from "../../lib/errorDialog";
+import { generateClipsString } from "../../../lib/generateClipsString";
+import { errorDialog } from "../../../lib/errorDialog";
 const FILE_PREFIX = "kindle_highlights_";
 const FILE_DATE_SUFFIX = moment().format("MM_DD_YYYY_HH_mm_ss");
 const FILE_EXT = ".txt";
 
-class ClipsExportModal extends Component {
+class SaveCopyModal extends Component {
     constructor(props) {
         super(props);
 
@@ -206,10 +206,10 @@ class ClipsExportModal extends Component {
     }
 }
 
-ClipsExportModal.propTypes = {
+SaveCopyModal.propTypes = {
     modalIsActive: PropTypes.bool,
     closeModalHandler: PropTypes.func,
     clips: PropTypes.object
 };
 
-export default ClipsExportModal;
+export default SaveCopyModal;

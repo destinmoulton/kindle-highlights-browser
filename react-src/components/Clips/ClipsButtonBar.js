@@ -8,7 +8,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 
 import Row from "react-bootstrap/Row";
 
-import ExportModal from "./ExportModal";
+import SaveCopyModal from "./SaveCopyModal/SaveCopyModal";
 
 class ClipsButtonBar extends Component {
     constructor(props) {
@@ -44,7 +44,7 @@ class ClipsButtonBar extends Component {
         const { sortChangeHandler, clips } = this.props;
         return (
             <div className="khb-clipslist-buttonbar">
-                <ExportModal
+                <SaveCopyModal
                     closeModalHandler={this.closeModal.bind(
                         this,
                         "scModalIsOpen"

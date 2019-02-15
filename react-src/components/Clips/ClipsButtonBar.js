@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Col from "react-bootstrap/Col";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -54,23 +55,28 @@ class ClipsButtonBar extends Component {
                 />
                 <Row>
                     <Col xs={6}>
-                        <Button
-                            variant="secondary"
-                            size="sm"
-                            onClick={this.openModal.bind(this, "scModalIsOpen")}
-                        >
-                            <i className="fa fa-save" /> Save or Copy
-                        </Button>
-                        <Button
-                            variant="secondary"
-                            size="sm"
-                            onClick={this.openModal.bind(
-                                this,
-                                "csvModalIsOpen"
-                            )}
-                        >
-                            <i className="fa fa-file-csv" /> CSV File
-                        </Button>
+                        <ButtonGroup>
+                            <Button
+                                variant="secondary"
+                                size="sm"
+                                onClick={this.openModal.bind(
+                                    this,
+                                    "scModalIsOpen"
+                                )}
+                            >
+                                <i className="fa fa-save" /> Save or Copy
+                            </Button>
+                            <Button
+                                variant="secondary"
+                                size="sm"
+                                onClick={this.openModal.bind(
+                                    this,
+                                    "csvModalIsOpen"
+                                )}
+                            >
+                                <i className="fa fa-file-csv" /> CSV File
+                            </Button>
+                        </ButtonGroup>
                     </Col>
                     <Col xs={6}>
                         <InputGroup size="sm">

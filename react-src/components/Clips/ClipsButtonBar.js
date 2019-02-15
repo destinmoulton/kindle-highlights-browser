@@ -15,7 +15,8 @@ class ClipsButtonBar extends Component {
         super(props);
 
         this.state = {
-            modalIsActive: false
+            scModalIsOpen: false,
+            csvModalIsOpen: false
         };
     }
 
@@ -23,9 +24,9 @@ class ClipsButtonBar extends Component {
      * Show the modal window by changing the
      * state.
      */
-    openModal() {
+    openModal(modalName) {
         this.setState({
-            modalIsActive: true
+            [modalName]: true
         });
     }
 
@@ -33,9 +34,9 @@ class ClipsButtonBar extends Component {
      * Close the modal window by changing the
      * state.
      */
-    closeModal() {
+    closeModal(modalName) {
         this.setState({
-            modalIsActive: false
+            [modalName]: false
         });
     }
 
@@ -44,8 +45,11 @@ class ClipsButtonBar extends Component {
         return (
             <div className="khb-clipslist-buttonbar">
                 <ExportModal
-                    closeModalHandler={this.closeModal.bind(this)}
-                    modalIsActive={this.state.modalIsActive}
+                    closeModalHandler={this.closeModal.bind(
+                        this,
+                        "scModalIsOpen"
+                    )}
+                    modalIsActive={this.state.scModalIsOpen}
                     clips={clips}
                 />
                 <Row>
@@ -53,9 +57,9 @@ class ClipsButtonBar extends Component {
                         <Button
                             variant="secondary"
                             size="sm"
-                            onClick={this.openModal.bind(this)}
+                            onClick={this.openModal.bind(this, "scModalIsOpen")}
                         >
-                            Save or Copy Clips
+                            <i className="fa fa-floppy-o" /> Save or Copy Clips
                         </Button>
                     </Col>
                     <Col xs={6}>

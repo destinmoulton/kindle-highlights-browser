@@ -9,7 +9,8 @@ import InputGroup from "react-bootstrap/InputGroup";
 
 import Row from "react-bootstrap/Row";
 
-import SaveCopyModal from "./SaveCopyModal/SaveCopyModal";
+import SaveCopyModal from "../Modals/SaveCopyModal/SaveCopyModal";
+import CSVModal from "../Modals/CSVModal/CSVModal";
 
 class ClipsButtonBar extends Component {
     constructor(props) {
@@ -51,6 +52,14 @@ class ClipsButtonBar extends Component {
                         "scModalIsOpen"
                     )}
                     modalIsActive={this.state.scModalIsOpen}
+                    clips={clips}
+                />
+                <CSVModal
+                    closeModalHandler={this.closeModal.bind(
+                        this,
+                        "csvModalIsOpen"
+                    )}
+                    modalIsActive={this.state.csvModalIsOpen}
                     clips={clips}
                 />
                 <Row>

@@ -1,8 +1,15 @@
-import React, { Component } from "react";
+import * as React from "react";
 
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
-export default props => {
+
+interface Props {
+    handleClearSearch: (e: any) => {};
+    handleSearchChange: (e: any) => {};
+    originalSearchString: string;
+}
+
+export default (props: Props) => {
     const {
         handleSearchChange,
         originalSearchString,

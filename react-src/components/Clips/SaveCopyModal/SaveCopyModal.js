@@ -177,7 +177,7 @@ class SaveCopyModal extends Component {
                                         this
                                     )}
                                 >
-                                    <i className="fa fa-floppy-o" /> Save All to
+                                    <i className="fa fa-save" /> Save All to
                                     File
                                 </Button>
                                 <Button
@@ -188,8 +188,7 @@ class SaveCopyModal extends Component {
                                 <Button
                                     onClick={this.handleSelectAll.bind(this)}
                                 >
-                                    <i className="fa fa-hand-rock-o" /> Select
-                                    All
+                                    <i className="fa fa-hand-rock" /> Select All
                                 </Button>
                             </ButtonGroup>
                             <Button

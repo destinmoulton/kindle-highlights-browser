@@ -59,7 +59,17 @@ class ClipsButtonBar extends Component {
                             size="sm"
                             onClick={this.openModal.bind(this, "scModalIsOpen")}
                         >
-                            <i className="fa fa-floppy-o" /> Save or Copy Clips
+                            <i className="fa fa-save" /> Save or Copy
+                        </Button>
+                        <Button
+                            variant="secondary"
+                            size="sm"
+                            onClick={this.openModal.bind(
+                                this,
+                                "csvModalIsOpen"
+                            )}
+                        >
+                            <i className="fa fa-file-csv" /> CSV File
                         </Button>
                     </Col>
                     <Col xs={6}>

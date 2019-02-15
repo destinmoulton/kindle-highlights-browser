@@ -46,7 +46,7 @@ class ClipsContainer extends Component {
                     clips={clips}
                     filters={filters}
                 />
-                {clipsLists}
+                <div className="khb-clipslist-container">{clipsLists}</div>
             </div>
         );
     }

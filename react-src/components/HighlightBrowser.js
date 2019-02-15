@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import TreeList from "./Tree/TreeList";
 import ClipsContainer from "./Clips/ClipsContainer";
 import EmptyClipList from "./Clips/EmptyClipList";
+import Row from "react-bootstrap/Row";
 
 import FiltersCollection from "../lib/FiltersCollection";
 
@@ -95,7 +96,7 @@ class HighlightBrowser extends React.Component {
         }
 
         return (
-            <div>
+            <Row>
                 <Col xs={4} id="khb-treelist-container">
                     <TreeList
                         authors={authors}
@@ -106,10 +107,11 @@ class HighlightBrowser extends React.Component {
                         filters={filters}
                     />
                 </Col>
+
                 <Col xs={8} id="khb-clips-container">
                     {clipsContents}
                 </Col>
-            </div>
+            </Row>
         );
     }
 }

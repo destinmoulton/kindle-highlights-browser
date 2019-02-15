@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
+
 import Row from "react-bootstrap/Row";
 
 import ExportModal from "./ExportModal";
@@ -41,20 +42,24 @@ class ClipsButtonBar extends Component {
     render() {
         const { sortChangeHandler, clips } = this.props;
         return (
-            <div>
+            <div className="khb-clipslist-buttonbar">
                 <ExportModal
                     closeModalHandler={this.closeModal.bind(this)}
                     modalIsActive={this.state.modalIsActive}
                     clips={clips}
                 />
                 <Row>
-                    <Col sm={6}>
-                        <Button onClick={this.openModal.bind(this)}>
+                    <Col xs={6}>
+                        <Button
+                            variant="secondary"
+                            size="sm"
+                            onClick={this.openModal.bind(this)}
+                        >
                             Save or Copy Clips
                         </Button>
                     </Col>
-                    <Col sm={6}>
-                        <InputGroup>
+                    <Col xs={6}>
+                        <InputGroup size="sm">
                             <InputGroup.Prepend>
                                 <InputGroup.Text>Sort By:</InputGroup.Text>
                             </InputGroup.Prepend>

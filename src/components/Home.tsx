@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -6,7 +6,10 @@ import Col from "react-bootstrap/Col";
 
 import Help from "./Help";
 
-function Home(props) {
+interface Props {
+    openClippingsDialogHandler: (e: any) => {};
+}
+function Home(props: Props) {
     return (
         <Col lg={12} md={12} sm={12}>
             <Card className="khb-home-panel text-center">

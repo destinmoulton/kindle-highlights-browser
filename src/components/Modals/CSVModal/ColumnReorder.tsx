@@ -42,7 +42,7 @@ const ClipColumns: ClipColumn[] = [
     { key: "text", name: "Text" }
 ];
 
-class SortableComponent extends React.Component<Props, SortableItems> {
+class ColumnReorder extends React.Component<Props, SortableItems> {
     constructor(props: Props) {
         super(props);
 
@@ -74,4 +74,4 @@ class SortableComponent extends React.Component<Props, SortableItems> {
     }
 }
 
-export default SortableComponent;
+export default ColumnReorder;

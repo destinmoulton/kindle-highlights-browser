@@ -13,6 +13,16 @@ const ClipColumns: Types.CSVColumn[] = [
     { key: "text", name: "Text" }
 ];
 
+interface IExample {
+    [key: string]: string | number;
+}
+const Example: IExample = {
+    title: "Hamlet",
+    authorFullName: "Bill Shakespeare",
+    location: "666-999",
+    text: "To Be Or Not to Be"
+};
+
 interface Props {
     modalIsActive: boolean;
     closeModalHandler: () => void;
@@ -48,12 +58,45 @@ class CSVModal extends React.Component<Props, State> {
 
     _handleChangeDateFormat = (e: any) => {
         const dateFormat = e.target.value;
+        this.setState({
+            dateFormat
+        });
     };
+
+    _renderPreview() {
+        const { columns, dateFormat } = this.state;
+
+        let titleRow: React.ReactElement[] = [];
+        let exampleRow: React.ReactElement[] = [];
+        columns.map((column, index) => {
+            const comma = index > 0 ? ", " : "";
+            titleRow.push(
+                <span>
+                    {comma}
+                    {column.name}
+                </span>
+            );
+            exampleRow.push(
+                <span>
+                    {comma}
+                    {Example[column.key]}
+                </span>
+            );
+        });
+        return (
+            <div>
+                <div>{titleRow}</div>
+                <div>{exampleRow}</div>
+            </div>
+        );
+    }
 
     render() {
         const { columns, dateFormat } = this.state;
         const { modalIsActive, closeModalHandler, filteredClips } = this.props;
         console.log("filteredClips", filteredClips);
+
+        const preview = this._renderPreview();
         return (
             <Modal show={modalIsActive} onHide={closeModalHandler} size="lg">
                 <Modal.Header closeButton>
@@ -89,6 +132,9 @@ class CSVModal extends React.Component<Props, State> {
                                             <Form.Control
                                                 type="text"
                                                 value={dateFormat}
+                                                onChange={
+                                                    this._handleChangeDateFormat
+                                                }
                                             />
                                             <Form.Text>
                                                 Uses Moment Date Formatting
@@ -103,7 +149,7 @@ class CSVModal extends React.Component<Props, State> {
                                 <Card.Body>
                                     <Card.Title>Preview</Card.Title>
                                     <hr />
-                                    Preview
+                                    {preview}
                                 </Card.Body>
                             </Card>
                         </Col>

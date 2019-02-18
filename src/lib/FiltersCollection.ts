@@ -1,6 +1,8 @@
 import { find, remove } from "lodash";
 
+import * as Types from "../types";
 export default class FiltersCollection {
+    filters: Types.Filters;
     constructor() {
         this.filters = [];
     }
@@ -11,7 +13,7 @@ export default class FiltersCollection {
      * @param String dirtyContent
      * @return String
      */
-    _cleanFilterContent(dirtyContent) {
+    _cleanFilterContent(dirtyContent: string) {
         return dirtyContent.trim().replace(/[^\w\s]/gi, "");
     }
 
@@ -22,7 +24,7 @@ export default class FiltersCollection {
      * @param String filterContent
      * @return Object (Need to maintain state!)
      */
-    add(fieldName, filterContent) {
+    add(fieldName: string, filterContent: string) {
         if (!this.has(fieldName, filterContent)) {
             const cleanContent = this._cleanFilterContent(filterContent);
             this.filters.push({
@@ -41,7 +43,7 @@ export default class FiltersCollection {
      * @param String filterContent
      * @return Object this (Need to maintain state!)
      */
-    remove(fieldName, filterContent) {
+    remove(fieldName: string, filterContent: string) {
         const cleanContent = this._cleanFilterContent(filterContent);
         if (this.has(fieldName, cleanContent)) {
             remove(this.filters, o => {
@@ -60,7 +62,7 @@ export default class FiltersCollection {
      * @param String filterContent
      * @return Bool
      */
-    has(fieldName, filterContent) {
+    has(fieldName: string, filterContent: string) {
         const cleanContent = this._cleanFilterContent(filterContent);
         const test = find(this.filters, o => {
             return o.fieldName === fieldName && o.cleanContent === cleanContent;
@@ -72,7 +74,13 @@ export default class FiltersCollection {
     /**
      * Loop over the filters, running a callback.
      */
-    each(callback) {
+    each(
+        callback: (
+            fieldName: string,
+            dirtyContent: string,
+            cleanContent?: string
+        ) => void
+    ) {
         this.filters.map(function(filter) {
             callback(
                 filter.fieldName,

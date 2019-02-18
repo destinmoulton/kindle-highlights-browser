@@ -1,7 +1,7 @@
 import { remote } from "electron";
 const dialog = remote.dialog;
 
-export function errorDialog(message, callback) {
+export function errorDialog(message: string, callback?: () => void) {
     const options = {
         type: "error",
         buttons: ["OK"],

@@ -1,13 +1,19 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
 import Card from "react-bootstrap/Card";
 
 import ClipRow from "./ClipRow";
 import ClipSorter from "../../lib/ClipSorter";
+import * as Types from "../../types";
 
-class ClipsList extends Component {
-    constructor(props) {
+interface Props {
+    clips: Types.Clip[];
+    sortBy: string;
+}
+
+class ClipsList extends React.Component<Props> {
+    clipSorter: ClipSorter;
+    constructor(props: Props) {
         super(props);
 
         this.clipSorter = new ClipSorter();
@@ -18,9 +24,9 @@ class ClipsList extends Component {
         const { title, authorFullName } = clips[0];
 
         this.clipSorter.sortClips(clips, sortBy);
-        const clipItems = [];
-        clips.map(function(clip) {
-            clipItems.push(<ClipRow key={clip.date} clip={clip} />);
+        const clipItems: React.ReactElement[] = [];
+        clips.map(function(clip, index) {
+            clipItems.push(<ClipRow key={index} clip={clip} />);
         });
 
         return (
@@ -36,9 +42,5 @@ class ClipsList extends Component {
         );
     }
 }
-ClipsList.propTypes = {
-    clips: PropTypes.array,
-    sortBy: PropTypes.string
-};
 
 export default ClipsList;

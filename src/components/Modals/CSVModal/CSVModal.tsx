@@ -1,18 +1,24 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Row from "react-bootstrap/Row";
 
-class CSVModal extends React.Component {
-    constructor(props) {
+import * as Types from "../../../types";
+
+interface Props {
+    modalIsActive: boolean;
+    closeModalHandler: () => void;
+    filteredClips: Types.FilteredClips;
+}
+class CSVModal extends React.Component<Props> {
+    constructor(props: Props) {
         super(props);
     }
 
     render() {
-        const { modalIsActive, closeModalHandler, clips } = this.props;
-        console.log("clips", clips);
+        const { modalIsActive, closeModalHandler, filteredClips } = this.props;
+        console.log("filteredClips", filteredClips);
         return (
             <Modal show={modalIsActive} onHide={closeModalHandler} size="lg">
                 <Modal.Header closeButton>
@@ -25,11 +31,5 @@ class CSVModal extends React.Component {
         );
     }
 }
-
-CSVModal.propTypes = {
-    modalIsActive: PropTypes.bool,
-    closeModalHandler: PropTypes.func,
-    clips: PropTypes.object
-};
 
 export default CSVModal;

@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -11,9 +10,19 @@ import Row from "react-bootstrap/Row";
 
 import SaveCopyModal from "../Modals/SaveCopyModal/SaveCopyModal";
 import CSVModal from "../Modals/CSVModal/CSVModal";
+import * as Types from "../../types";
 
-class ClipsButtonBar extends Component {
-    constructor(props) {
+interface Props {
+    sortChangeHandler: () => void;
+    filteredClips: Types.FilteredClips;
+}
+
+interface State {
+    [key: string]: boolean;
+}
+
+class ClipsButtonBar extends React.Component<Props, State> {
+    constructor(props: Props) {
         super(props);
 
         this.state = {
@@ -26,7 +35,7 @@ class ClipsButtonBar extends Component {
      * Show the modal window by changing the
      * state.
      */
-    openModal(modalName) {
+    openModal(modalName: string) {
         this.setState({
             [modalName]: true
         });
@@ -36,14 +45,14 @@ class ClipsButtonBar extends Component {
      * Close the modal window by changing the
      * state.
      */
-    closeModal(modalName) {
+    closeModal(modalName: string) {
         this.setState({
             [modalName]: false
         });
     }
 
     render() {
-        const { sortChangeHandler, clips } = this.props;
+        const { sortChangeHandler, filteredClips } = this.props;
         return (
             <div className="khb-clipslist-buttonbar">
                 <SaveCopyModal
@@ -52,7 +61,7 @@ class ClipsButtonBar extends Component {
                         "scModalIsOpen"
                     )}
                     modalIsActive={this.state.scModalIsOpen}
-                    clips={clips}
+                    filteredClips={filteredClips}
                 />
                 <CSVModal
                     closeModalHandler={this.closeModal.bind(
@@ -60,7 +69,7 @@ class ClipsButtonBar extends Component {
                         "csvModalIsOpen"
                     )}
                     modalIsActive={this.state.csvModalIsOpen}
-                    clips={clips}
+                    filteredClips={filteredClips}
                 />
                 <Row>
                     <Col xs={6}>
@@ -113,10 +122,5 @@ class ClipsButtonBar extends Component {
         );
     }
 }
-
-ClipsButtonBar.propTypes = {
-    sortChangeHandler: PropTypes.func,
-    clips: PropTypes.object
-};
 
 export default ClipsButtonBar;

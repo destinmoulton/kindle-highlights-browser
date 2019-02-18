@@ -1,8 +1,13 @@
+import * as Types from "../types";
 /**
  * Generate the formatted export string.
  *  The export options are set in the modal export popover.
  */
-export function generateClipsString(clips, exportOptions, EOL) {
+export function generateClipsString(
+    clips: Types.FilteredClips,
+    exportOptions: Types.ExportOptions,
+    EOL: string
+) {
     const { checkboxes, radios, separators } = exportOptions;
     const includeLocation = checkboxes.location;
     const includeDate = checkboxes.date;

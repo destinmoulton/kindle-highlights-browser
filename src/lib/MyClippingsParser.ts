@@ -1,6 +1,8 @@
-import fs from "fs";
+import * as fs from "fs";
 
-import moment from "moment";
+import * as moment from "moment";
+
+import * as Types from "../types";
 
 const CLIPPING_SEPARATOR = "==========";
 
@@ -35,16 +37,19 @@ const AUTHOR_SPACE_SEPARATOR = ", ";
 const MOMENT_FORMAT = "dddd, MMMM DD, YYYY h:mm:ss a";
 
 export default class MyClippingsParser {
+    authors: Set<string>;
+    titles: Set<string>;
+
     constructor() {
-        this.authors = {};
-        this.titles = {};
+        this.authors = new Set();
+        this.titles = new Set();
     }
 
-    parseFile(filename) {
+    parseFile(filename: string) {
         const contents = this.getFileContents(filename);
         const clips = contents.split(CLIPPING_SEPARATOR);
 
-        let clippings = {};
+        let clippings: Types.ClippingsMap = new Map();
         let current_title = "";
         clips.map(clip => {
             let lines = clip.split(/\r?\n/);
@@ -59,7 +64,6 @@ export default class MyClippingsParser {
 
             const [title, authorFullName] = this.parseTitleAndAuthor(lines[0]);
 
-            let clipData = {};
             const {
                 location,
                 location_start,
@@ -67,16 +71,16 @@ export default class MyClippingsParser {
                 unix_timestamp
             } = this.parseLocationAndDate(lines[1]);
 
-            if (!clippings.hasOwnProperty(unix_timestamp)) {
+            if (!clippings.has(unix_timestamp)) {
                 if (location.type !== "bookmark") {
-                    if (!this.authors.hasOwnProperty(authorFullName)) {
-                        this.authors[authorFullName] = authorFullName;
+                    if (!this.authors.has(authorFullName)) {
+                        this.authors.add(authorFullName);
                     }
-                    if (!this.titles.hasOwnProperty(title)) {
-                        this.titles[title] = title;
+                    if (!this.titles.has(title)) {
+                        this.titles.add(title);
                     }
 
-                    clippings[unix_timestamp] = {
+                    clippings.set(unix_timestamp, {
                         title,
                         authorFullName,
                         location,
@@ -84,25 +88,25 @@ export default class MyClippingsParser {
                         date,
                         unix_timestamp,
                         text: lines[3]
-                    };
+                    });
                 }
             }
         });
         return clippings;
     }
 
-    getAuthorsAsSortedArray() {
-        const authorNames = Object.keys(this.authors);
+    getAuthorsAsSortedArray(): string[] {
+        const authorNames = Array.from(this.authors.values());
 
         return authorNames.sort();
     }
 
-    getTitlesAsSortedArray() {
-        const titles = Object.keys(this.titles);
+    getTitlesAsSortedArray(): string[] {
+        const titles = Array.from(this.titles.values());
         return titles.sort();
     }
 
-    parseTitleAndAuthor(str) {
+    parseTitleAndAuthor(str: string) {
         const parts = str.split(TITLEAUTHOR_SEPARATOR);
 
         const title = parts[0].trim();
@@ -112,7 +116,7 @@ export default class MyClippingsParser {
         return [title, authorFullName];
     }
 
-    determineAuthorName(fullAuthorString) {
+    determineAuthorName(fullAuthorString: string) {
         let nameParts = fullAuthorString
             .replace(AUTHOR_SUFFIX, "")
             .split(AUTHOR_COMMA_SEPARATOR);
@@ -143,9 +147,9 @@ export default class MyClippingsParser {
         return firstName + space + lastName;
     }
 
-    parseLocationAndDate(locationAndDate) {
+    parseLocationAndDate(locationAndDate: string) {
         const parts = locationAndDate.split(LOCATION_DATE_SEPARATOR);
-        let location = {};
+        let location: Types.Location = { type: "", value: "" };
 
         for (let i = 0; i < LOCATION_TYPES.length; i++) {
             const possibleType = LOCATION_TYPES[i];
@@ -175,7 +179,7 @@ export default class MyClippingsParser {
         return { location, location_start, date, unix_timestamp };
     }
 
-    getFileContents(filename) {
+    getFileContents(filename: string) {
         return fs.readFileSync(filename, "utf8");
     }
 }

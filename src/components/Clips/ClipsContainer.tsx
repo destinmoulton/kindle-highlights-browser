@@ -1,11 +1,22 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
 import ClipsList from "./ClipsList";
 import ClipsButtonBar from "./ClipsButtonBar";
+import FiltersCollection from "../../lib/FiltersCollection";
 
-class ClipsContainer extends Component {
-    constructor(props) {
+import * as Types from "../../types";
+
+interface Props {
+    filteredClips: Types.FilteredClips;
+    filters: FiltersCollection;
+}
+
+interface State {
+    sortBy: string;
+}
+
+class ClipsContainer extends React.Component<Props, State> {
+    constructor(props: Props) {
         super(props);
 
         this.state = {
@@ -18,23 +29,23 @@ class ClipsContainer extends Component {
      *
      * @param Event e
      */
-    sortChangeHandler(e) {
+    sortChangeHandler(e: any) {
         this.setState({
             sortBy: e.target.value
         });
     }
 
     render() {
-        const { clips, filters } = this.props;
+        const { filteredClips, filters } = this.props;
         const { sortBy } = this.state;
-        const clipsLists = [];
-        const clipKeys = Object.keys(clips);
+        const clipSections: React.ReactElement[] = [];
+        const clipKeys = Object.keys(filteredClips);
         clipKeys.map(function(sectionTitle) {
-            clipsLists.push(
+            clipSections.push(
                 <ClipsList
                     key={sectionTitle}
                     sortBy={sortBy}
-                    clips={clips[sectionTitle]}
+                    clips={filteredClips[sectionTitle]}
                 />
             );
         });
@@ -42,19 +53,12 @@ class ClipsContainer extends Component {
             <div>
                 <ClipsButtonBar
                     sortChangeHandler={this.sortChangeHandler.bind(this)}
-                    sortBy={this.state.sortBy}
-                    clips={clips}
-                    filters={filters}
+                    filteredClips={filteredClips}
                 />
-                <div className="khb-clipslist-container">{clipsLists}</div>
+                <div className="khb-clipslist-container">{clipSections}</div>
             </div>
         );
     }
 }
-
-ClipsContainer.propTypes = {
-    clips: PropTypes.object,
-    filters: PropTypes.object
-};
 
 export default ClipsContainer;

@@ -1,17 +1,17 @@
 class SettingStore {
-    has(name) {
+    has(name: string) {
         return this.get(name) !== null;
     }
 
-    set(name, value) {
+    set(name: string, value: any) {
         return localStorage.setItem(name, value);
     }
 
-    get(name) {
+    get(name: string) {
         return localStorage.getItem(name);
     }
 
-    delete(name) {
+    delete(name: string) {
         return localStorage.removeItem(name);
     }
 }

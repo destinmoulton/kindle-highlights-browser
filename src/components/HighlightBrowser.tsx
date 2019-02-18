@@ -1,5 +1,4 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
 import Col from "react-bootstrap/Col";
 import TreeList from "./Tree/TreeList";
@@ -8,9 +7,19 @@ import EmptyClipList from "./Clips/EmptyClipList";
 import Row from "react-bootstrap/Row";
 
 import FiltersCollection from "../lib/FiltersCollection";
+import * as Types from "../types";
 
-class HighlightBrowser extends React.Component {
-    constructor(props) {
+interface Props {
+    clippingsMap: Types.ClippingsMap;
+    authors: Types.Authors;
+    titles: Types.Titles;
+}
+
+interface State {
+    filters: FiltersCollection;
+}
+class HighlightBrowser extends React.Component<Props, State> {
+    constructor(props: Props) {
         super(props);
 
         this.state = {
@@ -24,7 +33,7 @@ class HighlightBrowser extends React.Component {
      *
      * @param event e
      */
-    handleChangeSelectedFilter(e) {
+    handleChangeSelectedFilter(e: any) {
         document.getElementById("khb-clips-container").scrollTop = 0;
 
         let newFilterField = e.target.getAttribute("data-filter-field");
@@ -62,37 +71,42 @@ class HighlightBrowser extends React.Component {
     }
 
     filterClips() {
-        let clips = {};
-        const { clippings } = this.props;
+        let filteredClips: Types.FilteredClips = {};
+        const { clippingsMap } = this.props;
         const { filters } = this.state;
 
-        const clipKeys = Object.keys(clippings);
-        clipKeys.map(key => {
-            filters.each((filterField, filterContent) => {
-                if (clippings[key].hasOwnProperty(filterField)) {
-                    if (clippings[key][filterField] === filterContent) {
-                        if (!clips.hasOwnProperty(clippings[key]["title"])) {
+        const clipKeys = Object.keys(clippingsMap);
+        clippingsMap.forEach((clip: Types.Clip, key: Types.ClipKey) => {
+            filters.each((filterField: string, filterContent: string) => {
+                if (clip.hasOwnProperty(filterField)) {
+                    if (clip[filterField] === filterContent) {
+                        if (!filteredClips.hasOwnProperty(clip["title"])) {
                             // Group the clips by title
-                            clips[clippings[key]["title"]] = [];
+                            filteredClips[clip["title"]] = [];
                         }
-                        clips[clippings[key]["title"]].push(clippings[key]);
+                        filteredClips[clip["title"]].push(clip);
                     }
                 }
             });
         });
 
-        return clips;
+        return filteredClips;
     }
 
     render() {
-        const { clippings, authors, titles } = this.props;
+        const { authors, titles } = this.props;
         const { filters } = this.state;
 
-        const clips = this.filterClips();
+        const filteredClips = this.filterClips();
 
         let clipsContents = <EmptyClipList />;
-        if (Object.keys(clips).length > 0) {
-            clipsContents = <ClipsContainer clips={clips} filters={filters} />;
+        if (Object.keys(filteredClips).length > 0) {
+            clipsContents = (
+                <ClipsContainer
+                    filteredClips={filteredClips}
+                    filters={filters}
+                />
+            );
         }
 
         return (
@@ -115,11 +129,5 @@ class HighlightBrowser extends React.Component {
         );
     }
 }
-
-HighlightBrowser.propTypes = {
-    clippings: PropTypes.object,
-    authors: PropTypes.array,
-    titles: PropTypes.array
-};
 
 export default HighlightBrowser;

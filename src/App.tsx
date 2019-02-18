@@ -1,9 +1,9 @@
-import React from "react";
+import * as React from "react";
 import { render } from "react-dom";
 import { Route } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 
-import Layout from "./components/Layout.js";
+import Layout from "./components/Layout";
 
 import "./electron_menus/rightclick";
 

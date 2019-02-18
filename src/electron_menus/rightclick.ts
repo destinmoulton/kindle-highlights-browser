@@ -15,7 +15,8 @@ window.addEventListener(
     "contextmenu",
     e => {
         e.preventDefault();
-        menu.popup(remote.getCurrentWindow());
+        //menu.popup(remote.getCurrentWindow());
+        menu.popup();
     },
     false
 );

@@ -1,4 +1,7 @@
+import * as Types from "../types";
+
 export default class ClipSorter {
+    fieldToSort: string;
     constructor() {
         this.fieldToSort = "";
     }
@@ -10,7 +13,7 @@ export default class ClipSorter {
      * @param clips Array of clip objects
      * @param sortBy String containing field|dir (where dir is either asc/desc)
      */
-    sortClips(clips, sortBy) {
+    sortClips(clips: Types.Clip[], sortBy: string) {
         const sortParts = sortBy.split("|");
         this.fieldToSort = sortParts[0];
         if (sortParts[1] === "asc") {
@@ -20,7 +23,7 @@ export default class ClipSorter {
         }
     }
 
-    _compareFieldAsc(x, y) {
+    _compareFieldAsc(x: any, y: any) {
         if (x[this.fieldToSort] < y[this.fieldToSort]) {
             return -1;
         }
@@ -30,7 +33,7 @@ export default class ClipSorter {
         return 0;
     }
 
-    _compareFieldDesc(x, y) {
+    _compareFieldDesc(x: any, y: any) {
         if (x[this.fieldToSort] > y[this.fieldToSort]) {
             return -1;
         }

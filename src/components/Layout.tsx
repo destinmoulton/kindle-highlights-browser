@@ -6,7 +6,7 @@ import SettingStore from "../lib/SettingStore";
 
 import Home from "./Home";
 
-import HighlightBrowser from "./HighlightBrowser.js";
+import HighlightBrowser from "./HighlightBrowser";
 
 import MyClippingsParser from "../lib/MyClippingsParser";
 import * as Types from "../types";
@@ -15,14 +15,14 @@ const SETTING_LAST_OPEN_FILE = "last_open_myclippings_file";
 
 const INITIAL_STATE: IState = {
     hasClippings: false,
-    clippings: new Map(),
+    clippingsMap: new Map(),
     authors: [],
     titles: []
 };
 
 interface IProps {}
 interface IState {
-    clippings: Types.Clippings;
+    clippingsMap: Types.ClippingsMap;
     hasClippings: boolean;
     authors: Types.Authors;
     titles: Types.Titles;
@@ -38,11 +38,11 @@ export default class Layout extends React.Component<IProps, IState> {
         // Local instance of the storage/db mechanism
         this.settingStore = new SettingStore();
 
-        ipcRenderer.on("open-my-clippings", (e: any) => {
+        ipcRenderer.on("open-my-clippingsMap", (e: any) => {
             this.openClippingsDialog();
         });
 
-        ipcRenderer.on("close-my-clippings", (e: any) => {
+        ipcRenderer.on("close-my-clippingsMap", (e: any) => {
             this.settingStore.delete(SETTING_LAST_OPEN_FILE);
             this.clearClippings();
         });
@@ -83,7 +83,7 @@ export default class Layout extends React.Component<IProps, IState> {
      */
     parseFile(fileName: string) {
         const clipParser = new MyClippingsParser();
-        const clippings = clipParser.parseFile(fileName);
+        const clippingsMap = clipParser.parseFile(fileName);
         const authors = clipParser.getAuthorsAsSortedArray();
         const titles = clipParser.getTitlesAsSortedArray();
 
@@ -91,7 +91,7 @@ export default class Layout extends React.Component<IProps, IState> {
 
         this.setState({
             hasClippings: true,
-            clippings,
+            clippingsMap,
             authors,
             titles
         });
@@ -104,7 +104,7 @@ export default class Layout extends React.Component<IProps, IState> {
     }
 
     render() {
-        const { clippings, authors, titles } = this.state;
+        const { clippingsMap, authors, titles } = this.state;
 
         let contents = (
             <Home
@@ -114,7 +114,7 @@ export default class Layout extends React.Component<IProps, IState> {
         if (this.state.hasClippings) {
             contents = (
                 <HighlightBrowser
-                    clippings={clippings}
+                    clippingsMap={clippingsMap}
                     authors={authors}
                     titles={titles}
                 />

@@ -1,9 +1,12 @@
-const { Menu } = require("electron");
+import * as Electr from "electron";
 
 const OpenFile = {
     label: "Open My Clippings",
     accelerator: "CommandOrControl+O",
-    click: (menuItem, currentWindow) => {
+    click: (
+        menuItem: Electron.MenuItem,
+        currentWindow: Electron.BrowserWindow
+    ) => {
         currentWindow.webContents.send("open-my-clippings");
     }
 };
@@ -11,12 +14,15 @@ const OpenFile = {
 const CloseFile = {
     label: "Close File",
     accelerator: "CommandOrControl+W",
-    click: (menuItem, currentWindow) => {
+    click: (
+        menuItem: Electron.MenuItem,
+        currentWindow: Electron.BrowserWindow
+    ) => {
         currentWindow.webContents.send("close-my-clippings");
     }
 };
 
-function BuildMainMenu(app, win) {
+function BuildMainMenu(app: Electron.App, win: Electron.BrowserWindow) {
     var menuTemplate = [
         {
             label: "File",
@@ -71,6 +77,7 @@ function BuildMainMenu(app, win) {
             submenu: [
                 OpenFile,
                 {
+                    label: "Close",
                     role: "close",
                     accelerator: "CmdOrCtrl+q"
                 }
@@ -78,7 +85,9 @@ function BuildMainMenu(app, win) {
         });
     }
 
-    Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
+    Electron.Menu.setApplicationMenu(
+        Electron.Menu.buildFromTemplate(menuTemplate)
+    );
 }
 
 module.exports = BuildMainMenu;

@@ -1,8 +1,7 @@
-import fs from "fs";
+import * as fs from "fs";
 import { EOL } from "os";
 
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -11,22 +10,34 @@ import Modal from "react-bootstrap/Modal";
 import Row from "react-bootstrap/Row";
 
 import { clipboard, remote } from "electron";
-import moment from "moment";
+import * as moment from "moment";
 
 import ExportOptions from "./ExportOptions";
 import ExportPreview from "./ExportPreview";
 
 import { generateClipsString } from "../../../lib/generateClipsString";
 import { errorDialog } from "../../../lib/errorDialog";
+import * as Types from "../../../types";
+
 const FILE_PREFIX = "kindle_highlights_";
 const FILE_DATE_SUFFIX = moment().format("MM_DD_YYYY_HH_mm_ss");
 const FILE_EXT = ".txt";
 
-class SaveCopyModal extends Component {
-    constructor(props) {
+interface Props {
+    modalIsActive: boolean;
+    closeModalHandler: () => void;
+    filteredClips: Types.FilteredClips;
+}
+
+interface State {
+    exportOptions: Types.ExportOptions;
+}
+
+class SaveCopyModal extends React.Component<Props, State> {
+    constructor(props: Props) {
         super(props);
 
-        const exportOptions = {
+        const exportOptions: Types.ExportOptions = {
             checkboxes: {
                 location: true,
                 date: true,
@@ -52,9 +63,12 @@ class SaveCopyModal extends Component {
      *
      * @param Event e
      */
-    handleCheckboxChange(e) {
+    handleCheckboxChange(e: any) {
         let exportOptions = Object.assign({}, this.state.exportOptions);
-        let chks = Object.assign({}, exportOptions.checkboxes);
+        let chks: Types.ExportCheckboxes = Object.assign(
+            {},
+            exportOptions.checkboxes
+        );
         if (e.target.checked) {
             chks[e.target.value] = true;
         } else {
@@ -66,10 +80,16 @@ class SaveCopyModal extends Component {
         });
     }
 
-    handleRadioChange(e) {
+    handleRadioChange(e: any) {
         const targ = e.target;
-        let exportOptions = Object.assign({}, this.state.exportOptions);
-        let radios = Object.assign({}, exportOptions.radios);
+        let exportOptions: Types.ExportOptions = Object.assign(
+            {},
+            this.state.exportOptions
+        );
+        let radios: Types.ExportRadios = Object.assign(
+            {},
+            exportOptions.radios
+        );
         radios[targ.name] = targ.value;
         exportOptions.radios = radios;
         this.setState({
@@ -84,9 +104,12 @@ class SaveCopyModal extends Component {
      *
      * @param Event e
      */
-    handleSeparatorChange(e) {
+    handleSeparatorChange(e: any) {
         let exportOptions = Object.assign({}, this.state.exportOptions);
-        let separators = Object.assign({}, exportOptions.separators);
+        let separators: Types.ExportSeparators = Object.assign(
+            {},
+            exportOptions.separators
+        );
 
         separators[e.target.name] = e.target.value;
         exportOptions.separators = separators;
@@ -106,7 +129,7 @@ class SaveCopyModal extends Component {
             filename => {
                 if (typeof filename === "string") {
                     const strToWrite = generateClipsString(
-                        this.props.clips,
+                        this.props.filteredClips,
                         this.state.exportOptions,
                         EOL
                     );
@@ -127,7 +150,7 @@ class SaveCopyModal extends Component {
      */
     handleCopyClips() {
         const strToCopy = generateClipsString(
-            this.props.clips,
+            this.props.filteredClips,
             this.state.exportOptions,
             EOL
         );
@@ -139,11 +162,14 @@ class SaveCopyModal extends Component {
      * Select all the clips in the textarea.
      */
     handleSelectAll() {
-        document.getElementById("khb-exportpreview-textarea").select();
+        const el: HTMLInputElement = document.getElementById(
+            "khb-exportpreview-textarea"
+        ) as HTMLInputElement;
+        el.select();
     }
 
     render() {
-        const { modalIsActive, closeModalHandler, clips } = this.props;
+        const { modalIsActive, closeModalHandler, filteredClips } = this.props;
         const { exportOptions } = this.state;
         return (
             <Modal show={modalIsActive} onHide={closeModalHandler} size="lg">
@@ -169,7 +195,7 @@ class SaveCopyModal extends Component {
                         <Col xs={8}>
                             <ExportPreview
                                 exportOptions={exportOptions}
-                                clips={clips}
+                                filteredClips={filteredClips}
                             />
                             <ButtonGroup>
                                 <Button
@@ -204,11 +230,5 @@ class SaveCopyModal extends Component {
         );
     }
 }
-
-SaveCopyModal.propTypes = {
-    modalIsActive: PropTypes.bool,
-    closeModalHandler: PropTypes.func,
-    clips: PropTypes.object
-};
 
 export default SaveCopyModal;

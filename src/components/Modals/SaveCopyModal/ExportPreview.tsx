@@ -1,20 +1,24 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
 import Form from "react-bootstrap/Form";
+import * as Types from "../../../types";
 
 import { generateClipsString } from "../../../lib/generateClipsString";
-
+interface Props {
+    exportOptions: Types.ExportOptions;
+    filteredClips: Types.FilteredClips;
+}
 const TEXTAREA_EOL = "\n";
-class ExportPreview extends Component {
-    constructor(props) {
+
+class ExportPreview extends React.Component<Props> {
+    constructor(props: Props) {
         super(props);
     }
 
     render() {
-        const { clips, exportOptions } = this.props;
+        const { filteredClips, exportOptions } = this.props;
         const clipsPreview = generateClipsString(
-            clips,
+            filteredClips,
             exportOptions,
             TEXTAREA_EOL
         );
@@ -29,10 +33,4 @@ class ExportPreview extends Component {
     }
 }
 
-ExportPreview.propTypes = {
-    clips: PropTypes.object,
-    checkboxes: PropTypes.object,
-    radios: PropTypes.object,
-    separators: PropTypes.object
-};
 export default ExportPreview;

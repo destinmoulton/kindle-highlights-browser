@@ -1,12 +1,8 @@
-import * as Electr from "electron";
-
+const Electron = require("electron");
 const OpenFile = {
     label: "Open My Clippings",
     accelerator: "CommandOrControl+O",
-    click: (
-        menuItem: Electron.MenuItem,
-        currentWindow: Electron.BrowserWindow
-    ) => {
+    click: (menuItem, currentWindow) => {
         currentWindow.webContents.send("open-my-clippings");
     }
 };
@@ -14,15 +10,12 @@ const OpenFile = {
 const CloseFile = {
     label: "Close File",
     accelerator: "CommandOrControl+W",
-    click: (
-        menuItem: Electron.MenuItem,
-        currentWindow: Electron.BrowserWindow
-    ) => {
+    click: (menuItem, currentWindow) => {
         currentWindow.webContents.send("close-my-clippings");
     }
 };
 
-function BuildMainMenu(app: Electron.App, win: Electron.BrowserWindow) {
+function BuildMainMenu(app, win) {
     var menuTemplate = [
         {
             label: "File",

@@ -1,10 +1,23 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
 import Node from "./Node";
+import FiltersCollection from "../../lib/FiltersCollection";
 
-class TreeSublist extends Component {
-    constructor(props) {
+interface Props {
+    listData: string[];
+    listTitle: string;
+    filters: FiltersCollection;
+    filterFieldName: string;
+    handleChangeSelectedFilter: (e: any) => void;
+    searchString: string;
+}
+
+interface State {
+    isOpen: boolean;
+}
+
+class TreeSublist extends React.Component<Props, State> {
+    constructor(props: Props) {
         super(props);
         this.state = {
             isOpen: true
@@ -16,7 +29,7 @@ class TreeSublist extends Component {
      *
      * @param event e
      */
-    handleOpenClose(e) {
+    handleOpenClose(e: any) {
         let isOpen = true;
         if (this.state.isOpen) {
             isOpen = false;
@@ -35,7 +48,7 @@ class TreeSublist extends Component {
         } = this.props;
         const { isOpen } = this.state;
 
-        let sublist = [];
+        let sublist: React.ReactElement[] = [];
 
         listData.forEach(function(itemName) {
             const safeName = itemName.toLowerCase();
@@ -46,7 +59,6 @@ class TreeSublist extends Component {
                     handleChangeSelectedFilter={handleChangeSelectedFilter}
                     filterFieldName={filterFieldName}
                     filters={filters}
-                    searchString={searchString}
                     itemName={itemName}
                 />
             );
@@ -59,7 +71,7 @@ class TreeSublist extends Component {
         });
 
         let iconClasses = "fa fa-plus-circle khb-treelist-icon";
-        let sublistContent = "";
+        let sublistContent = null;
         if (isOpen) {
             iconClasses = "fa fa-minus-circle khb-treelist-icon";
             sublistContent = sublist;
@@ -79,14 +91,5 @@ class TreeSublist extends Component {
         );
     }
 }
-
-TreeSublist.propTypes = {
-    listData: PropTypes.array,
-    listTitle: PropTypes.string,
-    filters: PropTypes.object,
-    filterFieldName: PropTypes.string,
-    handleChangeSelectedFilter: PropTypes.func,
-    searchString: PropTypes.string
-};
 
 export default TreeSublist;

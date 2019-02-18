@@ -1,11 +1,24 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 
 import SearchBox from "./SearchBox";
 import TreeSublist from "./TreeSublist";
+import FiltersCollection from "../../lib/FiltersCollection";
+import * as Types from "../../types";
 
-class TreeList extends Component {
-    constructor(props) {
+interface Props {
+    authors: Types.Authors;
+    titles: Types.Titles;
+    handleChangeSelectedFilter: (e: any) => void;
+    filters: FiltersCollection;
+}
+
+interface State {
+    searchString: string;
+    originalSearchString: string;
+}
+
+class TreeList extends React.Component<Props, State> {
+    constructor(props: Props) {
         super(props);
 
         this.state = {
@@ -20,7 +33,7 @@ class TreeList extends Component {
      *
      * @param event e
      */
-    handleSearchChange(e) {
+    handleSearchChange(e: any) {
         let originalSearchString = e.target.value;
         this.setState({
             searchString: originalSearchString.toLowerCase().trim(),
@@ -34,7 +47,7 @@ class TreeList extends Component {
      *
      * @param event e
      */
-    handleClearSearch(e) {
+    handleClearSearch(e: any) {
         this.setState({
             searchString: "",
             originalSearchString: ""
@@ -78,12 +91,5 @@ class TreeList extends Component {
         );
     }
 }
-
-TreeList.propTypes = {
-    authors: PropTypes.array,
-    titles: PropTypes.array,
-    handleChangeSelectedFilter: PropTypes.func,
-    filters: PropTypes.object
-};
 
 export default TreeList;

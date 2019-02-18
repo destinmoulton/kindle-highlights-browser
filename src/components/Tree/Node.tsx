@@ -1,7 +1,14 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+import FiltersCollection from "../../lib/FiltersCollection";
 
-function Node(props) {
+interface Props {
+    itemName: string;
+    handleChangeSelectedFilter: (e: any) => void;
+    filterFieldName: string;
+    filters: FiltersCollection;
+}
+
+function Node(props: Props) {
     const {
         itemName,
         handleChangeSelectedFilter,
@@ -27,11 +34,6 @@ function Node(props) {
     );
 }
 
-Node.propTypes = {
-    itemName: PropTypes.string,
-    handleChangeSelectedFilter: PropTypes.func,
-    filterFieldName: PropTypes.string,
-    filters: PropTypes.object
-};
+Node.propTypes = {};
 
 export default Node;

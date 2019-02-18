@@ -8,12 +8,12 @@ import {
 } from "react-sortable-hoc";
 
 const SortableItem = SortableElement(({ value }: { value: string }) => (
-    <li>{value}</li>
+    <div className="khb-csvsort-list-item">{value}</div>
 ));
 
 const SortableList = SortableContainer(({ items }: SortableItems) => {
     return (
-        <ul>
+        <div className="khb-csvsort-list-container">
             {items.map((item: ClipColumn, index: number) => (
                 <SortableItem
                     key={`item-${index}`}
@@ -21,7 +21,7 @@ const SortableList = SortableContainer(({ items }: SortableItems) => {
                     value={item.name}
                 />
             ))}
-        </ul>
+        </div>
     );
 });
 
@@ -65,9 +65,13 @@ class SortableComponent extends React.Component<Props, SortableItems> {
 
     render() {
         return (
-            <SortableList items={this.state.items} onSortEnd={this.onSortEnd} />
+            <SortableList
+                axis="x"
+                items={this.state.items}
+                onSortEnd={this.onSortEnd}
+            />
         );
     }
 }
 
-render(<SortableComponent />, document.getElementById("root"));
+export default SortableComponent;

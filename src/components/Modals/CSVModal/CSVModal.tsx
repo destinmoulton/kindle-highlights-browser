@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { Modal, Row } from "react-bootstrap";
 
+import ColumnReorder from "./ColumnReorder";
 import * as Types from "../../../types";
 
 interface Props {
@@ -23,7 +24,9 @@ class CSVModal extends React.Component<Props> {
                     <Modal.Title>Export as CSV</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Row />
+                    <div className="khb-csvsort-list-wrapper">
+                        <ColumnReorder />
+                    </div>
                 </Modal.Body>
             </Modal>
         );

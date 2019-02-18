@@ -128,3 +128,37 @@ i.khb-clipslist-icon {
 #khb-exportpreview-textarea {
     height: 300px;
 }
+
+/** csvSortableHelper needs to be above the modal **/
+
+div.khb-csvsort-list-wrapper {
+    display: table;
+    margin: 0 auto;
+}
+
+div.khb-csvsort-list-container {
+    position: relative;
+    display: flex;
+    z-index: 9998;
+    background-color: #f3f3f3;
+    border: 1px solid #efefef;
+    border-radius: 3px;
+    outline: none;
+    width: 100%;
+}
+
+div.khb-csvsort-list-item {
+    display: flex;
+    flex-shrink: 0;
+    background-color: white;
+    height: 32px;
+    padding: 6px;
+    cursor: pointer;
+    border: 1px solid #efefef;
+    z-index: 9999;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

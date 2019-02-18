@@ -58,3 +58,8 @@ export interface ExportOptions {
     separators: ExportSeparators;
     radios: ExportRadios;
 }
+
+export interface CSVColumn {
+    key: string;
+    name: string;
+}

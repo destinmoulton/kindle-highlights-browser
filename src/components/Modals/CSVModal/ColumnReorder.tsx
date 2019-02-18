@@ -6,6 +6,7 @@ import {
     SortableElement,
     arrayMove
 } from "react-sortable-hoc";
+import * as Types from "../../../types";
 
 const SortableItem = SortableElement(({ value }: { value: string }) => (
     <div className="khb-csvsort-list-item">{value}</div>
@@ -14,7 +15,7 @@ const SortableItem = SortableElement(({ value }: { value: string }) => (
 const SortableList = SortableContainer(({ items }: SortableItems) => {
     return (
         <div className="khb-csvsort-list-container">
-            {items.map((item: ClipColumn, index: number) => (
+            {items.map((item: Types.CSVColumn, index: number) => (
                 <SortableItem
                     key={`item-${index}`}
                     index={index}
@@ -25,53 +26,23 @@ const SortableList = SortableContainer(({ items }: SortableItems) => {
     );
 });
 
-interface ClipColumn {
-    key: string;
-    name: string;
-}
-
-interface Props {}
-interface SortableItems {
-    items: ClipColumn[];
-}
-
-const ClipColumns: ClipColumn[] = [
-    { key: "title", name: "Title" },
-    { key: "authorFullName", name: "Author" },
-    { key: "location", name: "Location" },
-    { key: "text", name: "Text" }
-];
-
-class ColumnReorder extends React.Component<Props, SortableItems> {
-    constructor(props: Props) {
-        super(props);
-
-        this.state = {
-            items: ClipColumns
-        };
-    }
-
-    onSortEnd = ({
+interface Props {
+    columns: Types.CSVColumn[];
+    onSortEnd: ({
         oldIndex,
         newIndex
     }: {
         oldIndex: number;
         newIndex: number;
-    }) => {
-        this.setState(({ items }) => ({
-            items: arrayMove(items, oldIndex, newIndex)
-        }));
-    };
-
-    render() {
-        return (
-            <SortableList
-                axis="x"
-                items={this.state.items}
-                onSortEnd={this.onSortEnd}
-            />
-        );
-    }
+    }) => void;
 }
+interface SortableItems {
+    items: Types.CSVColumn[];
+}
+
+const ColumnReorder = (props: Props) => {
+    const { columns, onSortEnd } = props;
+    return <SortableList axis="x" items={columns} onSortEnd={onSortEnd} />;
+};
 
 export default ColumnReorder;

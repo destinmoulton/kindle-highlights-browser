@@ -1,7 +1,6 @@
 import * as React from "react";
 
-import FormControl from "react-bootstrap/FormControl";
-import InputGroup from "react-bootstrap/InputGroup";
+import { FormControl, InputGroup } from "react-bootstrap";
 
 interface Props {
     handleClearSearch: (e: any) => {};

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import Card from "react-bootstrap/Card";
+import { Card } from "react-bootstrap";
 export default () => {
     return (
         <Card className="khb-home-panel">

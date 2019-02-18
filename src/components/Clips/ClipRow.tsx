@@ -3,8 +3,8 @@ import * as Types from "../../types";
 interface Props {
     clip: Types.Clip;
 }
-export default (props: Props) => {
-    const { clip } = this.props;
+const ClipRow = (props: Props) => {
+    const { clip } = props;
     let loc = "";
     let icon = null;
     let quote = "";
@@ -48,3 +48,4 @@ export default (props: Props) => {
         </div>
     );
 };
+export default ClipRow;

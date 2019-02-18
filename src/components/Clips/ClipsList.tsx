@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import Card from "react-bootstrap/Card";
+import { Card } from "react-bootstrap";
 
 import ClipRow from "./ClipRow";
 import ClipSorter from "../../lib/ClipSorter";

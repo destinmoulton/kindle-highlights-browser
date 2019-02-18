@@ -1,12 +1,13 @@
 import * as React from "react";
 
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import Col from "react-bootstrap/Col";
-import FormControl from "react-bootstrap/FormControl";
-import InputGroup from "react-bootstrap/InputGroup";
-
-import Row from "react-bootstrap/Row";
+import {
+    Button,
+    ButtonGroup,
+    Col,
+    FormControl,
+    InputGroup,
+    Row
+} from "react-bootstrap";
 
 import SaveCopyModal from "../Modals/SaveCopyModal/SaveCopyModal";
 import CSVModal from "../Modals/CSVModal/CSVModal";

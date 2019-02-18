@@ -1,10 +1,9 @@
 import * as React from "react";
 
-import Col from "react-bootstrap/Col";
+import { Col, Row } from "react-bootstrap";
 import TreeList from "./Tree/TreeList";
 import ClipsContainer from "./Clips/ClipsContainer";
 import EmptyClipList from "./Clips/EmptyClipList";
-import Row from "react-bootstrap/Row";
 
 import FiltersCollection from "../lib/FiltersCollection";
 import * as Types from "../types";

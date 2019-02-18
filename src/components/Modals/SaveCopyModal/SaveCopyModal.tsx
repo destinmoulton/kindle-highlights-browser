@@ -3,11 +3,7 @@ import { EOL } from "os";
 
 import * as React from "react";
 
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import Col from "react-bootstrap/Col";
-import Modal from "react-bootstrap/Modal";
-import Row from "react-bootstrap/Row";
+import { Button, ButtonGroup, Col, Modal, Row } from "react-bootstrap";
 
 import { clipboard, remote } from "electron";
 import * as moment from "moment";

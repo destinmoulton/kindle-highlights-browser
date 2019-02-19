@@ -1,10 +1,17 @@
+import * as fs from "fs";
 import * as React from "react";
 
-import { Card, Col, Form, Modal, Row } from "react-bootstrap";
+import { Card, Col, Form, Modal, Row, Button } from "react-bootstrap";
 import { arrayMove } from "react-sortable-hoc";
+import { remote } from "electron";
+
+import convertArrayToCSV from "convert-array-to-csv";
 
 import ColumnReorder from "./ColumnReorder";
+import { errorDialog } from "../../../lib/errorDialog";
 import * as Types from "../../../types";
+
+const FILE_EXT = ".csv";
 
 const ClipColumns: Types.CSVColumn[] = [
     { key: "title", name: "Title" },
@@ -63,6 +70,50 @@ class CSVModal extends React.Component<Props, State> {
         });
     };
 
+    _handleClickGenerate = (e: any) => {
+        const { filteredClips } = this.props;
+
+        let headerNames: string[] = [];
+        let headerKeys: string[] = [];
+
+        for (let col of this.state.columns) {
+            headerNames.push(col.name);
+            headerKeys.push(col.key);
+        }
+
+        const titles = Object.keys(filteredClips);
+        const possibleTitle = titles[0].substr(0, 25);
+
+        let exportable: string[][] = [];
+        for (let title of titles) {
+            for (let inRow of filteredClips[title]) {
+                let outRow = [];
+                for (let key of headerKeys) {
+                    outRow.push(inRow[key].toString());
+                }
+                exportable.push(outRow);
+            }
+        }
+
+        remote.dialog.showSaveDialog(
+            { defaultPath: possibleTitle + FILE_EXT },
+            filename => {
+                const csvStr = convertArrayToCSV(exportable, {
+                    header: headerNames
+                });
+                if (typeof filename === "string") {
+                    fs.writeFile(filename, csvStr, function(err) {
+                        if (err) {
+                            return errorDialog(
+                                "There was a problem saving the file.\n" + err
+                            );
+                        }
+                    });
+                }
+            }
+        );
+    };
+
     _renderPreview() {
         const { columns, dateFormat } = this.state;
 
@@ -71,13 +122,13 @@ class CSVModal extends React.Component<Props, State> {
         columns.map((column, index) => {
             const comma = index > 0 ? ", " : "";
             titleRow.push(
-                <span>
+                <span key={"col-" + index}>
                     {comma}
                     {column.name}
                 </span>
             );
             exampleRow.push(
-                <span>
+                <span key={"ex-" + index}>
                     {comma}
                     {Example[column.key]}
                 </span>
@@ -155,6 +206,12 @@ class CSVModal extends React.Component<Props, State> {
                         </Col>
                     </Row>
                 </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={this._handleClickGenerate}>
+                        <i className="fa fa-save" />
+                        Generate CSV
+                    </Button>
+                </Modal.Footer>
             </Modal>
         );
     }

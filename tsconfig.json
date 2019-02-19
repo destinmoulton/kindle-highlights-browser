@@ -5,7 +5,8 @@
         "noImplicitAny": true,
         "module": "commonjs",
         "target": "es5",
-        "jsx": "react"
+        "jsx": "react",
+        "typeRoots": ["types"]
     },
-    "include": ["./src/**/*"]
+    "include": ["./src/**/*", "types/convert-array-to-csv.d.ts"]
 }

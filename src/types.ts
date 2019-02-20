@@ -2,15 +2,24 @@ import * as moment from "moment";
 
 export type ClipKey = number;
 
+export enum ClipType {
+    Note,
+    Highlight,
+    HighlightWithNote
+}
+
 export interface Clip {
     [key: string]: string | Location | number | moment.Moment;
     title: string;
     authorFullName: string;
     location: Location;
+    location_end: number;
     location_start: number;
     date: moment.Moment;
     unix_timestamp: number;
-    text: string;
+    highlight: string;
+    note: string;
+    type: ClipType;
 }
 
 export type ClippingsMap = Map<ClipKey, Clip>;

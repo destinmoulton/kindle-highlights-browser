@@ -11,7 +11,7 @@ import * as moment from "moment";
 import ExportOptions from "./ExportOptions";
 import ExportPreview from "./ExportPreview";
 
-import { generateClipsString } from "../../../lib/generateClipsString";
+import PreviewGenerator from "../../../lib/PreviewGenerator";
 import { errorDialog } from "../../../lib/errorDialog";
 import * as Types from "../../../types";
 
@@ -37,14 +37,14 @@ class SaveCopyModal extends React.Component<Props, State> {
             checkboxes: {
                 location: true,
                 date: true,
-                quote: true
+                quote: false
             },
             separators: {
                 title: "=====================================",
-                clip: "--------------------------"
+                clip: "---"
             },
             radios: {
-                clip_separator: "line"
+                clip_separator: "text"
             }
         };
 
@@ -124,10 +124,12 @@ class SaveCopyModal extends React.Component<Props, State> {
             { defaultPath: possibleTitle + FILE_EXT },
             filename => {
                 if (typeof filename === "string") {
-                    const strToWrite = generateClipsString(
-                        this.props.filteredClips,
+                    const previewGenerator = new PreviewGenerator(
                         this.state.exportOptions,
                         EOL
+                    );
+                    const strToWrite = previewGenerator.generate(
+                        this.props.filteredClips
                     );
                     fs.writeFile(filename, strToWrite, function(err) {
                         if (err) {
@@ -145,11 +147,11 @@ class SaveCopyModal extends React.Component<Props, State> {
      * Copy generated clip string to the clipboard.
      */
     handleCopyClips() {
-        const strToCopy = generateClipsString(
-            this.props.filteredClips,
+        const previewGenerator = new PreviewGenerator(
             this.state.exportOptions,
             EOL
         );
+        const strToCopy = previewGenerator.generate(this.props.filteredClips);
 
         clipboard.writeText(strToCopy);
     }

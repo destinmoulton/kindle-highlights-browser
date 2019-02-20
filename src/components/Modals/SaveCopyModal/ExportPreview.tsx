@@ -3,7 +3,7 @@ import * as React from "react";
 import { Form } from "react-bootstrap";
 import * as Types from "../../../types";
 
-import { generateClipsString } from "../../../lib/generateClipsString";
+import PreviewGenerator from "../../../lib/PreviewGenerator";
 interface Props {
     exportOptions: Types.ExportOptions;
     filteredClips: Types.FilteredClips;
@@ -17,11 +17,14 @@ class ExportPreview extends React.Component<Props> {
 
     render() {
         const { filteredClips, exportOptions } = this.props;
-        const clipsPreview = generateClipsString(
-            filteredClips,
+
+        const previewGenerator = new PreviewGenerator(
             exportOptions,
             TEXTAREA_EOL
         );
+
+        const clipsPreview = previewGenerator.generate(filteredClips);
+
         return (
             <Form>
                 <Form.Group controlId="khb-exportpreview-textarea">

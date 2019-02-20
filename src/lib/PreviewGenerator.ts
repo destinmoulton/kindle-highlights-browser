@@ -5,7 +5,7 @@ export default class PreviewGenerator {
     radios: Types.ExportRadios;
     separators: Types.ExportSeparators;
 
-    setup(exportOptions: Types.ExportOptions, eol: string) {
+    constructor(exportOptions: Types.ExportOptions, eol: string) {
         const { checkboxes, radios, separators } = exportOptions;
         this.checkboxes = checkboxes;
         this.radios = radios;
@@ -17,7 +17,7 @@ export default class PreviewGenerator {
      * Generate the formatted export string.
      *  The export options are set in the modal export popover.
      */
-    generateClipsString(clips: Types.FilteredClips) {
+    generate(clips: Types.FilteredClips) {
         let quotationMark = this.checkboxes.quote ? '"' : "";
 
         let clipsString = "";

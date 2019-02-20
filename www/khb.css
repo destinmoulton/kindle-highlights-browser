@@ -121,8 +121,42 @@ div.khb-clipslist-container {
     z-index: 1;
 }
 
-i.khb-clipslist-icon {
+.khb-clipcard-card {
+    margin-bottom: 7px;
+}
+
+.khb-clipcard-body {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+i.khb-clipcard-icon {
     color: gray;
+}
+
+div.khb-clipcard-footer {
+    text-align: right;
+    color: gray;
+    font-size: 0.7em;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+div.khb-clipcard-highlight {
+    background-color: lightyellow;
+    padding: 5px;
+}
+
+div.khb-clipcard-note {
+    background-color: rgb(240, 251, 255);
+    padding: 5px;
+}
+
+div.khb-clipcard-note-with-highlight {
+    border-left-style: dotted;
+    border-left-width: 2px;
+    border-left-color: gray;
+    padding-left: 10px;
 }
 
 #khb-exportpreview-textarea {

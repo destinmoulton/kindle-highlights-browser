@@ -50,6 +50,7 @@ export default class MyClippingsParser {
         const clips = contents.split(CLIPPING_SEPARATOR);
 
         let clippings: Types.ClippingsMap = new Map();
+        let locationEndMap: Map<string, number> = new Map();
         let current_title = "";
         clips.map(clip => {
             let lines = clip.split(/\r?\n/);
@@ -66,6 +67,7 @@ export default class MyClippingsParser {
 
             const {
                 location,
+                location_end,
                 location_start,
                 date,
                 unix_timestamp
@@ -80,15 +82,49 @@ export default class MyClippingsParser {
                         this.titles.add(title);
                     }
 
-                    clippings.set(unix_timestamp, {
-                        title,
-                        authorFullName,
-                        location,
-                        location_start,
-                        date,
-                        unix_timestamp,
-                        text: lines[3]
-                    });
+                    const clipContent = lines[3];
+
+                    const locationMapID =
+                        location_end.toString() + title + authorFullName;
+
+                    if (location.type === "note") {
+                        if (locationEndMap.has(locationMapID)) {
+                            // Notes can be associated with highlights
+                            const clipKey = locationEndMap.get(locationMapID);
+                            const clip = clippings.get(clipKey);
+                            clip.note = clipContent;
+                            clip.type = Types.ClipType.HighlightWithNote;
+                            clippings.set(clipKey, clip);
+                        } else {
+                            // This note not associated with a highlight
+                            clippings.set(unix_timestamp, {
+                                title,
+                                authorFullName,
+                                location,
+                                location_end,
+                                location_start,
+                                date,
+                                unix_timestamp,
+                                highlight: "",
+                                note: clipContent,
+                                type: Types.ClipType.Note
+                            });
+                        }
+                    } else if (location.type === "highlight") {
+                        locationEndMap.set(locationMapID, unix_timestamp);
+                        clippings.set(unix_timestamp, {
+                            title,
+                            authorFullName,
+                            location,
+                            location_end,
+                            location_start,
+                            date,
+                            unix_timestamp,
+                            highlight: clipContent,
+                            note: "",
+                            type: Types.ClipType.Highlight
+                        });
+                    }
                 }
             }
         });
@@ -170,13 +206,17 @@ export default class MyClippingsParser {
                 };
             }
         }
-
-        const location_start = parseInt(location["value"].split("-")[0]);
+        const locationValues = location["value"].split("-");
+        const location_start = parseInt(locationValues[0]);
+        let location_end = location_start;
+        if (locationValues.length > 1) {
+            location_end = parseInt(locationValues[1]);
+        }
         const dateStr = parts[1].replace(TIME_PREFIX, "");
         const date = moment(dateStr, MOMENT_FORMAT);
 
         const unix_timestamp = date.unix();
-        return { location, location_start, date, unix_timestamp };
+        return { location, location_end, location_start, date, unix_timestamp };
     }
 
     getFileContents(filename: string) {

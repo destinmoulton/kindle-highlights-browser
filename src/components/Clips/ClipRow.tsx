@@ -57,7 +57,6 @@ const ClipRow = (props: Props) => {
                 <Col xs={6} className="khb-clipcard-highlight">
                     {clip.highlight}
                 </Col>
-
                 <Col
                     xs={6}
                     className="khb-clipcard-note khb-clipcard-note-with-highlight"

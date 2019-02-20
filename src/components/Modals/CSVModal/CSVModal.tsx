@@ -10,24 +10,35 @@ import convertArrayToCSV from "convert-array-to-csv";
 import ColumnReorder from "./ColumnReorder";
 import { errorDialog } from "../../../lib/errorDialog";
 import * as Types from "../../../types";
+import moment = require("moment");
 
 const FILE_EXT = ".csv";
 
 const ClipColumns: Types.CSVColumn[] = [
+    { key: "highlight", name: "Highlight" },
+    { key: "note", name: "Note" },
+    {
+        key: "location",
+        name: "Location"
+    },
+    {
+        key: "date",
+        name: "Date"
+    },
     { key: "title", name: "Title" },
-    { key: "authorFullName", name: "Author" },
-    { key: "location", name: "Location" },
-    { key: "text", name: "Text" }
+    { key: "authorFullName", name: "Author" }
 ];
 
 interface IExample {
-    [key: string]: string | number;
+    [key: string]: any;
 }
 const Example: IExample = {
+    highlight: "To Comma, Or Not to Comma",
+    note: "What a classic line!",
+    location: { type: "highlight-with-note", value: "555-666" },
+    date: moment(),
     title: "Hamlet",
-    authorFullName: "Bill Shakespeare",
-    location: "666-999",
-    text: "To Be Or Not to Be"
+    authorFullName: "Bill Shakespeare"
 };
 
 interface Props {
@@ -47,7 +58,7 @@ class CSVModal extends React.Component<Props, State> {
 
         this.state = {
             columns: ClipColumns,
-            dateFormat: "H:mm a MMM D, YYYY"
+            dateFormat: "h:mm a MMM D, YYYY"
         };
     }
 
@@ -71,12 +82,13 @@ class CSVModal extends React.Component<Props, State> {
     };
 
     _handleClickGenerate = (e: any) => {
+        const { columns, dateFormat } = this.state;
         const { filteredClips } = this.props;
 
         let headerNames: string[] = [];
         let headerKeys: string[] = [];
 
-        for (let col of this.state.columns) {
+        for (let col of columns) {
             headerNames.push(col.name);
             headerKeys.push(col.key);
         }
@@ -89,7 +101,15 @@ class CSVModal extends React.Component<Props, State> {
             for (let inRow of filteredClips[title]) {
                 let outRow = [];
                 for (let key of headerKeys) {
-                    outRow.push(inRow[key].toString());
+                    let content = "";
+                    if (key === "date") {
+                        content = inRow[key].format(dateFormat);
+                    } else if (key === "location") {
+                        content = `Location ${inRow[key].value}`;
+                    } else {
+                        content = inRow[key].toString();
+                    }
+                    outRow.push(content);
                 }
                 exportable.push(outRow);
             }
@@ -117,29 +137,24 @@ class CSVModal extends React.Component<Props, State> {
     _renderPreview() {
         const { columns, dateFormat } = this.state;
 
-        let titleRow: React.ReactElement[] = [];
-        let exampleRow: React.ReactElement[] = [];
+        let titleRow: string[] = [];
+        let csvRow: string[] = [];
         columns.map((column, index) => {
-            const comma = index > 0 ? ", " : "";
-            titleRow.push(
-                <span key={"col-" + index}>
-                    {comma}
-                    {column.name}
-                </span>
-            );
-            exampleRow.push(
-                <span key={"ex-" + index}>
-                    {comma}
-                    {Example[column.key]}
-                </span>
-            );
+            titleRow.push(column.name);
+
+            let content = "";
+            if (column.key === "date") {
+                content = Example[column.key].format(dateFormat);
+            } else if (column.key === "location") {
+                content = Example[column.key].value;
+            } else {
+                content = Example[column.key];
+            }
+            csvRow.push(content);
         });
-        return (
-            <div>
-                <div>{titleRow}</div>
-                <div>{exampleRow}</div>
-            </div>
-        );
+
+        const csvString = convertArrayToCSV([csvRow], { header: titleRow });
+        return <div>{csvString}</div>;
     }
 
     render() {
@@ -155,7 +170,7 @@ class CSVModal extends React.Component<Props, State> {
                 </Modal.Header>
                 <Modal.Body>
                     <Row>
-                        <Col xs={6}>
+                        <Col xs={4}>
                             <Card>
                                 <Card.Body>
                                     <Card.Title>Settings</Card.Title>
@@ -195,7 +210,7 @@ class CSVModal extends React.Component<Props, State> {
                                 </Card.Body>
                             </Card>
                         </Col>
-                        <Col xs={6}>
+                        <Col xs={8}>
                             <Card>
                                 <Card.Body>
                                     <Card.Title>Preview</Card.Title>

@@ -46,7 +46,7 @@ class PrefixSuffixTab extends React.Component<Props> {
                         onChange={this._handleOnChange.bind(
                             this,
                             input.id,
-                            "prefix"
+                            "prefixValue"
                         )}
                         value={inputValues[input.id]["prefixValue"]}
                     />
@@ -56,7 +56,7 @@ class PrefixSuffixTab extends React.Component<Props> {
                         onChange={this._handleOnChange.bind(
                             this,
                             input.id,
-                            "suffix"
+                            "suffixValue"
                         )}
                         value={inputValues[input.id]["suffixValue"]}
                     />

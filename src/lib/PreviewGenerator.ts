@@ -25,94 +25,98 @@ export default class PreviewGenerator {
      *  The export options are set in the modal export popover.
      */
     generate(clips: Types.FilteredClips) {
-        let clipsString = "";
+        let clipString = "";
         let titles = Object.keys(clips);
         let bookBegin = true;
         titles.forEach(title => {
             if (!bookBegin) {
                 // Extra newline before the next book
-                clipsString += `${this.EOL}`;
+                clipString += `${this.EOL}`;
             }
 
-            clipsString += this._titleBlock(
+            clipString += this._titleBlock(
                 title,
                 clips[title][0]["authorFullName"]
             );
 
             bookBegin = true;
             clips[title].forEach(clip => {
-                if (!bookBegin && clipsString !== "") {
+                if (!bookBegin && clipString !== "") {
                     if (this.radios.clip_separator === "text") {
-                        clipsString += `${this.EOL}${this.separators.clip}${
+                        clipString += `${this.EOL}${this.separators.clip}${
                             this.EOL
                         }`;
                     } else if (this.radios.clip_separator === "line") {
-                        clipsString += `${this.EOL}${this.EOL}`;
+                        clipString += `${this.EOL}${this.EOL}`;
                     } else {
-                        clipsString += `${this.EOL}`;
+                        clipString += `${this.EOL}`;
                     }
                 }
 
-                clipsString += this._locationTimeLine(clip);
+                clipString += this._locationTimeLine(clip);
 
                 if (clip.highlight !== "") {
-                    clipsString += `> ${clip.highlight}`;
+                    clipString += `${this.prefsuf.highlight.prefixValue}${
+                        clip.highlight
+                    }${this.prefsuf.highlight.suffixValue}`;
                 }
 
                 if (clip.note !== "") {
-                    clipsString += `${this.EOL}${this.EOL}`;
-                    clipsString += "`" + clip.note + "`";
-                    clipsString += `${this.EOL}`;
+                    clipString += `${this.EOL}${this.EOL}`;
+                    clipString += this.prefsuf.note.prefixValue;
+                    clipString += clip.note;
+                    clipString += this.prefsuf.note.suffixValue;
+                    clipString += `${this.EOL}`;
                 }
                 bookBegin = false;
             });
 
-            clipsString += `${this.EOL}`;
+            clipString += `${this.EOL}`;
         });
-        return clipsString;
+        return clipString;
     }
 
     _titleBlock(title: string, authorFullName: string) {
-        let clipsString = `${this.separators.title}${this.EOL}`;
-        clipsString += `${title}${this.EOL}`;
-        clipsString += `By ${authorFullName}${this.EOL}`;
-        clipsString += `${this.separators.title}${this.EOL}`;
-        return clipsString;
+        let clipString = `${this.separators.title}${this.EOL}`;
+        clipString += `${title}${this.EOL}`;
+        clipString += `By ${authorFullName}${this.EOL}`;
+        clipString += `${this.separators.title}${this.EOL}`;
+        return clipString;
     }
 
     _locationTimeLine(clip: Types.Clip) {
         const includeLocation = this.checkboxes.location;
         const includeDate = this.checkboxes.date;
-        let clipsString = "";
+        let clipString = "";
 
         if (includeLocation || includeDate) {
-            clipsString += this.prefsuf.location.prefixValue;
+            clipString += this.prefsuf.location.prefixValue;
         }
 
         if (includeLocation) {
             if (clip.type === Types.ClipType.Highlight) {
-                clipsString += "Highlight at ";
+                clipString += "Highlight at ";
             } else if (clip.type === Types.ClipType.Note) {
-                clipsString += "Note at ";
+                clipString += "Note at ";
             } else if (clip.type === Types.ClipType.HighlightWithNote) {
-                clipsString += "Highlight with Note at ";
+                clipString += "Highlight with Note at ";
             }
 
-            clipsString += `Location: ${clip.location.value}`;
+            clipString += `Location: ${clip.location.value}`;
         }
 
         if (includeLocation && includeDate) {
-            clipsString += " -- ";
+            clipString += " -- ";
         }
 
         if (includeDate) {
-            clipsString += `${clip.date.format("MMMM DD, YYYY h:mm:ss a")}`;
+            clipString += `${clip.date.format("MMMM DD, YYYY h:mm:ss a")}`;
         }
 
         if (includeLocation || includeDate) {
-            clipsString += this.prefsuf.location.suffixValue;
-            clipsString += `${this.EOL}`;
+            clipString += this.prefsuf.location.suffixValue;
+            clipString += `${this.EOL}`;
         }
-        return clipsString;
+        return clipString;
     }
 }

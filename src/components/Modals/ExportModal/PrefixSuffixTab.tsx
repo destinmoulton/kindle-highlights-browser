@@ -36,7 +36,7 @@ class PrefixSuffixTab extends React.Component<Props> {
 
         return this._prePostInputs.map(input => {
             return (
-                <InputGroup size="sm">
+                <InputGroup key={input.id} size="sm">
                     <InputGroup.Prepend>
                         <InputGroup.Text>{input.name}</InputGroup.Text>
                     </InputGroup.Prepend>

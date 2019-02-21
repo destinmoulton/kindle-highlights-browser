@@ -137,6 +137,7 @@ class ExportModal extends React.Component<Props, State> {
     }
 
     handlePrefixSuffixChange(id: string, position: string, value: string) {
+        console.log("handlePrefixSuffixChange()", id, position, value);
         const { exportOptions } = this.state;
         exportOptions.prefixsuffixes[id][position] = value;
         this.setState({
@@ -231,9 +232,9 @@ class ExportModal extends React.Component<Props, State> {
                                     title="Prefix/Suffix"
                                 >
                                     <PrefixSuffixTab
-                                        onChangeValue={
-                                            this.handlePrefixSuffixChange
-                                        }
+                                        onChangeValue={this.handlePrefixSuffixChange.bind(
+                                            this
+                                        )}
                                         inputValues={
                                             exportOptions.prefixsuffixes
                                         }

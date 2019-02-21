@@ -41,16 +41,6 @@ function ExportOptions(props: Props) {
                 />
             </Form.Group>
             <Form.Group>
-                <Form.Check
-                    inline
-                    checked={checkboxes.quote}
-                    onChange={handleCheckboxChange}
-                    value="quote"
-                    type="checkbox"
-                    label="Include Quotation Marks"
-                />
-            </Form.Group>
-            <Form.Group>
                 <Form.Label>Book Title Separator</Form.Label>
                 <Form.Control
                     type="text"

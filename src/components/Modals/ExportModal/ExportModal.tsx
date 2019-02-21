@@ -29,7 +29,7 @@ interface State {
     exportOptions: Types.ExportOptions;
 }
 
-class SaveCopyModal extends React.Component<Props, State> {
+class ExportModal extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
 
@@ -229,4 +229,4 @@ class SaveCopyModal extends React.Component<Props, State> {
     }
 }
 
-export default SaveCopyModal;
+export default ExportModal;

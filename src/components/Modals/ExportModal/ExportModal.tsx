@@ -3,13 +3,22 @@ import { EOL } from "os";
 
 import * as React from "react";
 
-import { Button, ButtonGroup, Col, Modal, Row } from "react-bootstrap";
+import {
+    Button,
+    ButtonGroup,
+    Col,
+    Modal,
+    Row,
+    Tabs,
+    Tab
+} from "react-bootstrap";
 
 import { clipboard, remote } from "electron";
 import * as moment from "moment";
 
 import ExportOptions from "./ExportOptions";
 import ExportPreview from "./ExportPreview";
+import PrefixSuffixTab from "./PrefixSuffixTab";
 
 import PreviewGenerator from "../../../lib/PreviewGenerator";
 import { errorDialog } from "../../../lib/errorDialog";
@@ -36,8 +45,7 @@ class ExportModal extends React.Component<Props, State> {
         const exportOptions: Types.ExportOptions = {
             checkboxes: {
                 location: true,
-                date: true,
-                quote: false
+                date: false
             },
             separators: {
                 title: "=====================================",
@@ -45,6 +53,20 @@ class ExportModal extends React.Component<Props, State> {
             },
             radios: {
                 clip_separator: "text"
+            },
+            prefixsuffixes: {
+                location: {
+                    prefixValue: "",
+                    suffixValue: ""
+                },
+                highlight: {
+                    prefixValue: "",
+                    suffixValue: ""
+                },
+                note: {
+                    prefixValue: "",
+                    suffixValue: ""
+                }
             }
         };
 
@@ -114,6 +136,14 @@ class ExportModal extends React.Component<Props, State> {
         });
     }
 
+    handlePrefixSuffixChange(id: string, position: string, value: string) {
+        const { exportOptions } = this.state;
+        exportOptions.prefixsuffixes[id][position] = value;
+        this.setState({
+            exportOptions
+        });
+    }
+
     /**
      * Show the file save dialog box and save the clip
      * string to the selected file.
@@ -177,18 +207,39 @@ class ExportModal extends React.Component<Props, State> {
                 <Modal.Body>
                     <Row>
                         <Col xs={4}>
-                            <ExportOptions
-                                exportOptions={exportOptions}
-                                handleCheckboxChange={this.handleCheckboxChange.bind(
-                                    this
-                                )}
-                                handleRadioChange={this.handleRadioChange.bind(
-                                    this
-                                )}
-                                handleSeparatorChange={this.handleSeparatorChange.bind(
-                                    this
-                                )}
-                            />
+                            <Tabs
+                                defaultActiveKey="options"
+                                transition={false}
+                                id="exportmodal-tabs"
+                            >
+                                <Tab eventKey="options" title="Options">
+                                    <ExportOptions
+                                        exportOptions={exportOptions}
+                                        handleCheckboxChange={this.handleCheckboxChange.bind(
+                                            this
+                                        )}
+                                        handleRadioChange={this.handleRadioChange.bind(
+                                            this
+                                        )}
+                                        handleSeparatorChange={this.handleSeparatorChange.bind(
+                                            this
+                                        )}
+                                    />
+                                </Tab>
+                                <Tab
+                                    eventKey="prefixsuffix"
+                                    title="Prefix/Suffix"
+                                >
+                                    <PrefixSuffixTab
+                                        onChangeValue={
+                                            this.handlePrefixSuffixChange
+                                        }
+                                        inputValues={
+                                            exportOptions.prefixsuffixes
+                                        }
+                                    />
+                                </Tab>
+                            </Tabs>
                         </Col>
                         <Col xs={8}>
                             <ExportPreview

@@ -48,7 +48,6 @@ export interface ExportCheckboxes {
     [key: string]: boolean;
     location: boolean;
     date: boolean;
-    quote: boolean;
 }
 
 export interface ExportSeparators {

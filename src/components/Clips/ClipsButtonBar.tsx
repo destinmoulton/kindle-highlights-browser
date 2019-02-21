@@ -9,7 +9,7 @@ import {
     Row
 } from "react-bootstrap";
 
-import SaveCopyModal from "../Modals/SaveCopyModal/SaveCopyModal";
+import ExportModal from "../Modals/ExportModal/ExportModal";
 import CSVModal from "../Modals/CSVModal/CSVModal";
 import * as Types from "../../types";
 
@@ -56,7 +56,7 @@ class ClipsButtonBar extends React.Component<Props, State> {
         const { sortChangeHandler, filteredClips } = this.props;
         return (
             <div className="khb-clipslist-buttonbar">
-                <SaveCopyModal
+                <ExportModal
                     closeModalHandler={this.closeModal.bind(
                         this,
                         "scModalIsOpen"
@@ -83,7 +83,7 @@ class ClipsButtonBar extends React.Component<Props, State> {
                                     "scModalIsOpen"
                                 )}
                             >
-                                <i className="fa fa-save" /> Save or Copy
+                                <i className="fa fa-save" /> Export
                             </Button>
                             <Button
                                 variant="secondary"

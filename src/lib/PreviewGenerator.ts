@@ -57,7 +57,7 @@ export default class PreviewGenerator {
                 }
 
                 if (clip.note !== "") {
-                    clipsString += `${this.EOL}`;
+                    clipsString += `${this.EOL}${this.EOL}`;
                     clipsString += "`" + clip.note + "`";
                     clipsString += `${this.EOL}`;
                 }

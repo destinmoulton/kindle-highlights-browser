@@ -62,6 +62,15 @@ export interface ExportRadios {
     clip_separator: string;
 }
 
+export interface ExportPrefixSuffixElement {
+    prefixValue: string;
+    suffixValue: string;
+}
+
+export interface ExportPrefixSuffixElements {
+    [key: string]: ExportPrefixSuffixElement;
+}
+
 export interface ExportOptions {
     checkboxes: ExportCheckboxes;
     separators: ExportSeparators;

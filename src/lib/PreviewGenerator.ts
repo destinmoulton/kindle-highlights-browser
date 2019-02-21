@@ -18,8 +18,6 @@ export default class PreviewGenerator {
      *  The export options are set in the modal export popover.
      */
     generate(clips: Types.FilteredClips) {
-        let quotationMark = this.checkboxes.quote ? '"' : "";
-
         let clipsString = "";
         let titles = Object.keys(clips);
         let bookBegin = true;
@@ -51,9 +49,7 @@ export default class PreviewGenerator {
                 clipsString += this._locationTimeLine(clip);
 
                 if (clip.highlight !== "") {
-                    clipsString += `> ${quotationMark}${
-                        clip.highlight
-                    }${quotationMark}`;
+                    clipsString += `> ${clip.highlight}`;
                 }
 
                 if (clip.note !== "") {

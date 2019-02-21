@@ -4,12 +4,19 @@ export default class PreviewGenerator {
     checkboxes: Types.ExportCheckboxes;
     radios: Types.ExportRadios;
     separators: Types.ExportSeparators;
+    prefsuf: Types.ExportPrefixSuffixElements;
 
     constructor(exportOptions: Types.ExportOptions, eol: string) {
-        const { checkboxes, radios, separators } = exportOptions;
+        const {
+            checkboxes,
+            radios,
+            separators,
+            prefixsuffixes
+        } = exportOptions;
         this.checkboxes = checkboxes;
         this.radios = radios;
         this.separators = separators;
+        this.prefsuf = prefixsuffixes;
         this.EOL = eol;
     }
 
@@ -79,7 +86,7 @@ export default class PreviewGenerator {
         let clipsString = "";
 
         if (includeLocation || includeDate) {
-            clipsString += "_"; // italics
+            clipsString += this.prefsuf.location.prefixValue;
         }
 
         if (includeLocation) {
@@ -101,11 +108,9 @@ export default class PreviewGenerator {
         if (includeDate) {
             clipsString += `${clip.date.format("MMMM DD, YYYY h:mm:ss a")}`;
         }
-        if (includeLocation || includeDate) {
-            clipsString += "_"; // italics
-        }
 
         if (includeLocation || includeDate) {
+            clipsString += this.prefsuf.location.suffixValue;
             clipsString += `${this.EOL}`;
         }
         return clipsString;

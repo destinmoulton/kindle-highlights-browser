@@ -62,6 +62,7 @@ export interface ExportRadios {
 }
 
 export interface ExportPrefixSuffixElement {
+    [key: string]: string;
     prefixValue: string;
     suffixValue: string;
 }
@@ -74,6 +75,7 @@ export interface ExportOptions {
     checkboxes: ExportCheckboxes;
     separators: ExportSeparators;
     radios: ExportRadios;
+    prefixsuffixes: ExportPrefixSuffixElements;
 }
 
 export interface CSVColumn {

@@ -62,9 +62,10 @@ export interface ExportRadios {
 }
 
 export interface ExportPrefixSuffixElement {
-    [key: string]: string;
+    [key: string]: string | number;
     prefixValue: string;
     suffixValue: string;
+    suffixEOL: number;
 }
 
 export interface ExportPrefixSuffixElements {

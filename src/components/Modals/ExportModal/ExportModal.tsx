@@ -57,15 +57,18 @@ class ExportModal extends React.Component<Props, State> {
             prefixsuffixes: {
                 location: {
                     prefixValue: "",
-                    suffixValue: ""
+                    suffixValue: "",
+                    suffixEOL: 1
                 },
                 highlight: {
                     prefixValue: "",
-                    suffixValue: ""
+                    suffixValue: "",
+                    suffixEOL: 1
                 },
                 note: {
                     prefixValue: "",
-                    suffixValue: ""
+                    suffixValue: "",
+                    suffixEOL: 1
                 }
             }
         };

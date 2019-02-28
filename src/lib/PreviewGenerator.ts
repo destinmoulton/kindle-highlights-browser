@@ -31,7 +31,7 @@ export default class PreviewGenerator {
         titles.forEach(title => {
             if (!bookBegin) {
                 // Extra newline before the next book
-                clipString += `${this.EOL}`;
+                clipString += this.EOL;
             }
 
             clipString += this._titleBlock(
@@ -49,29 +49,38 @@ export default class PreviewGenerator {
                     } else if (this.radios.clip_separator === "line") {
                         clipString += `${this.EOL}${this.EOL}`;
                     } else {
-                        clipString += `${this.EOL}`;
+                        clipString += this.EOL;
                     }
                 }
 
                 clipString += this._locationTimeLine(clip);
 
                 if (clip.highlight !== "") {
-                    clipString += `${this.prefsuf.highlight.prefixValue}${
-                        clip.highlight
-                    }${this.prefsuf.highlight.suffixValue}`;
+                    clipString += this.prefsuf.highlight.prefixValue;
+                    clipString += clip.highlight;
+                    clipString += this.prefsuf.highlight.suffixValue;
+                    for (
+                        let i = 1;
+                        i <= this.prefsuf.highlight.suffixEOL;
+                        i++
+                    ) {
+                        clipString += this.EOL;
+                    }
                 }
 
                 if (clip.note !== "") {
-                    clipString += `${this.EOL}${this.EOL}`;
+                    clipString += this.EOL;
                     clipString += this.prefsuf.note.prefixValue;
                     clipString += clip.note;
                     clipString += this.prefsuf.note.suffixValue;
-                    clipString += `${this.EOL}`;
+                    for (let i = 1; i <= this.prefsuf.note.suffixEOL; i++) {
+                        clipString += this.EOL;
+                    }
                 }
                 bookBegin = false;
             });
 
-            clipString += `${this.EOL}`;
+            //clipString += `${this.EOL}`;
         });
         return clipString;
     }
@@ -110,12 +119,15 @@ export default class PreviewGenerator {
         }
 
         if (includeDate) {
-            clipString += `${clip.date.format("MMMM DD, YYYY h:mm:ss a")}`;
+            clipString += clip.date.format("MMMM DD, YYYY h:mm:ss a");
         }
 
         if (includeLocation || includeDate) {
             clipString += this.prefsuf.location.suffixValue;
-            clipString += `${this.EOL}`;
+
+            for (let i = 1; i <= this.prefsuf.location.suffixEOL; i++) {
+                clipString += this.EOL;
+            }
         }
         return clipString;
     }

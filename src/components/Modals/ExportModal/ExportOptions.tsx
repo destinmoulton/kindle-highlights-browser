@@ -29,8 +29,7 @@ function ExportOptions(props: Props) {
                     type="checkbox"
                     label="Include Location"
                 />
-            </Form.Group>
-            <Form.Group>
+
                 <Form.Check
                     inline
                     checked={checkboxes.date}

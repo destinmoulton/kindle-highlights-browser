@@ -1,9 +1,9 @@
 import * as React from "react";
 
 import { Form } from "react-bootstrap";
-import * as Types from "../../../types";
+import * as Types from "../../../../types";
 
-import PreviewGenerator from "../../../lib/PreviewGenerator";
+import PreviewGenerator from "../../../../lib/PreviewGenerator";
 interface Props {
     exportOptions: Types.ExportOptions;
     filteredClips: Types.FilteredClips;

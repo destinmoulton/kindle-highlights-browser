@@ -1,14 +1,7 @@
 import * as React from "react";
-import {
-    Button,
-    ButtonGroup,
-    Col,
-    Modal,
-    Row,
-    Tabs,
-    Tab
-} from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import * as Types from "../../../../types";
+import OptionFormGenerator from "./OptionFormGenerator";
 
 interface Props {
     options: Types.ExportOptions;
@@ -16,9 +9,23 @@ interface Props {
 }
 
 function OptionsTab(props: Props) {
+    const { options, changeFormOption } = props;
     return (
         <Row>
-            <Col xs="6" />
+            <Col xs="6">
+                <OptionFormGenerator
+                    changeElement={changeFormOption}
+                    group_id="display"
+                    group_name={options.display.group_name}
+                    elements={options.display.elements}
+                />
+                <OptionFormGenerator
+                    changeElement={changeFormOption}
+                    group_id="surround_title_block"
+                    group_name={options.surround_title_block.group_name}
+                    elements={options.surround_title_block.elements}
+                />
+            </Col>
             <Col xs="6" />
         </Row>
     );

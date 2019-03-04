@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Form } from "react-bootstrap";
-import * as Types from "../../../types";
+import * as Types from "../../../../types";
 
 interface Props {
     exportOptions: Types.ExportOptions;
@@ -10,7 +10,7 @@ interface Props {
     handleSeparatorChange: () => void;
 }
 
-function ExportOptions(props: Props) {
+function OptionsLeftForm(props: Props) {
     const {
         exportOptions,
         handleCheckboxChange,
@@ -86,4 +86,4 @@ function ExportOptions(props: Props) {
     );
 }
 
-export default ExportOptions;
+export default OptionsLeftForm;

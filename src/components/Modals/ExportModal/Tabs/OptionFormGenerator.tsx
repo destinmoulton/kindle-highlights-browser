@@ -13,22 +13,23 @@ class FormGenerator extends React.Component<Props> {
         super(props);
     }
 
-    _handleChangeInput = (element_id: string, evt: any)=>{
+    _handleChangeInput = (element_id: string, evt: any) => {
         this.props.changeElement(this.props.group_id, element_id, evt);
-    }
+    };
 
     _renderCheckbox(element: Types.ExportOptionFormElement) {
         const isChecked = element.value === "true" || element.value === true;
         return (
-            <Form.Check
-                key={element.id}
-                inline
-                checked={isChecked}
-                onChange={this._handleChangeInput.bind(this, element.id)}
-                value={element.id}
-                type="checkbox"
-                label="Include Location"
-            />
+            <Col xs="12" key={element.id}>
+                <Form.Check
+                    inline
+                    checked={isChecked}
+                    onChange={this._handleChangeInput.bind(this, element.id)}
+                    value={element.id}
+                    type="checkbox"
+                    label={element.name}
+                />
+            </Col>
         );
     }
 
@@ -44,7 +45,10 @@ class FormGenerator extends React.Component<Props> {
                         type="text"
                         size="sm"
                         placeholder={placeholder}
-                        onChange={this._handleChangeInput.bind(this, element.id)}
+                        onChange={this._handleChangeInput.bind(
+                            this,
+                            element.id
+                        )}
                         value={element.value.toString()}
                     />
                 </Col>
@@ -62,10 +66,13 @@ class FormGenerator extends React.Component<Props> {
                 <Col xs="6">
                     <Form.Label column>{element.name}</Form.Label>
                 </Col>
-                <Col sm="6">
+                <Col xs="6">
                     <Form.Control
                         as="select"
-                        onChange={this._handleChangeInput.bind(this, element.id)}
+                        onChange={this._handleChangeInput.bind(
+                            this,
+                            element.id
+                        )}
                         defaultValue={element.value}
                     >
                         {options}
@@ -81,17 +88,30 @@ class FormGenerator extends React.Component<Props> {
         const formElements = Object.values(elements).map(element => {
             switch (element.type) {
                 case "checkbox":
-                    return this._renderCheckbox(element);
+                    return (
+                        <Row key={element.id}>
+                            {this._renderCheckbox(element)}
+                        </Row>
+                    );
                 case "text":
-                    return this._renderText(element);
+                    return (
+                        <Row key={element.id}>{this._renderText(element)}</Row>
+                    );
                 case "select":
-                    return this._renderSelect(element);
+                    return (
+                        <Row key={element.id}>
+                            {this._renderSelect(element)}
+                        </Row>
+                    );
             }
         });
 
         return (
-            <h4>{</h4>
-        )
+            <div>
+                <h4>{group_name}</h4>
+                {formElements}
+            </div>
+        );
     }
 }
 

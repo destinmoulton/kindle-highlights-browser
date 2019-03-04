@@ -44,40 +44,21 @@ export interface Filter {
 
 export type Filters = Filter[];
 
-export interface ExportCheckboxes {
-    [key: string]: boolean;
-    location: boolean;
-    date: boolean;
+export interface ExportOptionFormElement {
+    id: string;
+    name: string;
+    type: string;
+    default: boolean | string | number;
+    options?: any[];
 }
 
-export interface ExportSeparators {
-    [key: string]: string;
-    title: string;
-    clip: string;
+export interface ExportOptionGroup {
+    group_id: string;
+    group_name: string;
+    elements: ExportOptionFormElement[];
 }
 
-export interface ExportRadios {
-    [key: string]: string;
-    clip_separator: string;
-}
-
-export interface ExportPrefixSuffixElement {
-    [key: string]: string | number;
-    prefixValue: string;
-    suffixValue: string;
-    suffixEOL: number;
-}
-
-export interface ExportPrefixSuffixElements {
-    [key: string]: ExportPrefixSuffixElement;
-}
-
-export interface ExportOptions {
-    checkboxes: ExportCheckboxes;
-    separators: ExportSeparators;
-    radios: ExportRadios;
-    prefixsuffixes: ExportPrefixSuffixElements;
-}
+export type ExportOptions = ExportOptionGroup[];
 
 export interface CSVColumn {
     key: string;

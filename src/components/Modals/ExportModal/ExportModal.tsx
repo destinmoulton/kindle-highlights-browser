@@ -16,13 +16,14 @@ import {
 import { clipboard, remote } from "electron";
 import * as moment from "moment";
 
-import ExportOptions from "./ExportOptions";
-import ExportPreview from "./ExportPreview";
-import PrefixSuffixTab from "./PrefixSuffixTab";
+import OptionsTab from "./Tabs/OptionsTab";
+import PreviewTab from "./Tabs/PreviewTab";
 
 import PreviewGenerator from "../../../lib/PreviewGenerator";
 import { errorDialog } from "../../../lib/errorDialog";
 import * as Types from "../../../types";
+
+import EXPORT_OPTIONS from "../../../data/exportOptions";
 
 const FILE_PREFIX = "kindle_highlights_";
 const FILE_DATE_SUFFIX = moment().format("MM_DD_YYYY_HH_mm_ss");
@@ -42,111 +43,27 @@ class ExportModal extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
 
-        const exportOptions: Types.ExportOptions = {
-            checkboxes: {
-                location: true,
-                date: false
-            },
-            separators: {
-                title: "=====================================",
-                clip: "---"
-            },
-            radios: {
-                clip_separator: "text"
-            },
-            prefixsuffixes: {
-                location: {
-                    prefixValue: "",
-                    suffixValue: "",
-                    suffixEOL: 0
-                },
-                highlight: {
-                    prefixValue: "",
-                    suffixValue: "",
-                    suffixEOL: 0
-                },
-                note: {
-                    prefixValue: "",
-                    suffixValue: "",
-                    suffixEOL: 0
-                }
-            }
-        };
-
         this.state = {
-            exportOptions
+            exportOptions: EXPORT_OPTIONS
         };
     }
 
-    /**
-     * Handle the checkbox change event
-     * when a user checks or unchecks a checkbox  (ExportOptions component)
-     *
-     * @param Event e
-     */
-    handleCheckboxChange(e: any) {
-        let exportOptions = Object.assign({}, this.state.exportOptions);
-        let chks: Types.ExportCheckboxes = Object.assign(
-            {},
-            exportOptions.checkboxes
-        );
-        if (e.target.checked) {
-            chks[e.target.value] = true;
-        } else {
-            chks[e.target.value] = false;
-        }
-        exportOptions.checkboxes = chks;
-        this.setState({
-            exportOptions
-        });
-    }
-
-    handleRadioChange(e: any) {
-        const targ = e.target;
-        let exportOptions: Types.ExportOptions = Object.assign(
-            {},
-            this.state.exportOptions
-        );
-        let radios: Types.ExportRadios = Object.assign(
-            {},
-            exportOptions.radios
-        );
-        radios[targ.name] = targ.value;
-        exportOptions.radios = radios;
-        this.setState({
-            exportOptions
-        });
-    }
-
-    /**
-     * Handle a separator change event.
-     * ie When the user adds or removes characters
-     * from a separator input field (ExportOptions component)
-     *
-     * @param Event e
-     */
-    handleSeparatorChange(e: any) {
-        let exportOptions = Object.assign({}, this.state.exportOptions);
-        let separators: Types.ExportSeparators = Object.assign(
-            {},
-            exportOptions.separators
-        );
-
-        separators[e.target.name] = e.target.value;
-        exportOptions.separators = separators;
-        this.setState({
-            exportOptions
-        });
-    }
-
-    handlePrefixSuffixChange(id: string, position: string, value: string) {
-        console.log("handlePrefixSuffixChange()", id, position, value);
+    handleOptionChange = (group_id: string, element_id: string, evt: any) => {
         const { exportOptions } = this.state;
-        exportOptions.prefixsuffixes[id][position] = value;
+
+        const option = exportOptions[group_id]["elements"][element_id];
+        if (option.type === "checkbox") {
+            option.value = evt.target.checked;
+        } else {
+            option.value = evt.target.value;
+        }
+
+        exportOptions[group_id]["elements"][element_id] = option;
+
         this.setState({
             exportOptions
         });
-    }
+    };
 
     /**
      * Show the file save dialog box and save the clip
@@ -210,73 +127,49 @@ class ExportModal extends React.Component<Props, State> {
                 </Modal.Header>
                 <Modal.Body>
                     <Row>
-                        <Col xs={4}>
+                        <Col xs={12}>
                             <Tabs
-                                defaultActiveKey="options"
+                                defaultActiveKey="preview"
                                 transition={false}
                                 id="exportmodal-tabs"
                             >
-                                <Tab eventKey="options" title="Options">
-                                    <ExportOptions
+                                <Tab eventKey="preview" title="Preview">
+                                    <PreviewTab
                                         exportOptions={exportOptions}
-                                        handleCheckboxChange={this.handleCheckboxChange.bind(
-                                            this
-                                        )}
-                                        handleRadioChange={this.handleRadioChange.bind(
-                                            this
-                                        )}
-                                        handleSeparatorChange={this.handleSeparatorChange.bind(
-                                            this
-                                        )}
+                                        filteredClips={filteredClips}
                                     />
                                 </Tab>
-                                <Tab
-                                    eventKey="prefixsuffix"
-                                    title="Prefix/Suffix"
-                                >
-                                    <PrefixSuffixTab
-                                        onChangeValue={this.handlePrefixSuffixChange.bind(
-                                            this
-                                        )}
-                                        inputValues={
-                                            exportOptions.prefixsuffixes
+                                <Tab eventKey="options" title="Options">
+                                    <OptionsTab
+                                        options={exportOptions}
+                                        changeFormOption={
+                                            this.handleOptionChange
                                         }
                                     />
                                 </Tab>
                             </Tabs>
                         </Col>
-                        <Col xs={8}>
-                            <ExportPreview
-                                exportOptions={exportOptions}
-                                filteredClips={filteredClips}
-                            />
-                            <ButtonGroup>
-                                <Button
-                                    onClick={this.handleSaveClipsToFile.bind(
-                                        this
-                                    )}
-                                >
-                                    <i className="fa fa-save" /> Save All to
-                                    File
-                                </Button>
-                                <Button
-                                    onClick={this.handleCopyClips.bind(this)}
-                                >
-                                    <i className="fa fa-clipboard" /> Copy All
-                                </Button>
-                                <Button
-                                    onClick={this.handleSelectAll.bind(this)}
-                                >
-                                    <i className="fa fa-hand-rock" /> Select All
-                                </Button>
-                            </ButtonGroup>
+                    </Row>
+                    <Row>
+                        <ButtonGroup>
                             <Button
-                                onClick={closeModalHandler}
-                                className="pull-right"
+                                onClick={this.handleSaveClipsToFile.bind(this)}
                             >
-                                Close
+                                <i className="fa fa-save" /> Save All to File
                             </Button>
-                        </Col>
+                            <Button onClick={this.handleCopyClips.bind(this)}>
+                                <i className="fa fa-clipboard" /> Copy All
+                            </Button>
+                            <Button onClick={this.handleSelectAll.bind(this)}>
+                                <i className="fa fa-hand-rock" /> Select All
+                            </Button>
+                        </ButtonGroup>
+                        <Button
+                            onClick={closeModalHandler}
+                            className="pull-right"
+                        >
+                            Close
+                        </Button>
                     </Row>
                 </Modal.Body>
             </Modal>

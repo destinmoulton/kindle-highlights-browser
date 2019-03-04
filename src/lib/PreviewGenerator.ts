@@ -58,19 +58,19 @@ export default class PreviewGenerator {
             dispOpts.should_display_book_title.value ||
             dispOpts.should_display_book_author.value
         ) {
-            let clipString = `${surrOpts.text_before_title_block.value}${
-                this.EOL
-            }`;
+            let tstr = surrOpts.text_before_title_block.value;
+            tstr += this.EOL;
 
-            if (dispOpts.should_display_book_title) {
-                clipString += `${title}${this.EOL}`;
+            if (dispOpts.should_display_book_title.value) {
+                tstr += `${title}${this.EOL}`;
             }
-            if (dispOpts.should_display_book_author) {
-                clipString += `By ${authorFullName}${this.EOL}`;
+            if (dispOpts.should_display_book_author.value) {
+                tstr += `By ${authorFullName}${this.EOL}`;
             }
-            clipString += `${surrOpts.text_after_title_block.value}${this.EOL}`;
-
-            return clipString;
+            tstr += `${surrOpts.text_after_title_block.value}${this.EOL}`;
+            tstr += this._newlines(surrOpts.lines_after_title_block
+                .value as string);
+            return tstr;
         }
         return "";
     }
@@ -83,61 +83,58 @@ export default class PreviewGenerator {
         const includeDate = dispOpts.should_display_quote_date.value;
 
         if (includeLocation || includeDate) {
-            let clipString = "";
+            let lstr = "";
 
-            clipString += surrOpts.text_before_location_block.value;
+            lstr += surrOpts.text_before_location_block.value;
 
             if (includeLocation) {
                 if (clip.type === Types.ClipType.Highlight) {
-                    clipString += "Highlight at ";
+                    lstr += "Highlight at ";
                 } else if (clip.type === Types.ClipType.Note) {
-                    clipString += "Note at ";
+                    lstr += "Note at ";
                 } else if (clip.type === Types.ClipType.HighlightWithNote) {
-                    clipString += "Highlight with Note at ";
+                    lstr += "Highlight with Note at ";
                 }
 
-                clipString += `Location: ${clip.location.value}`;
+                lstr += `Location: ${clip.location.value}`;
             }
 
             if (includeLocation && includeDate) {
-                clipString += " -- ";
+                lstr += " -- ";
             }
 
             if (includeDate) {
-                clipString += clip.date.format("MMMM DD, YYYY h:mm:ss a");
+                lstr += clip.date.format("MMMM DD, YYYY h:mm:ss a");
             }
 
-            clipString += surrOpts.text_after_location_block.value;
+            lstr += surrOpts.text_after_location_block.value;
 
-            clipString += this._newlines(surrOpts.lines_after_location_block
+            lstr += this._newlines(surrOpts.lines_after_location_block
                 .value as string);
 
-            return clipString;
+            return lstr;
         }
         return "";
     }
 
     _highlightBlock(clip: Types.Clip) {
         const surrOpts = this.options.surround_highlight.elements;
-        let clipString = "";
-        clipString += surrOpts.text_before_highlight.value;
-        clipString += clip.highlight;
-        clipString += surrOpts.text_after_highlight.value;
+        let hstr = surrOpts.text_before_highlight.value;
+        hstr += clip.highlight;
+        hstr += surrOpts.text_after_highlight.value.toString();
 
-        clipString += this._newlines(surrOpts.lines_after_highlight
-            .value as string);
-        return clipString;
+        hstr += this._newlines(surrOpts.lines_after_highlight.value as string);
+        return hstr;
     }
 
     _noteBlock(clip: Types.Clip) {
         const surrOpts = this.options.surround_note.elements;
-        let clipString = "";
-        clipString += surrOpts.text_before_note.value;
-        clipString += clip.note;
-        clipString += surrOpts.text_after_note.value;
+        let nstr = surrOpts.text_before_note.value;
+        nstr += clip.note;
+        nstr += surrOpts.text_after_note.value.toString();
 
-        clipString += this._newlines(surrOpts.lines_after_note.value as string);
-        return clipString;
+        nstr += this._newlines(surrOpts.lines_after_note.value as string);
+        return nstr;
     }
 
     _clipSeparator(clip: Types.Clip) {

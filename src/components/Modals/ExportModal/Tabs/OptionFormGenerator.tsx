@@ -1,15 +1,20 @@
 import * as React from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import * as Types from "../../../../types";
+
 interface Props {
     group_id: string;
     group_name: string;
     elements: Types.ExportOptionFormElements;
-    changeElement: (evt: any) => void;
+    changeElement: (group_id: string, element_id: string, evt: any) => void;
 }
 class FormGenerator extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
+    }
+
+    _handleChangeInput = (element_id: string, evt: any)=>{
+        this.props.changeElement(this.props.group_id, element_id, evt);
     }
 
     _renderCheckbox(element: Types.ExportOptionFormElement) {
@@ -19,7 +24,7 @@ class FormGenerator extends React.Component<Props> {
                 key={element.id}
                 inline
                 checked={isChecked}
-                onChange={this.props.changeElement}
+                onChange={this._handleChangeInput.bind(this, element.id)}
                 value={element.id}
                 type="checkbox"
                 label="Include Location"
@@ -39,7 +44,7 @@ class FormGenerator extends React.Component<Props> {
                         type="text"
                         size="sm"
                         placeholder={placeholder}
-                        onChange={this.props.changeElement}
+                        onChange={this._handleChangeInput.bind(this, element.id)}
                         value={element.value.toString()}
                     />
                 </Col>
@@ -60,7 +65,7 @@ class FormGenerator extends React.Component<Props> {
                 <Col sm="6">
                     <Form.Control
                         as="select"
-                        onChange={this.props.changeElement}
+                        onChange={this._handleChangeInput.bind(this, element.id)}
                         defaultValue={element.value}
                     >
                         {options}
@@ -71,9 +76,9 @@ class FormGenerator extends React.Component<Props> {
     }
 
     render() {
-        const { elements } = this.props;
+        const { elements, group_name } = this.props;
 
-        return Object.values(elements).map(element => {
+        const formElements = Object.values(elements).map(element => {
             switch (element.type) {
                 case "checkbox":
                     return this._renderCheckbox(element);
@@ -83,6 +88,10 @@ class FormGenerator extends React.Component<Props> {
                     return this._renderSelect(element);
             }
         });
+
+        return (
+            <h4>{</h4>
+        )
     }
 }
 

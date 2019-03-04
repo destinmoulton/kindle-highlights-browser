@@ -5,9 +5,9 @@ for (let i = 0; i <= 10; i++) {
     EOL_OPTIONS.push(i.toString());
 }
 const EXPORT_OPTIONS: Types.ExportOptions = {
-    display: {
-        group_id: "display",
-        group_name: "Display",
+    title: {
+        group_id: "title",
+        group_name: "Title Options",
         elements: {
             should_display_book_title: {
                 id: "should_display_book_title",
@@ -21,24 +21,6 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
                 type: "checkbox",
                 value: true
             },
-            should_display_quote_location: {
-                id: "should_display_quote_location",
-                name: "Quote Location",
-                type: "checkbox",
-                value: true
-            },
-            should_display_quote_date: {
-                id: "should_display_quote_date",
-                name: "Quote Date",
-                type: "checkbox",
-                value: false
-            }
-        }
-    },
-    surround_title_block: {
-        group_id: "surround_title_block",
-        group_name: "Title Block",
-        elements: {
             text_before_title_block: {
                 id: "text_before_title_block",
                 name: "Text Before Title/Author",
@@ -60,10 +42,22 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
             }
         }
     },
-    surround_location_block: {
-        group_id: "surround_location_block",
-        group_name: "Before and After",
+    location: {
+        group_id: "location",
+        group_name: "Location/Date Options",
         elements: {
+            should_display_quote_location: {
+                id: "should_display_quote_location",
+                name: "Quote Location",
+                type: "checkbox",
+                value: true
+            },
+            should_display_quote_date: {
+                id: "should_display_quote_date",
+                name: "Quote Date",
+                type: "checkbox",
+                value: false
+            },
             text_before_location_block: {
                 id: "text_before_location_block",
                 name: "Text Before Location/Date Block",
@@ -85,9 +79,9 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
             }
         }
     },
-    surround_highlight: {
-        group_id: "surround_highlight",
-        group_name: "Before and After Highlight",
+    highlights: {
+        group_id: "highlights",
+        group_name: "Highlight Options",
         elements: {
             text_before_highlight: {
                 id: "text_before_highlight",
@@ -110,9 +104,9 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
             }
         }
     },
-    surround_note: {
-        group_id: "surround_note",
-        group_name: "Before and After Note",
+    notes: {
+        group_id: "notes",
+        group_name: "Note Options",
         elements: {
             text_before_note: {
                 id: "text_before_note",
@@ -137,7 +131,7 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
     },
     clip_separator: {
         group_id: "clip_separator",
-        group_name: "Clip Separator",
+        group_name: "Clip Separator Options",
         elements: {
             text_between_clips: {
                 id: "text_between_clips",

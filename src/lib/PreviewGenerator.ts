@@ -51,24 +51,23 @@ export default class PreviewGenerator {
     }
 
     _titleBlock(title: string, authorFullName: string) {
-        const dispOpts = this.options.display.elements;
-        const surrOpts = this.options.surround_title_block.elements;
+        const opts = this.options.title.elements;
 
         if (
-            dispOpts.should_display_book_title.value ||
-            dispOpts.should_display_book_author.value
+            opts.should_display_book_title.value ||
+            opts.should_display_book_author.value
         ) {
-            let tstr = surrOpts.text_before_title_block.value;
+            let tstr = opts.text_before_title_block.value;
             tstr += this.EOL;
 
-            if (dispOpts.should_display_book_title.value) {
+            if (opts.should_display_book_title.value) {
                 tstr += `${title}${this.EOL}`;
             }
-            if (dispOpts.should_display_book_author.value) {
+            if (opts.should_display_book_author.value) {
                 tstr += `By ${authorFullName}${this.EOL}`;
             }
-            tstr += `${surrOpts.text_after_title_block.value}${this.EOL}`;
-            tstr += this._newlines(surrOpts.lines_after_title_block
+            tstr += `${opts.text_after_title_block.value}${this.EOL}`;
+            tstr += this._newlines(opts.lines_after_title_block
                 .value as string);
             return tstr;
         }
@@ -76,16 +75,15 @@ export default class PreviewGenerator {
     }
 
     _locationTimeLine(clip: Types.Clip) {
-        const dispOpts = this.options.display.elements;
-        const surrOpts = this.options.surround_location_block.elements;
+        const opts = this.options.location.elements;
 
-        const includeLocation = dispOpts.should_display_quote_location.value;
-        const includeDate = dispOpts.should_display_quote_date.value;
+        const includeLocation = opts.should_display_quote_location.value;
+        const includeDate = opts.should_display_quote_date.value;
 
         if (includeLocation || includeDate) {
             let lstr = "";
 
-            lstr += surrOpts.text_before_location_block.value;
+            lstr += opts.text_before_location_block.value;
 
             if (includeLocation) {
                 if (clip.type === Types.ClipType.Highlight) {
@@ -107,9 +105,9 @@ export default class PreviewGenerator {
                 lstr += clip.date.format("MMMM DD, YYYY h:mm:ss a");
             }
 
-            lstr += surrOpts.text_after_location_block.value;
+            lstr += opts.text_after_location_block.value;
 
-            lstr += this._newlines(surrOpts.lines_after_location_block
+            lstr += this._newlines(opts.lines_after_location_block
                 .value as string);
 
             return lstr;
@@ -118,30 +116,30 @@ export default class PreviewGenerator {
     }
 
     _highlightBlock(clip: Types.Clip) {
-        const surrOpts = this.options.surround_highlight.elements;
-        let hstr = surrOpts.text_before_highlight.value;
+        const opts = this.options.highlights.elements;
+        let hstr = opts.text_before_highlight.value;
         hstr += clip.highlight;
-        hstr += surrOpts.text_after_highlight.value.toString();
+        hstr += opts.text_after_highlight.value.toString();
 
-        hstr += this._newlines(surrOpts.lines_after_highlight.value as string);
+        hstr += this._newlines(opts.lines_after_highlight.value as string);
         return hstr;
     }
 
     _noteBlock(clip: Types.Clip) {
-        const surrOpts = this.options.surround_note.elements;
-        let nstr = surrOpts.text_before_note.value;
+        const opts = this.options.notes.elements;
+        let nstr = opts.text_before_note.value;
         nstr += clip.note;
-        nstr += surrOpts.text_after_note.value.toString();
+        nstr += opts.text_after_note.value.toString();
 
-        nstr += this._newlines(surrOpts.lines_after_note.value as string);
+        nstr += this._newlines(opts.lines_after_note.value as string);
         return nstr;
     }
 
     _clipSeparator(clip: Types.Clip) {
-        const surrOpts = this.options.clip_separator.elements;
+        const opts = this.options.clip_separator.elements;
         let str = "";
-        str += surrOpts.text_between_clips.value;
-        str += this._newlines(surrOpts.lines_after_clip.value as string);
+        str += opts.text_between_clips.value;
+        str += this._newlines(opts.lines_after_clip.value as string);
         return str;
     }
 

@@ -1,22 +1,10 @@
 import * as Types from "../types";
 export default class PreviewGenerator {
     EOL: string;
-    checkboxes: Types.ExportCheckboxes;
-    radios: Types.ExportRadios;
-    separators: Types.ExportSeparators;
-    prefsuf: Types.ExportPrefixSuffixElements;
+    options: Types.ExportOptions;
 
     constructor(exportOptions: Types.ExportOptions, eol: string) {
-        const {
-            checkboxes,
-            radios,
-            separators,
-            prefixsuffixes
-        } = exportOptions;
-        this.checkboxes = checkboxes;
-        this.radios = radios;
-        this.separators = separators;
-        this.prefsuf = prefixsuffixes;
+        this.options = exportOptions;
         this.EOL = eol;
     }
 
@@ -42,40 +30,17 @@ export default class PreviewGenerator {
             bookBegin = true;
             clips[title].forEach(clip => {
                 if (!bookBegin && clipString !== "") {
-                    if (this.radios.clip_separator === "text") {
-                        clipString += `${this.EOL}${this.separators.clip}${
-                            this.EOL
-                        }`;
-                    } else if (this.radios.clip_separator === "line") {
-                        clipString += `${this.EOL}${this.EOL}`;
-                    } else {
-                        clipString += this.EOL;
-                    }
+                    clipString += this._clipSeparator(clip);
                 }
 
                 clipString += this._locationTimeLine(clip);
 
                 if (clip.highlight !== "") {
-                    clipString += this.prefsuf.highlight.prefixValue;
-                    clipString += clip.highlight;
-                    clipString += this.prefsuf.highlight.suffixValue;
-                    for (
-                        let i = 1;
-                        i <= this.prefsuf.highlight.suffixEOL;
-                        i++
-                    ) {
-                        clipString += this.EOL;
-                    }
+                    clipString += this._highlightBlock(clip);
                 }
 
                 if (clip.note !== "") {
-                    clipString += this.EOL;
-                    clipString += this.prefsuf.note.prefixValue;
-                    clipString += clip.note;
-                    clipString += this.prefsuf.note.suffixValue;
-                    for (let i = 1; i <= this.prefsuf.note.suffixEOL; i++) {
-                        clipString += this.EOL;
-                    }
+                    clipString += this._noteBlock(clip);
                 }
                 bookBegin = false;
             });
@@ -86,49 +51,108 @@ export default class PreviewGenerator {
     }
 
     _titleBlock(title: string, authorFullName: string) {
-        let clipString = `${this.separators.title}${this.EOL}`;
-        clipString += `${title}${this.EOL}`;
-        clipString += `By ${authorFullName}${this.EOL}`;
-        clipString += `${this.separators.title}${this.EOL}`;
-        return clipString;
+        const dispOpts = this.options.display.elements;
+        const surrOpts = this.options.surround_title_block.elements;
+
+        if (
+            dispOpts.should_display_book_title.value ||
+            dispOpts.should_display_book_author.value
+        ) {
+            let clipString = `${surrOpts.text_before_title_block.value}${
+                this.EOL
+            }`;
+
+            if (dispOpts.should_display_book_title) {
+                clipString += `${title}${this.EOL}`;
+            }
+            if (dispOpts.should_display_book_author) {
+                clipString += `By ${authorFullName}${this.EOL}`;
+            }
+            clipString += `${surrOpts.text_after_title_block.value}${this.EOL}`;
+
+            return clipString;
+        }
+        return "";
     }
 
     _locationTimeLine(clip: Types.Clip) {
-        const includeLocation = this.checkboxes.location;
-        const includeDate = this.checkboxes.date;
+        const dispOpts = this.options.display.elements;
+        const surrOpts = this.options.surround_location_block.elements;
+
+        const includeLocation = dispOpts.should_display_quote_location.value;
+        const includeDate = dispOpts.should_display_quote_date.value;
+
+        if (includeLocation || includeDate) {
+            let clipString = "";
+
+            clipString += surrOpts.text_before_location_block.value;
+
+            if (includeLocation) {
+                if (clip.type === Types.ClipType.Highlight) {
+                    clipString += "Highlight at ";
+                } else if (clip.type === Types.ClipType.Note) {
+                    clipString += "Note at ";
+                } else if (clip.type === Types.ClipType.HighlightWithNote) {
+                    clipString += "Highlight with Note at ";
+                }
+
+                clipString += `Location: ${clip.location.value}`;
+            }
+
+            if (includeLocation && includeDate) {
+                clipString += " -- ";
+            }
+
+            if (includeDate) {
+                clipString += clip.date.format("MMMM DD, YYYY h:mm:ss a");
+            }
+
+            clipString += surrOpts.text_after_location_block.value;
+
+            clipString += this._newlines(surrOpts.lines_after_location_block
+                .value as string);
+
+            return clipString;
+        }
+        return "";
+    }
+
+    _highlightBlock(clip: Types.Clip) {
+        const surrOpts = this.options.surround_highlight.elements;
         let clipString = "";
+        clipString += surrOpts.text_before_highlight.value;
+        clipString += clip.highlight;
+        clipString += surrOpts.text_after_highlight.value;
 
-        if (includeLocation || includeDate) {
-            clipString += this.prefsuf.location.prefixValue;
-        }
-
-        if (includeLocation) {
-            if (clip.type === Types.ClipType.Highlight) {
-                clipString += "Highlight at ";
-            } else if (clip.type === Types.ClipType.Note) {
-                clipString += "Note at ";
-            } else if (clip.type === Types.ClipType.HighlightWithNote) {
-                clipString += "Highlight with Note at ";
-            }
-
-            clipString += `Location: ${clip.location.value}`;
-        }
-
-        if (includeLocation && includeDate) {
-            clipString += " -- ";
-        }
-
-        if (includeDate) {
-            clipString += clip.date.format("MMMM DD, YYYY h:mm:ss a");
-        }
-
-        if (includeLocation || includeDate) {
-            clipString += this.prefsuf.location.suffixValue;
-
-            for (let i = 1; i <= this.prefsuf.location.suffixEOL; i++) {
-                clipString += this.EOL;
-            }
-        }
+        clipString += this._newlines(surrOpts.lines_after_highlight
+            .value as string);
         return clipString;
+    }
+
+    _noteBlock(clip: Types.Clip) {
+        const surrOpts = this.options.surround_note.elements;
+        let clipString = "";
+        clipString += surrOpts.text_before_note.value;
+        clipString += clip.note;
+        clipString += surrOpts.text_after_note.value;
+
+        clipString += this._newlines(surrOpts.lines_after_note.value as string);
+        return clipString;
+    }
+
+    _clipSeparator(clip: Types.Clip) {
+        const surrOpts = this.options.clip_separator.elements;
+        let str = "";
+        str += surrOpts.text_between_clips.value;
+        str += this._newlines(surrOpts.lines_after_clip.value as string);
+        return str;
+    }
+
+    _newlines(count: string) {
+        let eolString = "";
+        for (let i = 1; i <= parseInt(count as string); i++) {
+            eolString += this.EOL;
+        }
+        return eolString;
     }
 }

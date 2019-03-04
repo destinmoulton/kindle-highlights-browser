@@ -62,38 +62,6 @@ class PrefixSuffixTab extends React.Component<Props> {
         });
     }
 
-    _renderEOLSelects() {
-        const { inputValues } = this.props;
-
-        let options: React.ReactElement[] = [];
-        for (let i = 0; i <= 10; i++) {
-            options.push(<option key={i}>{i}</option>);
-        }
-
-        return this._prePostInputs.map(input => {
-            return (
-                <Form.Group as={Row} key={input.id} size="sm">
-                    <Col xs="6">
-                        <Form.Label column>{input.name}</Form.Label>
-                    </Col>
-                    <Col sm="6">
-                        <Form.Control
-                            as="select"
-                            onChange={this._handleOnChange.bind(
-                                this,
-                                input.id,
-                                "suffixEOL"
-                            )}
-                            defaultValue={inputValues[input.id]["suffixEOL"]}
-                        >
-                            {options}
-                        </Form.Control>
-                    </Col>
-                </Form.Group>
-            );
-        });
-    }
-
     render() {
         const inputGroups = this._renderInputGroups();
         const suffixEOLs = this._renderEOLSelects();

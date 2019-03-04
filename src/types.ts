@@ -48,17 +48,24 @@ export interface ExportOptionFormElement {
     id: string;
     name: string;
     type: string;
-    default: boolean | string | number;
-    options?: any[];
+    value: boolean | string;
+    placeholder?: string;
+    options?: string[];
+}
+
+export interface ExportOptionFormElements {
+    [key: string]: ExportOptionFormElement;
 }
 
 export interface ExportOptionGroup {
     group_id: string;
     group_name: string;
-    elements: ExportOptionFormElement[];
+    elements: ExportOptionFormElements;
 }
 
-export type ExportOptions = ExportOptionGroup[];
+export interface ExportOptions {
+    [key: string]: ExportOptionGroup;
+}
 
 export interface CSVColumn {
     key: string;

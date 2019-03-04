@@ -81,7 +81,7 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
                 name: "Lines After Location/Date Block",
                 type: "select",
                 options: EOL_OPTIONS,
-                value: "0"
+                value: "1"
             }
         }
     },
@@ -106,7 +106,7 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
                 name: "Lines After Highlight",
                 type: "select",
                 options: EOL_OPTIONS,
-                value: "0"
+                value: "1"
             }
         }
     },
@@ -131,7 +131,7 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
                 name: "Lines After Note",
                 type: "select",
                 options: EOL_OPTIONS,
-                value: "0"
+                value: "1"
             }
         }
     },
@@ -150,7 +150,7 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
                 name: "Lines After Clip",
                 type: "select",
                 options: EOL_OPTIONS,
-                value: "0"
+                value: "1"
             }
         }
     }

@@ -37,26 +37,26 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
     },
     surround_title_block: {
         group_id: "surround_title_block",
-        group_name: "Before and After Title Block",
+        group_name: "Title Block",
         elements: {
             text_before_title_block: {
                 id: "text_before_title_block",
-                name: "Text Before Title/Author Block",
+                name: "Text Before Title/Author",
                 type: "text",
                 value: "===================="
             },
             text_after_title_block: {
                 id: "text_after_title_block",
-                name: "Text After Title/Author Block",
+                name: "Text After Title/Author",
                 type: "text",
                 value: "===================="
             },
             lines_after_title_block: {
                 id: "lines_after_title_block",
-                name: "Lines After Title/Author Block",
+                name: "Lines After Title/Author",
                 type: "select",
                 options: EOL_OPTIONS,
-                value: "0"
+                value: "1"
             }
         }
     },

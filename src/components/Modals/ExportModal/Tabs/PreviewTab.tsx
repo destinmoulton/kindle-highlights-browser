@@ -10,30 +10,21 @@ interface Props {
 }
 const TEXTAREA_EOL = "\n";
 
-class ExportPreview extends React.Component<Props> {
-    constructor(props: Props) {
-        super(props);
-    }
+function PreviewTab(props: Props) {
+    const { filteredClips, exportOptions } = props;
 
-    render() {
-        const { filteredClips, exportOptions } = this.props;
+    const previewGenerator = new PreviewGenerator(exportOptions, TEXTAREA_EOL);
 
-        const previewGenerator = new PreviewGenerator(
-            exportOptions,
-            TEXTAREA_EOL
-        );
+    const clipsPreview = previewGenerator.generate(filteredClips);
 
-        const clipsPreview = previewGenerator.generate(filteredClips);
-
-        return (
-            <Form>
-                <Form.Group controlId="khb-exportpreview-textarea">
-                    <Form.Label>Preview Export</Form.Label>
-                    <Form.Control as="textarea" value={clipsPreview} readOnly />
-                </Form.Group>
-            </Form>
-        );
-    }
+    return (
+        <Form>
+            <Form.Group controlId="khb-exportpreview-textarea">
+                <Form.Label>Preview Export</Form.Label>
+                <Form.Control as="textarea" value={clipsPreview} readOnly />
+            </Form.Group>
+        </Form>
+    );
 }
 
-export default ExportPreview;
+export default PreviewTab;

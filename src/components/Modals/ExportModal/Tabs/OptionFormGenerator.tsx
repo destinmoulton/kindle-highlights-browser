@@ -47,6 +47,29 @@ class FormGenerator extends React.Component<Props> {
         );
     }
 
+    _renderSelect(element: Types.ExportOptionFormElement) {
+        let options: React.ReactElement[] = element.options.map(option => {
+            return <option key={option}>{option}</option>;
+        });
+
+        return (
+            <Form.Group as={Row} key={element.id} size="sm">
+                <Col xs="6">
+                    <Form.Label column>{element.name}</Form.Label>
+                </Col>
+                <Col sm="6">
+                    <Form.Control
+                        as="select"
+                        onChange={this.props.changeElement}
+                        defaultValue={element.value}
+                    >
+                        {options}
+                    </Form.Control>
+                </Col>
+            </Form.Group>
+        );
+    }
+
     render() {
         const { elements } = this.props;
 
@@ -56,6 +79,8 @@ class FormGenerator extends React.Component<Props> {
                     return this._renderCheckbox(element);
                 case "text":
                     return this._renderText(element);
+                case "select":
+                    return this._renderSelect(element);
             }
         });
     }

@@ -48,15 +48,21 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
         elements: {
             should_display_quote_location: {
                 id: "should_display_quote_location",
-                name: "Quote Location",
+                name: "Include Clip Location",
                 type: "checkbox",
                 value: true
             },
             should_display_quote_date: {
                 id: "should_display_quote_date",
-                name: "Quote Date",
+                name: "Include Clip Date",
                 type: "checkbox",
                 value: false
+            },
+            date_format: {
+                id: "date_format",
+                name: "Date Format",
+                type: "text",
+                value: "MMMM DD, YYYY h:mm:ss a"
             },
             text_before_location_block: {
                 id: "text_before_location_block",

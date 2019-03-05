@@ -102,7 +102,7 @@ export default class PreviewGenerator {
             }
 
             if (includeDate) {
-                lstr += clip.date.format("MMMM DD, YYYY h:mm:ss a");
+                lstr += clip.date.format(opts.date_format.value as string);
             }
 
             lstr += opts.text_after_location_block.value;

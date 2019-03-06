@@ -20,7 +20,6 @@ function PreviewTab(props: Props) {
     return (
         <Form>
             <Form.Group controlId="khb-exportpreview-textarea">
-                <Form.Label>Preview Export</Form.Label>
                 <Form.Control as="textarea" value={clipsPreview} readOnly />
             </Form.Group>
         </Form>

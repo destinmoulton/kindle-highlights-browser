@@ -71,6 +71,15 @@ div.khb-clipslist-container {
     z-index: 1;
 }
 
+div.khb-clipslist-tip-box {
+    width: 100%;
+    margin: 5px;
+    border: 1px solid gray;
+    padding: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
 div.khb-clipslist-title-section {
     margin-bottom: 30px;
 }
@@ -218,6 +227,7 @@ div.khb-csvmodal-option-card-body {
 
 #khb-treelist-search-container {
     padding: 10px 10px 0px 10px;
+    margin-bottom: 5px;
 }
 
 .khb-treelist-search-close-icon {
@@ -241,7 +251,7 @@ ul.khb-treelist-subtree {
     padding-left: 10px;
 }
 
-ul.khb-treelist-subtree > li {
+ul.khb-treelist-subtree>li {
     margin-bottom: 4px;
     margin-left: -10px;
     cursor: pointer;
@@ -252,7 +262,7 @@ ul.khb-treelist-subtree > li {
     font-weight: bold;
 }
 
-ul.khb-treelist-subtree > li:last-child {
+ul.khb-treelist-subtree>li:last-child {
     background: #fff url(graphics/tree-lastitem.png) no-repeat;
 }
 

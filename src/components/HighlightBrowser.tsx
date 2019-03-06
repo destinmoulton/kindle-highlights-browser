@@ -3,7 +3,7 @@ import * as React from "react";
 import { Col, Row } from "react-bootstrap";
 import TreeList from "./Tree/TreeList";
 import ClipsContainer from "./Clips/ClipsContainer";
-import EmptyClipList from "./Clips/EmptyClipList";
+import Tips from "./Clips/Tips";
 
 import FiltersCollection from "../lib/FiltersCollection";
 import * as Types from "../types";
@@ -98,7 +98,7 @@ class HighlightBrowser extends React.Component<Props, State> {
 
         const filteredClips = this.filterClips();
 
-        let clipsContents = <EmptyClipList />;
+        let clipsContents = <Tips />;
         if (Object.keys(filteredClips).length > 0) {
             clipsContents = (
                 <ClipsContainer

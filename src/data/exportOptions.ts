@@ -25,20 +25,26 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
                 id: "text_before_title_block",
                 name: "Text Before Title/Author",
                 type: "text",
-                value: "===================="
+                value: "====================",
+                enabled_on:
+                    "should_display_book_title||should_display_book_author"
             },
             text_after_title_block: {
                 id: "text_after_title_block",
                 name: "Text After Title/Author",
                 type: "text",
-                value: "===================="
+                value: "====================",
+                enabled_on:
+                    "should_display_book_title||should_display_book_author"
             },
             lines_after_title_block: {
                 id: "lines_after_title_block",
                 name: "Lines After Title/Author",
                 type: "select",
                 options: EOL_OPTIONS,
-                value: "1"
+                value: "1",
+                enabled_on:
+                    "should_display_book_title||should_display_book_author"
             }
         }
     },
@@ -62,26 +68,33 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
                 id: "date_format",
                 name: "Date Format",
                 type: "text",
-                value: "MMMM DD, YYYY h:mm:ss a"
+                value: "MMMM DD, YYYY h:mm:ss a",
+                enabled_on: "should_display_quote_date"
             },
             text_before_location_block: {
                 id: "text_before_location_block",
                 name: "Text Before Location/Date Block",
                 type: "text",
-                value: ""
+                value: "",
+                enabled_on:
+                    "should_display_quote_location||should_display_quote_date"
             },
             text_after_location_block: {
                 id: "text_after_location_block",
                 name: "Text After Location/Date Block",
                 type: "text",
-                value: ""
+                value: "",
+                enabled_on:
+                    "should_display_quote_location||should_display_quote_date"
             },
             lines_after_location_block: {
                 id: "lines_after_location_block",
                 name: "Lines After Location/Date Block",
                 type: "select",
                 options: EOL_OPTIONS,
-                value: "1"
+                value: "1",
+                enabled_on:
+                    "should_display_quote_location||should_display_quote_date"
             }
         }
     },
@@ -89,24 +102,33 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
         group_id: "highlights",
         group_name: "Highlight Options",
         elements: {
+            should_display_highlights: {
+                id: "should_display_highlights",
+                name: "Display Highlights",
+                type: "checkbox",
+                value: true
+            },
             text_before_highlight: {
                 id: "text_before_highlight",
-                name: "Text Before Highlight",
+                name: "Text Before Each Highlight",
                 type: "text",
-                value: ""
+                value: "",
+                enabled_on: "should_display_highlights"
             },
             text_after_highlight: {
                 id: "text_after_highlight",
-                name: "Text After Highlight",
+                name: "Text After Each Highlight",
                 type: "text",
-                value: ""
+                value: "",
+                enabled_on: "should_display_highlights"
             },
             lines_after_highlight: {
                 id: "lines_after_highlight",
-                name: "Lines After Highlight",
+                name: "Lines After Each Highlight",
                 type: "select",
                 options: EOL_OPTIONS,
-                value: "1"
+                value: "1",
+                enabled_on: "should_display_highlights"
             }
         }
     },
@@ -114,24 +136,33 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
         group_id: "notes",
         group_name: "Note Options",
         elements: {
+            should_display_notes: {
+                id: "should_display_notes",
+                name: "Display Notes",
+                type: "checkbox",
+                value: true
+            },
             text_before_note: {
                 id: "text_before_note",
-                name: "Text Before Note",
+                name: "Text Before Each Note",
                 type: "text",
-                value: ""
+                value: "",
+                enabled_on: "should_display_notes"
             },
             text_after_note: {
                 id: "text_after_note",
-                name: "Text After Note",
+                name: "Text After Each Note",
                 type: "text",
-                value: ""
+                value: "",
+                enabled_on: "should_display_notes"
             },
             lines_after_note: {
                 id: "lines_after_note",
-                name: "Lines After Note",
+                name: "Lines After Each Note",
                 type: "select",
                 options: EOL_OPTIONS,
-                value: "1"
+                value: "1",
+                enabled_on: "should_display_notes"
             }
         }
     },

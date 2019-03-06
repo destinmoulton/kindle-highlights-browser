@@ -51,6 +51,7 @@ export interface ExportOptionFormElement {
     value: boolean | string;
     placeholder?: string;
     options?: string[];
+    enabled_on?: string;
 }
 
 export interface ExportOptionFormElements {

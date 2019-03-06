@@ -74,28 +74,23 @@ class ClipsButtonBar extends React.Component<Props, State> {
                 />
                 <Row>
                     <Col xs={6}>
-                        <ButtonGroup>
-                            <Button
-                                variant="secondary"
-                                size="sm"
-                                onClick={this.openModal.bind(
-                                    this,
-                                    "scModalIsOpen"
-                                )}
-                            >
-                                <i className="fa fa-save" /> Export
-                            </Button>
-                            <Button
-                                variant="secondary"
-                                size="sm"
-                                onClick={this.openModal.bind(
-                                    this,
-                                    "csvModalIsOpen"
-                                )}
-                            >
-                                <i className="fa fa-file-csv" /> CSV File
-                            </Button>
-                        </ButtonGroup>
+                        <Button
+                            variant="secondary"
+                            size="sm"
+                            onClick={this.openModal.bind(this, "scModalIsOpen")}
+                        >
+                            <i className="fa fa-save" /> Export
+                        </Button>{" "}
+                        <Button
+                            variant="secondary"
+                            size="sm"
+                            onClick={this.openModal.bind(
+                                this,
+                                "csvModalIsOpen"
+                            )}
+                        >
+                            <i className="fa fa-file-csv" /> CSV File
+                        </Button>
                     </Col>
                     <Col xs={6}>
                         <InputGroup size="sm">

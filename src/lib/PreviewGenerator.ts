@@ -28,24 +28,26 @@ export default class PreviewGenerator {
             );
 
             bookBegin = true;
+            let lastClip = "";
             clips[title].forEach(clip => {
-                if (!bookBegin && clipString !== "") {
+                if (!bookBegin && clipString !== "" && lastClip !== "") {
                     clipString += this._clipSeparator(clip);
                 }
 
-                clipString += this._locationTimeLine(clip);
+                let clipBlock = this._locationTimeLine(clip);
 
                 if (clip.highlight !== "") {
-                    clipString += this._highlightBlock(clip);
+                    clipBlock += this._highlightBlock(clip);
                 }
 
                 if (clip.note !== "") {
-                    clipString += this._noteBlock(clip);
+                    clipBlock += this._noteBlock(clip);
                 }
+
+                clipString += clipBlock;
+                lastClip = clipBlock;
                 bookBegin = false;
             });
-
-            //clipString += `${this.EOL}`;
         });
         return clipString;
     }
@@ -117,22 +119,28 @@ export default class PreviewGenerator {
 
     _highlightBlock(clip: Types.Clip) {
         const opts = this.options.highlights.elements;
-        let hstr = opts.text_before_highlight.value;
-        hstr += clip.highlight;
-        hstr += opts.text_after_highlight.value.toString();
+        if (opts.should_display_highlights.value === true) {
+            let hstr = opts.text_before_highlight.value;
+            hstr += clip.highlight;
+            hstr += opts.text_after_highlight.value.toString();
 
-        hstr += this._newlines(opts.lines_after_highlight.value as string);
-        return hstr;
+            hstr += this._newlines(opts.lines_after_highlight.value as string);
+            return hstr;
+        }
+        return "";
     }
 
     _noteBlock(clip: Types.Clip) {
         const opts = this.options.notes.elements;
-        let nstr = opts.text_before_note.value;
-        nstr += clip.note;
-        nstr += opts.text_after_note.value.toString();
+        if (opts.should_display_notes.value === true) {
+            let nstr = opts.text_before_note.value;
+            nstr += clip.note;
+            nstr += opts.text_after_note.value.toString();
 
-        nstr += this._newlines(opts.lines_after_note.value as string);
-        return nstr;
+            nstr += this._newlines(opts.lines_after_note.value as string);
+            return nstr;
+        }
+        return "";
     }
 
     _clipSeparator(clip: Types.Clip) {

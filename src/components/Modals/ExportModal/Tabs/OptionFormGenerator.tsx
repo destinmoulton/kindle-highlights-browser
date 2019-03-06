@@ -33,10 +33,13 @@ class FormGenerator extends React.Component<Props> {
 
     _renderText(element: Types.ExportOptionFormElement) {
         const placeholder = element.placeholder ? element.placeholder : "";
+
+        const isDisabled = this._isElementDisabled(element);
         return (
             <Form.Control
                 type="text"
                 size="sm"
+                disabled={isDisabled}
                 placeholder={placeholder}
                 onChange={this._handleChangeInput.bind(this, element.id)}
                 value={element.value.toString()}
@@ -49,10 +52,13 @@ class FormGenerator extends React.Component<Props> {
             return <option key={option}>{option}</option>;
         });
 
+        const isDisabled = this._isElementDisabled(element);
+
         return (
             <Col xs="6">
                 <Form.Control
                     as="select"
+                    disabled={isDisabled}
                     onChange={this._handleChangeInput.bind(this, element.id)}
                     defaultValue={element.value}
                 >
@@ -60,6 +66,20 @@ class FormGenerator extends React.Component<Props> {
                 </Form.Control>
             </Col>
         );
+    }
+
+    _isElementDisabled(element: Types.ExportOptionFormElement) {
+        const { elements } = this.props;
+
+        if (element.hasOwnProperty("enabled_if")) {
+            const parts = element.enabled_if.split("||");
+
+            const anyTrue = parts.some(part => {
+                return elements[part].value === true;
+            });
+            return !anyTrue;
+        }
+        return false;
     }
 
     render() {

@@ -26,7 +26,7 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
                 name: "Text Before Title/Author",
                 type: "text",
                 value: "====================",
-                enabled_on:
+                enabled_if:
                     "should_display_book_title||should_display_book_author"
             },
             text_after_title_block: {
@@ -34,7 +34,7 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
                 name: "Text After Title/Author",
                 type: "text",
                 value: "====================",
-                enabled_on:
+                enabled_if:
                     "should_display_book_title||should_display_book_author"
             },
             lines_after_title_block: {
@@ -43,7 +43,7 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
                 type: "select",
                 options: EOL_OPTIONS,
                 value: "1",
-                enabled_on:
+                enabled_if:
                     "should_display_book_title||should_display_book_author"
             }
         }
@@ -69,14 +69,14 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
                 name: "Date Format",
                 type: "text",
                 value: "MMMM DD, YYYY h:mm:ss a",
-                enabled_on: "should_display_quote_date"
+                enabled_if: "should_display_quote_date"
             },
             text_before_location_block: {
                 id: "text_before_location_block",
                 name: "Text Before Location/Date Block",
                 type: "text",
                 value: "",
-                enabled_on:
+                enabled_if:
                     "should_display_quote_location||should_display_quote_date"
             },
             text_after_location_block: {
@@ -84,7 +84,7 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
                 name: "Text After Location/Date Block",
                 type: "text",
                 value: "",
-                enabled_on:
+                enabled_if:
                     "should_display_quote_location||should_display_quote_date"
             },
             lines_after_location_block: {
@@ -93,7 +93,7 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
                 type: "select",
                 options: EOL_OPTIONS,
                 value: "1",
-                enabled_on:
+                enabled_if:
                     "should_display_quote_location||should_display_quote_date"
             }
         }
@@ -113,14 +113,14 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
                 name: "Text Before Each Highlight",
                 type: "text",
                 value: "",
-                enabled_on: "should_display_highlights"
+                enabled_if: "should_display_highlights"
             },
             text_after_highlight: {
                 id: "text_after_highlight",
                 name: "Text After Each Highlight",
                 type: "text",
                 value: "",
-                enabled_on: "should_display_highlights"
+                enabled_if: "should_display_highlights"
             },
             lines_after_highlight: {
                 id: "lines_after_highlight",
@@ -128,7 +128,7 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
                 type: "select",
                 options: EOL_OPTIONS,
                 value: "1",
-                enabled_on: "should_display_highlights"
+                enabled_if: "should_display_highlights"
             }
         }
     },
@@ -147,14 +147,14 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
                 name: "Text Before Each Note",
                 type: "text",
                 value: "",
-                enabled_on: "should_display_notes"
+                enabled_if: "should_display_notes"
             },
             text_after_note: {
                 id: "text_after_note",
                 name: "Text After Each Note",
                 type: "text",
                 value: "",
-                enabled_on: "should_display_notes"
+                enabled_if: "should_display_notes"
             },
             lines_after_note: {
                 id: "lines_after_note",
@@ -162,7 +162,7 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
                 type: "select",
                 options: EOL_OPTIONS,
                 value: "1",
-                enabled_on: "should_display_notes"
+                enabled_if: "should_display_notes"
             }
         }
     },

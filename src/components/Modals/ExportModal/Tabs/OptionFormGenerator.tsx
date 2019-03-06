@@ -91,9 +91,17 @@ class FormGenerator extends React.Component<Props> {
         });
 
         return (
-            <div>
-                <h4>{group_name}</h4>
-                <Table size="sm">{formElements}</Table>
+            <div className="khb-exportmodal-options-form-container">
+                <div className="khb-exportmodal-options-form-title">
+                    {group_name}
+                </div>
+                <Table
+                    className="khb-exportmodal-options-form-table"
+                    bordered={false}
+                    size="sm"
+                >
+                    {formElements}
+                </Table>
             </div>
         );
     }

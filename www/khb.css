@@ -66,7 +66,7 @@ ul.khb-treelist-subtree {
     padding-left: 10px;
 }
 
-ul.khb-treelist-subtree>li {
+ul.khb-treelist-subtree > li {
     margin-bottom: 4px;
     margin-left: -10px;
     cursor: pointer;
@@ -77,7 +77,7 @@ ul.khb-treelist-subtree>li {
     font-weight: bold;
 }
 
-ul.khb-treelist-subtree>li:last-child {
+ul.khb-treelist-subtree > li:last-child {
     background: #fff url(graphics/tree-lastitem.png) no-repeat;
 }
 
@@ -159,8 +159,29 @@ div.khb-clipcard-note-with-highlight {
     padding-left: 10px;
 }
 
-#khb-exportpreview-textarea {
+#khb-exportmodal-preview-textarea {
     height: 300px;
+}
+
+.khb-exportmodal-options-tabcontainer {
+    margin-top: 10px;
+}
+
+.khb-exportmodal-options-form-title {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.khb-exportmodal-options-form-container {
+    padding: 10px;
+}
+
+.khb-exportmodal-options-form-table {
+    margin-left: 10px;
+}
+
+.khb-exportmodal-options-form-table tr td {
+    border: none;
 }
 
 /** csvSortableHelper needs to be above the modal **/

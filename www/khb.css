@@ -251,7 +251,7 @@ ul.khb-treelist-subtree {
     padding-left: 10px;
 }
 
-ul.khb-treelist-subtree > li {
+ul.khb-treelist-subtree>li {
     margin-bottom: 4px;
     margin-left: -10px;
     cursor: pointer;
@@ -260,9 +260,10 @@ ul.khb-treelist-subtree > li {
     background: url(graphics/tree-item.png) no-repeat;
     color: #369;
     font-weight: bold;
+    font-size: .9em;
 }
 
-ul.khb-treelist-subtree > li:last-child {
+ul.khb-treelist-subtree>li:last-child {
     background: #fff url(graphics/tree-lastitem.png) no-repeat;
 }
 

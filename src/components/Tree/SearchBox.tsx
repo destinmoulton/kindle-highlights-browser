@@ -25,7 +25,7 @@ export default (props: Props) => {
     }
     return (
         <div id="khb-treelist-search-container">
-            <InputGroup>
+            <InputGroup size="sm">
                 <FormControl
                     type="text"
                     placeholder="Search Authors/Titles..."

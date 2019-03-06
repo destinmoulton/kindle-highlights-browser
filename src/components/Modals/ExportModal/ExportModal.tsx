@@ -79,12 +79,16 @@ class ExportModal extends React.Component<Props, State> {
                         </Col>
                     </Row>
                     <Row>
-                        <Button
-                            onClick={closeModalHandler}
-                            className="pull-right"
-                        >
-                            Close
-                        </Button>
+                        <Col xs={12}>
+                            <Button
+                                onClick={closeModalHandler}
+                                className="float-right"
+                                variant="outline-secondary"
+                                size="sm"
+                            >
+                                Close
+                            </Button>
+                        </Col>
                     </Row>
                 </Modal.Body>
             </Modal>

@@ -81,28 +81,46 @@ class PreviewTab extends React.Component<Props> {
         const clipsPreview = previewGenerator.generate(filteredClips);
 
         return (
-            <Form>
-                <Form.Group controlId="khb-exportmodal-preview-textarea">
-                    <Form.Control as="textarea" value={clipsPreview} readOnly />
-                </Form.Group>
-                <Form.Group as={Row}>
-                    <Col sm={{ span: 10, offset: 2 }}>
-                        <ButtonGroup>
+            <div>
+                <Row>
+                    <Col xs={12}>
+                        <ButtonGroup id="khb-exportmodal-preview-buttonbar">
                             <Button
+                                size="sm"
+                                variant="outline-dark"
                                 onClick={this.handleSaveClipsToFile.bind(this)}
                             >
                                 <i className="fa fa-save" /> Save All to File
                             </Button>
-                            <Button onClick={this.handleCopyClips.bind(this)}>
+                            <Button
+                                size="sm"
+                                variant="outline-dark"
+                                onClick={this.handleCopyClips.bind(this)}
+                            >
                                 <i className="fa fa-clipboard" /> Copy All
                             </Button>
-                            <Button onClick={this.handleSelectAll.bind(this)}>
+                            <Button
+                                size="sm"
+                                variant="outline-dark"
+                                onClick={this.handleSelectAll.bind(this)}
+                            >
                                 <i className="fa fa-hand-rock" /> Select All
                             </Button>
                         </ButtonGroup>
                     </Col>
-                </Form.Group>
-            </Form>
+                </Row>
+                <Row>
+                    <Col xs={12}>
+                        <Form.Group controlId="khb-exportmodal-preview-textarea">
+                            <Form.Control
+                                as="textarea"
+                                value={clipsPreview}
+                                readOnly
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+            </div>
         );
     }
 }

@@ -125,6 +125,20 @@ div.khb-clipslist-container {
     z-index: 1;
 }
 
+div.khb-clipslist-title-section {
+    margin-bottom: 30px;
+}
+
+div.khb-clipslist-title-card {
+    margin-bottom: 5px;
+    border-radius: 0;
+    border-width: 3px;
+}
+
+div.khb-clipslist-title-card-body {
+    padding: 10px !important;
+}
+
 .khb-clipcard-card {
     margin-bottom: 7px;
 }

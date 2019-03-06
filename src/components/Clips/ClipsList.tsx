@@ -30,11 +30,11 @@ class ClipsList extends React.Component<Props> {
         });
 
         return (
-            <div>
-                <Card>
-                    <Card.Body>
+            <div className="khb-clipslist-title-section">
+                <Card className="khb-clipslist-title-card">
+                    <Card.Body className="khb-clipslist-title-card-body">
                         <Card.Title>{title}</Card.Title>
-                        <Card.Subtitle>{authorFullName}</Card.Subtitle>
+                        <Card.Subtitle>By {authorFullName}</Card.Subtitle>
                     </Card.Body>
                 </Card>
                 {clipItems}

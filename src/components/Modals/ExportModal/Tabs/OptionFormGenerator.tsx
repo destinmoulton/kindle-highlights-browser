@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Col, Form, Row } from "react-bootstrap";
+import { Col, Form, Row, Table } from "react-bootstrap";
 import * as Types from "../../../../types";
 
 interface Props {
@@ -20,39 +20,27 @@ class FormGenerator extends React.Component<Props> {
     _renderCheckbox(element: Types.ExportOptionFormElement) {
         const isChecked = element.value === "true" || element.value === true;
         return (
-            <Col xs="12" key={element.id}>
-                <Form.Check
-                    inline
-                    checked={isChecked}
-                    onChange={this._handleChangeInput.bind(this, element.id)}
-                    value={element.id}
-                    type="checkbox"
-                    label={element.name}
-                />
-            </Col>
+            <Form.Check
+                inline
+                checked={isChecked}
+                onChange={this._handleChangeInput.bind(this, element.id)}
+                value={element.id}
+                type="checkbox"
+                label={element.name}
+            />
         );
     }
 
     _renderText(element: Types.ExportOptionFormElement) {
         const placeholder = element.placeholder ? element.placeholder : "";
         return (
-            <Form.Group as={Row} key={element.id} size="sm">
-                <Col xs="6">
-                    <Form.Label column>{element.name}</Form.Label>
-                </Col>
-                <Col xs="6">
-                    <Form.Control
-                        type="text"
-                        size="sm"
-                        placeholder={placeholder}
-                        onChange={this._handleChangeInput.bind(
-                            this,
-                            element.id
-                        )}
-                        value={element.value.toString()}
-                    />
-                </Col>
-            </Form.Group>
+            <Form.Control
+                type="text"
+                size="sm"
+                placeholder={placeholder}
+                onChange={this._handleChangeInput.bind(this, element.id)}
+                value={element.value.toString()}
+            />
         );
     }
 
@@ -62,23 +50,15 @@ class FormGenerator extends React.Component<Props> {
         });
 
         return (
-            <Form.Group as={Row} key={element.id} size="sm">
-                <Col xs="6">
-                    <Form.Label column>{element.name}</Form.Label>
-                </Col>
-                <Col xs="6">
-                    <Form.Control
-                        as="select"
-                        onChange={this._handleChangeInput.bind(
-                            this,
-                            element.id
-                        )}
-                        defaultValue={element.value}
-                    >
-                        {options}
-                    </Form.Control>
-                </Col>
-            </Form.Group>
+            <Col xs="6">
+                <Form.Control
+                    as="select"
+                    onChange={this._handleChangeInput.bind(this, element.id)}
+                    defaultValue={element.value}
+                >
+                    {options}
+                </Form.Control>
+            </Col>
         );
     }
 
@@ -89,19 +69,23 @@ class FormGenerator extends React.Component<Props> {
             switch (element.type) {
                 case "checkbox":
                     return (
-                        <Row key={element.id}>
-                            {this._renderCheckbox(element)}
-                        </Row>
+                        <tr key={element.id}>
+                            <td colSpan={2}>{this._renderCheckbox(element)}</td>
+                        </tr>
                     );
                 case "text":
                     return (
-                        <Row key={element.id}>{this._renderText(element)}</Row>
+                        <tr key={element.id}>
+                            <td>{element.name}</td>
+                            <td>{this._renderText(element)}</td>
+                        </tr>
                     );
                 case "select":
                     return (
-                        <Row key={element.id}>
-                            {this._renderSelect(element)}
-                        </Row>
+                        <tr key={element.id}>
+                            <td>{element.name}</td>
+                            <td>{this._renderSelect(element)}</td>
+                        </tr>
                     );
             }
         });
@@ -109,7 +93,7 @@ class FormGenerator extends React.Component<Props> {
         return (
             <div>
                 <h4>{group_name}</h4>
-                {formElements}
+                <Table size="sm">{formElements}</Table>
             </div>
         );
     }

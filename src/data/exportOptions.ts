@@ -11,13 +11,13 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
         elements: {
             should_display_book_title: {
                 id: "should_display_book_title",
-                name: "Book Title",
+                name: "Display Book Title",
                 type: "checkbox",
                 value: true
             },
             should_display_book_author: {
                 id: "should_display_book_author",
-                name: "Book Author",
+                name: "Display Book Author",
                 type: "checkbox",
                 value: true
             },
@@ -48,13 +48,13 @@ const EXPORT_OPTIONS: Types.ExportOptions = {
         elements: {
             should_display_quote_location: {
                 id: "should_display_quote_location",
-                name: "Include Clip Location",
+                name: "Display Clip Location",
                 type: "checkbox",
                 value: true
             },
             should_display_quote_date: {
                 id: "should_display_quote_date",
-                name: "Include Clip Date",
+                name: "Display Clip Date",
                 type: "checkbox",
                 value: false
             },

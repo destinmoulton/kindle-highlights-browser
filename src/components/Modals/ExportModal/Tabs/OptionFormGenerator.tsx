@@ -120,7 +120,7 @@ class FormGenerator extends React.Component<Props> {
                     bordered={false}
                     size="sm"
                 >
-                    {formElements}
+                    <tbody>{formElements}</tbody>
                 </Table>
             </div>
         );

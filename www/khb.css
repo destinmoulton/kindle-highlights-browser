@@ -61,7 +61,7 @@ div.khb-clipslist-buttonbar {
     top: 0;
     /** center the button bar **/
     left: 50%;
-    background-color: lightgrey;
+    background-color: #f2f7ff;
     z-index: 2;
 }
 
@@ -241,7 +241,7 @@ ul.khb-treelist-subtree {
     padding-left: 10px;
 }
 
-ul.khb-treelist-subtree>li {
+ul.khb-treelist-subtree > li {
     margin-bottom: 4px;
     margin-left: -10px;
     cursor: pointer;
@@ -252,7 +252,7 @@ ul.khb-treelist-subtree>li {
     font-weight: bold;
 }
 
-ul.khb-treelist-subtree>li:last-child {
+ul.khb-treelist-subtree > li:last-child {
     background: #fff url(graphics/tree-lastitem.png) no-repeat;
 }
 

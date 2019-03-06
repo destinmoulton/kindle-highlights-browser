@@ -79,13 +79,13 @@ class TreeSublist extends React.Component<Props, State> {
 
         return (
             <div className="khb-treelist-subtree-container">
-                <h4>
+                <div className="khb-treelist-subtree-title">
                     <i
                         className={iconClasses}
                         onClick={this.handleOpenClose.bind(this)}
                     />{" "}
                     {listTitle}
-                </h4>
+                </div>
                 <ul className="khb-treelist-subtree">{sublistContent}</ul>
             </div>
         );

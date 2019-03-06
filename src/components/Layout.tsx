@@ -38,11 +38,11 @@ export default class Layout extends React.Component<IProps, IState> {
         // Local instance of the storage/db mechanism
         this.settingStore = new SettingStore();
 
-        ipcRenderer.on("open-my-clippingsMap", (e: any) => {
+        ipcRenderer.on("open-my-clippings", (e: any) => {
             this.openClippingsDialog();
         });
 
-        ipcRenderer.on("close-my-clippingsMap", (e: any) => {
+        ipcRenderer.on("close-my-clippings", (e: any) => {
             this.settingStore.delete(SETTING_LAST_OPEN_FILE);
             this.clearClippings();
         });

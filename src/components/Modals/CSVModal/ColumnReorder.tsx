@@ -9,12 +9,12 @@ import {
 import * as Types from "../../../types";
 
 const SortableItem = SortableElement(({ value }: { value: string }) => (
-    <div className="khb-csvsort-list-item">{value}</div>
+    <div className="khb-csvmodal-sort-list-item">{value}</div>
 ));
 
 const SortableList = SortableContainer(({ items }: SortableItems) => {
     return (
-        <div className="khb-csvsort-list-container">
+        <div className="khb-csvmodal-sort-list-container">
             {items.map((item: Types.CSVColumn, index: number) => (
                 <SortableItem
                     key={`item-${index}`}

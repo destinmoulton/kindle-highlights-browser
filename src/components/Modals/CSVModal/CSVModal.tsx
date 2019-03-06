@@ -34,7 +34,7 @@ interface IExample {
 }
 const Example: IExample = {
     highlight: "To Comma, Or Not to Comma",
-    note: "What a classic line!",
+    note: "Classic line!",
     location: { type: "highlight-with-note", value: "555-666" },
     date: moment(),
     title: "Hamlet",
@@ -153,14 +153,12 @@ class CSVModal extends React.Component<Props, State> {
             csvRow.push(content);
         });
 
-        const csvString = convertArrayToCSV([csvRow], { header: titleRow });
-        return <div>{csvString}</div>;
+        return convertArrayToCSV([csvRow], { header: titleRow });
     }
 
     render() {
         const { columns, dateFormat } = this.state;
         const { modalIsActive, closeModalHandler, filteredClips } = this.props;
-        console.log("filteredClips", filteredClips);
 
         const preview = this._renderPreview();
         return (
@@ -170,17 +168,15 @@ class CSVModal extends React.Component<Props, State> {
                 </Modal.Header>
                 <Modal.Body>
                     <Row>
-                        <Col xs={4}>
-                            <Card>
-                                <Card.Body>
-                                    <Card.Title>Settings</Card.Title>
-                                    <hr />
+                        <Col xs={8}>
+                            <Card className="khb-csvmodal-option-card">
+                                <Card.Body className="khb-csvmodal-option-card-body">
                                     <Form>
-                                        <Form.Group>
+                                        <Form.Group className="khb-csvmodal-formgroup">
                                             <Form.Label>
                                                 Column Order
                                             </Form.Label>
-                                            <div className="khb-csvsort-list-wrapper">
+                                            <div className="khb-csvmodal-sort-list-wrapper">
                                                 <ColumnReorder
                                                     columns={columns}
                                                     onSortEnd={
@@ -192,12 +188,20 @@ class CSVModal extends React.Component<Props, State> {
                                                 Drag to Reorder
                                             </Form.Text>
                                         </Form.Group>
-                                        <hr />
-                                        <Form.Group>
+                                    </Form>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col xs={4}>
+                            <Card className="khb-csvmodal-option-card">
+                                <Card.Body className="khb-csvmodal-option-card-body">
+                                    <Form>
+                                        <Form.Group className="khb-csvmodal-formgroup">
                                             <Form.Label>Date Format</Form.Label>
                                             <Form.Control
                                                 type="text"
                                                 value={dateFormat}
+                                                size="sm"
                                                 onChange={
                                                     this._handleChangeDateFormat
                                                 }
@@ -210,21 +214,44 @@ class CSVModal extends React.Component<Props, State> {
                                 </Card.Body>
                             </Card>
                         </Col>
-                        <Col xs={8}>
+                    </Row>
+                    <Row id="khb-csvmodal-preview-row">
+                        <Col xs={12}>
                             <Card>
                                 <Card.Body>
-                                    <Card.Title>Preview</Card.Title>
-                                    <hr />
-                                    {preview}
+                                    <Form.Group
+                                        className="khb-csvmodal-formgroup"
+                                        controlId="khb-csvmodal-preview-textarea"
+                                    >
+                                        <Form.Label>CSV Preview</Form.Label>
+                                        <Form.Control
+                                            as="textarea"
+                                            value={preview}
+                                            readOnly
+                                        />
+                                    </Form.Group>
                                 </Card.Body>
                             </Card>
                         </Col>
                     </Row>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this._handleClickGenerate}>
+                    <Button
+                        variant="outline-primary"
+                        size="sm"
+                        onClick={this._handleClickGenerate}
+                    >
                         <i className="fa fa-save" />
+                        {"  "}
                         Generate CSV
+                    </Button>
+                    <Button
+                        onClick={closeModalHandler}
+                        className="float-right"
+                        variant="outline-secondary"
+                        size="sm"
+                    >
+                        Close
                     </Button>
                 </Modal.Footer>
             </Modal>

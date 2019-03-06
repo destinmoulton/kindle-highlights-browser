@@ -155,12 +155,16 @@ div.khb-clipcard-note-with-highlight {
 
 /** csvSortableHelper needs to be above the modal **/
 
-div.khb-csvsort-list-wrapper {
+div.khb-csvmodal-formgroup {
+    margin-bottom: 0px;
+}
+
+div.khb-csvmodal-sort-list-wrapper {
     display: table;
     margin: 0 auto;
 }
 
-div.khb-csvsort-list-container {
+div.khb-csvmodal-sort-list-container {
     position: relative;
     display: flex;
     z-index: 9998;
@@ -171,7 +175,7 @@ div.khb-csvsort-list-container {
     width: 100%;
 }
 
-div.khb-csvsort-list-item {
+div.khb-csvmodal-sort-list-item {
     display: flex;
     flex-shrink: 0;
     background-color: #f2ffd1;
@@ -185,6 +189,23 @@ div.khb-csvsort-list-item {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+div.khb-csvmodal-option-card {
+    height: 110px;
+}
+
+div.khb-csvmodal-option-card-body {
+    padding: 10px !important;
+}
+
+#khb-csvmodal-preview-row {
+    margin-top: 10px;
+}
+
+#khb-csvmodal-preview-textarea {
+    height: 65px;
+    font-size: 0.9em;
 }
 
 /** treelist styles **/
@@ -220,7 +241,7 @@ ul.khb-treelist-subtree {
     padding-left: 10px;
 }
 
-ul.khb-treelist-subtree > li {
+ul.khb-treelist-subtree>li {
     margin-bottom: 4px;
     margin-left: -10px;
     cursor: pointer;
@@ -231,7 +252,7 @@ ul.khb-treelist-subtree > li {
     font-weight: bold;
 }
 
-ul.khb-treelist-subtree > li:last-child {
+ul.khb-treelist-subtree>li:last-child {
     background: #fff url(graphics/tree-lastitem.png) no-repeat;
 }
 

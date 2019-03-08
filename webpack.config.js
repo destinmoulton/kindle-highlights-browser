@@ -1,10 +1,10 @@
 var path = require("path");
 
 module.exports = {
-    entry: "./src/App.tsx",
+    entry: "./src/react/App.tsx",
     devtool: "source-map",
     output: {
-        path: path.join(__dirname, "www/js"),
+        path: path.join(__dirname, "src/electron/www/js"),
         filename: "khb-app.js"
     },
 

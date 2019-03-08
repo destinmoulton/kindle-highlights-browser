@@ -10,44 +10,48 @@ const DISTS = ["osx", "win32", "linux"];
 
 // electron packager api docs
 // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md
-const WINDOWS_OPTIONS = {
-    dir: "./src",
-    out: "./dist/win32",
-    platform: "win32",
-    arch: "x64",
+
+const COMMON_BUILD_OPTIONS = {
+    dir: "./src/electron",
     electronVersion: "4.0.4",
-    //ignore: ["assets", "typings", ".vscode", "dist", "node_modules"],
-
-    icon: "assets/icons/BlackvariantKindle.ico"
-};
-const LINUX_OPTIONS = {
-    dir: "./src-electron",
-    out: "./dist/linux",
-    platform: "linux",
-    arch: "x64",
-    electronVersion: "4.0.4"
-    //ignore: ["assets", "typings", ".vscode", "dist", "node_modules"],
+    overwrite: true,
+    appname: "Kindle Highlights Browser"
 };
 
-function build(options) {
-    return electron(options, (err, appPath) => {
-        if (err) {
-            util.log(err);
-        } else {
-            util.log(
-                "Built",
-                util.colors.cyan(opts.name),
-                util.colors.magenta("v" + opts.appVersion)
-            );
-            util.log("Packaged to: ");
-            for (var i = 0; i < appPath.length; i++) {
-                util.log("            ", util.colors.cyan(appPath[i]));
-            }
-        }
-    });
+const BUILD_OPTIONS = [
+    {
+        ...COMMON_BUILD_OPTIONS,
+        out: "./dist/win32",
+        platform: "win32",
+        arch: "x64",
+        icon: "assets/icons/BlackvariantKindle.ico"
+    },
+    {
+        ...COMMON_BUILD_OPTIONS,
+        out: "./dist/linux",
+        platform: "linux",
+        arch: "x64"
+    },
+    {
+        ...COMMON_BUILD_OPTIONS,
+        out: "./dist/darwin",
+        platform: "darwin",
+        arch: "x64",
+        icon: "assets/icons/BlackvariantKindle.icns"
+    }
+];
+
+async function build(options) {
+    util.log(
+        "Building electron distribution for ",
+        util.colors.magenta(options.platform)
+    );
+    return electron(options);
 }
 
-gulp.task("build:linux", function(done) {
-    build(LINUX_OPTIONS);
+gulp.task("build", async function(done) {
+    for (let opt of BUILD_OPTIONS) {
+        await build(opt);
+    }
     return done();
 });

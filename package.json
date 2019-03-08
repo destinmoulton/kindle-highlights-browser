@@ -9,19 +9,7 @@
         "test:watch": "jest --watchAll",
         "compile:react": "webpack --config webpack.config.js -d --watch",
         "dev": "electron ./src/electron",
-        "clean:osx": "rm -rf ./dist/osx",
-        "clean:windows": "rm -rf ./dist/win32",
-        "clean:linux": "rm -rf ./dist/linux",
-        "clean:all": "npm run clean:osx && npm run clean:win && npm run clean:linux",
-        "build:linux": "npm run clean:linux && electron-packager . --overwrite --out=dist/linux --platform=linux --arch=x64 --electron-version=2.0.1 --appname='Kindle Highlights Browser' --icon=assets/icons/BlackvariantKindle.ico --ignore=assets --ignore=typings --ignore=.vscode --ignore=dist --ignore=node_modules",
-        "build:osx": "npm run clean:osx && electron-packager . --overwrite --out=dist/osx --platform=darwin --arch=x64 --electron-version=2.0.1 --appname='Kindle Highlights Browser' --icon=assets/icons/BlackvariantKindle.icns --ignore=assets --ignore=typings --ignore=.vscode --ignore=dist --ignore=node_modules",
-        "build:windows": "npm run clean:windows && electron-packager . --overwrite --out=dist/win32 --platform=win32 --arch=x64 --electron-version=2.0.1 --appname='Kindle Highlights Browser' --icon=assets/icons/BlackvariantKindle.ico --ignore=assets --ignore=typings --ignore=.vscode --ignore=dist --ignore=node_modules",
-        "zip:linux": "zip -r './dist/KindleHighlightsBrowser_Linux_x64.zip' './dist/linux/Kindle Highlights Browser-linux-x64/'",
-        "zip:osx": "zip -r './dist/KindleHighlightsBrowser_MacOSX.zip' './dist/osx/Kindle Highlights Browser-darwin-x64'",
-        "zip:windows": "zip -r './dist/KindleHighlightsBrowser_Windows_x64.zip' './dist/win32/Kindle Highlights Browser-win32-x64'",
-        "pack:win": "npm run build:windows && npm run zip:windows && npm run clean:windows",
-        "pack:osx": "npm run build:osx && npm run zip:osx && npm run clean:osx",
-        "pack:linux": "npm run build:linux && npm run zip:linux && npm run clean:linux"
+        "build": "gulp build"
     },
     "keywords": [
         "electron",

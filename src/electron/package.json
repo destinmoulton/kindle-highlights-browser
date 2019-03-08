@@ -1,0 +1,9 @@
+{
+    "name": "kindle-highlights-browser",
+    "productName": "Kindle Highlights Browser",
+    "version": "0.1.0",
+    "description": "A Kindle highlights viewer. Built using Node, Electron, and React.",
+    "main": "index.js",
+    "author": "Destin Moulton",
+    "license": "MIT"
+}

@@ -21,7 +21,7 @@ Versions available for Windows and Mac OS.
     -   Save your notes directly to a file
     -   Copy your notes to the clipboard
 
-### Development Environment
+### Development Notes
 
 ---
 
@@ -35,6 +35,20 @@ To compile the react code:
 
 ```sh
 $ npm run compile:react
+```
+
+To build all of the electron apps:
+
+```sh
+$ gulp build
+```
+
+To build a single electron app:
+
+```sh
+$ gulp package:linux:x64
+$ gulp package:win32:x64
+$ gulp package:darwin:x64
 ```
 
 #### React Devtools

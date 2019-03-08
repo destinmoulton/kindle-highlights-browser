@@ -1,0 +1,281 @@
+body,
+html {
+    margin: 0;
+    overflow: hidden;
+    height: 100%;
+}
+
+h3 {
+    margin: 5px 0 5px 0;
+}
+
+.well {
+    padding: 10px;
+}
+
+.modal-header {
+    padding: 8px 10px 8px 10px;
+}
+
+@media (min-width: 768px) {
+    #khb-treelist-container {
+        position: absolute;
+        top: 0px;
+        bottom: 0;
+        left: 0;
+        overflow-y: scroll;
+    }
+    #khb-clips-container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        overflow-y: scroll;
+    }
+}
+
+.khb-home-panel {
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    width: 500px;
+    padding: 10px;
+    margin: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#khb-clips-container {
+    height: 100%;
+    text-align: left;
+    padding: 5px;
+}
+
+div.khb-clipslist-buttonbar {
+    border-bottom: 2px solid gray;
+    border-right: 2px solid gray;
+    border-left: 2px solid gray;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding: 5px;
+    position: fixed;
+    top: 0;
+    /** center the button bar **/
+    left: 50%;
+    background-color: #f2f7ff;
+    z-index: 2;
+}
+
+div.khb-clipslist-container {
+    width: 100%;
+    margin-top: 55px;
+    z-index: 1;
+}
+
+div.khb-clipslist-tip-box {
+    width: 100%;
+    margin: 5px;
+    border: 1px solid gray;
+    padding: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+div.khb-clipslist-title-section {
+    margin-bottom: 30px;
+}
+
+div.khb-clipslist-title-card {
+    margin-bottom: 5px;
+    border-radius: 0;
+    border-width: 3px;
+}
+
+div.khb-clipslist-title-card-body {
+    padding: 10px !important;
+}
+
+.khb-clipcard-card {
+    margin-bottom: 7px;
+}
+
+.khb-clipcard-body {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+i.khb-clipcard-icon {
+    color: gray;
+}
+
+div.khb-clipcard-footer {
+    text-align: right;
+    color: gray;
+    font-size: 0.7em;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+div.khb-clipcard-highlight {
+    background-color: lightyellow;
+    padding: 5px;
+}
+
+div.khb-clipcard-note {
+    background-color: rgb(240, 251, 255);
+    padding: 5px;
+}
+
+div.khb-clipcard-note-with-highlight {
+    border-left-style: dotted;
+    border-left-width: 2px;
+    border-left-color: gray;
+    padding-left: 10px;
+}
+
+#khb-exportmodal-preview-buttonbar {
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+#khb-exportmodal-preview-textarea {
+    height: 300px;
+}
+
+.khb-exportmodal-options-tabcontainer {
+    margin-top: 10px;
+}
+
+.khb-exportmodal-options-form-title {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.khb-exportmodal-options-form-container {
+    padding: 10px;
+}
+
+.khb-exportmodal-options-form-table {
+    margin-left: 10px;
+}
+
+.khb-exportmodal-options-form-table tr td {
+    border: none;
+}
+
+/** csvSortableHelper needs to be above the modal **/
+
+div.khb-csvmodal-formgroup {
+    margin-bottom: 0px;
+}
+
+div.khb-csvmodal-sort-list-wrapper {
+    display: table;
+    margin: 0 auto;
+}
+
+div.khb-csvmodal-sort-list-container {
+    position: relative;
+    display: flex;
+    z-index: 9998;
+    background-color: #f3f3f3;
+    border: 1px solid #efefef;
+    border-radius: 3px;
+    outline: none;
+    width: 100%;
+}
+
+div.khb-csvmodal-sort-list-item {
+    display: flex;
+    flex-shrink: 0;
+    background-color: #f2ffd1;
+    height: 32px;
+    padding: 6px;
+    cursor: pointer;
+    border: 1px solid #efefef;
+    z-index: 9999;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+div.khb-csvmodal-option-card {
+    height: 110px;
+}
+
+div.khb-csvmodal-option-card-body {
+    padding: 10px !important;
+}
+
+#khb-csvmodal-preview-row {
+    margin-top: 10px;
+}
+
+#khb-csvmodal-preview-textarea {
+    height: 65px;
+    font-size: 0.9em;
+}
+
+/** treelist styles **/
+
+#khb-treelist-container {
+    height: 100%;
+    text-align: left;
+    padding: 0px 0px 0px 0px;
+}
+
+#khb-treelist-search-container {
+    padding: 10px 10px 0px 10px;
+    margin-bottom: 5px;
+}
+
+.khb-treelist-search-close-icon {
+    color: maroon;
+    cursor: pointer;
+}
+
+div.khb-treelist-subtree-container {
+    margin-left: 5px;
+}
+
+div.khb-treelist-subtree-title {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+ul.khb-treelist-subtree {
+    list-style-type: none;
+    background: white url(graphics/tree-vline.png) repeat-y;
+    margin: 0 0 0 7px;
+    padding-left: 10px;
+}
+
+ul.khb-treelist-subtree>li {
+    margin-bottom: 4px;
+    margin-left: -10px;
+    cursor: pointer;
+    padding: 0 12px;
+    line-height: 20px;
+    background: url(graphics/tree-item.png) no-repeat;
+    color: #369;
+    font-weight: bold;
+    font-size: .9em;
+}
+
+ul.khb-treelist-subtree>li:last-child {
+    background: #fff url(graphics/tree-lastitem.png) no-repeat;
+}
+
+div.khb-treelist-node {
+    line-height: 1em;
+}
+
+div.khb-treelist-activenode {
+    padding: 4px;
+    background-color: #f5f5f5;
+}
+
+i.khb-treelist-icon {
+    cursor: pointer;
+}
